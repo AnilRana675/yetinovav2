@@ -15,9 +15,10 @@
   "dependencies": {
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "geist": "^1.7.0",
     "lucide-react": "^0.564.0",
     "material-symbols": "^0.40.2",
-    "next": "16.1.6",
+    "next": "^16.1.6",
     "ogl": "^1.0.11",
     "radix-ui": "^1.4.3",
     "react": "19.2.3",

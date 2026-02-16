@@ -17,8 +17,8 @@ export function HeroSection() {
       </div>
 
       <div className="relative z-10 max-w-5xl mx-auto flex flex-col items-center px-2 sm:px-4">
-        <h1 className="font-serif text-3xl sm:text-5xl md:text-7xl lg:text-8xl xl:text-9xl leading-[1.05] sm:leading-[0.95] text-white mb-4 sm:mb-6 lg:mb-8 tracking-tight">
-          We Back Nepal&apos;s <br />
+        <h1 className="font-serif text-3xl sm:text-3xl md:text-5xl lg:text-6xl xl:text-7xl leading-[1.05] sm:leading-[0.95] text-white mb-4 sm:mb-6 lg:mb-8 tracking-tight">
+          We Back Nepal&apos;s
           <br className="hidden sm:block" />
           <span className="text-glow-purple">Boldest Builders.</span>
         </h1>
