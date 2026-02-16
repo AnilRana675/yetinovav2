@@ -88,8 +88,8 @@ export function AboutSection() {
 
         {/* Leadership & Team */}
         <div className="border-t border-white/10 pt-16">
-          <p className="text-xs font-bold tracking-widest uppercase text-purple-400 mb-10">
-            Leadership & Team [YESLAI PACHI HATAUNE HO DONT WORRY]
+          <p className="text-3xl font-bold tracking-widest uppercase text-purple-400 mb-10">
+            THIS SECTION NEEDS TO CHANGE (IGNORE THIS SECTION )
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
