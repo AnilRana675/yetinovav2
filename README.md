@@ -1,36 +1,54 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# yetinova-v2
 
-## Getting Started
+Lightweight Next.js starter for Yetinova V2 — a modern React + Next.js app scaffolded from create-next-app, with Tailwind, TypeScript, and developer tooling.
 
-First, run the development server:
+Quick overview
+- Framework: Next.js (App Router)
+- Language: TypeScript
+- Styling: Tailwind CSS
+- Dev tools: ESLint, Prettier, Husky + lint-staged
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Getting started (local)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+1. Clone
+   ```bash
+   git clone https://github.com/AnilRana675/yetinovav2.git
+   cd yetinovav2
+   ```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+2. Install
+   ```bash
+   npm ci
+   # or yarn / pnpm
+   ```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+3. Run dev server
+   ```bash
+   npm run dev
+   # open http://localhost:3000
+   ```
 
-## Learn More
+Useful scripts
+- `npm run dev`        — start dev server (Next.js)
+- `npm run build`      — build for production
+- `npm run start`      — start production server
+- `npm run lint`       — run ESLint (errors only)
+- `npm run lint:fix`   — run ESLint and auto-fix
+- `npm run format`     — run Prettier to format files
+- `npm run typecheck`  — run TypeScript type check
 
-To learn more about Next.js, take a look at the following resources:
+Environment
+- Create a `.env.local` with any `NEXT_PUBLIC_*` variables required by your app.
+- See `.env.example` for a template.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Contributing
+- Open small, focused PRs.
+- Follow the code style: ESLint + Prettier.
+- Run tests and lint locally before submitting a PR.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Deploy
+- This repo deploys easily to Vercel. Connect the repo in the Vercel dashboard and set environment variables as needed.
+- Alternatively: `npm run build && npm run start` on your host.
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+License
+- Add a license file if you plan to open-source this project publicly.
