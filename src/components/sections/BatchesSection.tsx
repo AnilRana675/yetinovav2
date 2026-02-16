@@ -35,37 +35,34 @@ const STARTUPS = [
 export function BatchesSection() {
   return (
     <section
-      id="batches"
-      className="relative bg-black py-32 px-8 md:px-16 lg:px-32 border-t border-white/5 overflow-hidden"
+      id="ventures"
+      className="relative bg-black py-16 sm:py-24 lg:py-32 px-4 sm:px-6 lg:px-8 xl:px-32 border-t border-white/5 overflow-hidden"
     >
-      {/* ASCEND Watermark */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none overflow-hidden">
-        <span className="text-[20vw] font-serif font-bold text-white/[0.02] tracking-tighter whitespace-nowrap">
+        <span className="text-[15vw] sm:text-[20vw] font-serif font-bold text-white/[0.02] tracking-tighter whitespace-nowrap">
           ASCEND
         </span>
       </div>
 
       <div className="max-w-7xl mx-auto relative z-10">
-        {/* Header */}
-        <div className="mb-16">
-          <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl text-white mb-4">
+        <div className="mb-10 sm:mb-16">
+          <h2 className="font-serif text-2xl sm:text-4xl md:text-5xl lg:text-6xl text-white mb-3 sm:mb-4">
             Innovation Batches
           </h2>
-          <p className="text-neutral-text-muted text-lg md:text-xl font-light max-w-2xl">
+          <p className="text-neutral-text-muted text-base sm:text-lg md:text-xl font-light max-w-2xl">
             Seasonal teams of young builders shipping global-grade work.
           </p>
         </div>
 
-        {/* Core Focus Pillars - Scrollable Tags */}
-        <div className="mb-20">
-          <p className="text-xs font-bold tracking-widest uppercase text-purple-400 mb-6">
+        <div className="mb-12 sm:mb-20">
+          <p className="text-xs font-bold tracking-widest uppercase text-purple-400 mb-4 sm:mb-6">
             Core Focus Pillars
           </p>
-          <div className="flex flex-wrap gap-3">
+          <div className="flex flex-wrap gap-2 sm:gap-3">
             {FOCUS_PILLARS.map((pillar) => (
               <div
                 key={pillar}
-                className="px-5 py-2.5 rounded-full border border-white/10 bg-white/5 text-neutral-text text-sm font-medium hover:border-purple-500/30 hover:bg-purple-500/10 transition-all cursor-default"
+                className="px-3 sm:px-5 py-2 sm:py-2.5 rounded-full border border-white/10 bg-white/5 text-neutral-text text-xs sm:text-sm font-medium hover:border-purple-500/30 hover:bg-purple-500/10 transition-all cursor-default"
               >
                 {pillar}
               </div>
@@ -73,8 +70,7 @@ export function BatchesSection() {
           </div>
         </div>
 
-        {/* Startup Cards - 2 Column Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 lg:gap-8">
           {STARTUPS.map((startup, index) => (
             <VentureCard
               key={startup.name}

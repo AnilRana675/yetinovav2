@@ -16,8 +16,16 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  title: "YetiNova Atmospheric Hero",
-  description: "Building Sustainable Digital Ventures",
+  title: "YetiNova - Building Sustainable Digital Ventures",
+  description:
+    "We back Nepal's boldest builders. We turn raw concepts into global-grade startups — reinvesting our returns to fuel the next batch.",
+};
+
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+  themeColor: "#000000",
 };
 
 export default function RootLayout({

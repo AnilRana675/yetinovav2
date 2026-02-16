@@ -38,22 +38,20 @@ export function ModelSection() {
   return (
     <section
       id="model"
-      className="relative bg-[#0a0a0a] py-32 px-8 md:px-16 lg:px-32 border-t border-white/5"
+      className="relative bg-[#0a0a0a] py-16 sm:py-24 lg:py-32 px-4 sm:px-6 lg:px-8 xl:px-32 border-t border-white/5"
     >
       <div className="max-w-7xl mx-auto">
-        {/* Header */}
-        <div className="mb-20 text-center">
-          <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl text-white mb-6">
+        <div className="mb-12 sm:mb-20 text-center">
+          <h2 className="font-serif text-2xl sm:text-4xl md:text-5xl lg:text-6xl text-white mb-4 sm:mb-6">
             Our Model
           </h2>
-          <p className="text-neutral-text-muted text-lg md:text-xl font-light max-w-3xl mx-auto">
+          <p className="text-neutral-text-muted text-base sm:text-lg md:text-xl font-light max-w-3xl mx-auto px-2 sm:px-0">
             We don&apos;t do classrooms. We do product sprints. A rigorous
             four-stage framework to turn ideas into assets.
           </p>
         </div>
 
-        {/* 2x2 Grid - The Engine */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
           {MODEL_STAGES.map((stage, index) => (
             <CardWithIcon
               key={stage.title}
