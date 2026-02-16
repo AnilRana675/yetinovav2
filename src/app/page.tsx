@@ -1,7 +1,12 @@
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { HeroSection } from "@/components/sections/HeroSection";
-import { VenturesSection } from "@/components/sections/VenturesSection";
+import { BatchesSection } from "@/components/sections/BatchesSection";
+import { ModelSection } from "@/components/sections/ModelSection";
+import { AboutSection } from "@/components/sections/AboutSection";
+import { PartnershipsSection } from "@/components/sections/PartnershipsSection";
+import { JoinSection } from "@/components/sections/JoinSection";
+import { GovernanceSection } from "@/components/sections/GovernanceSection";
 
 export default function Home() {
   return (
@@ -9,7 +14,12 @@ export default function Home() {
       <Header />
       <main>
         <HeroSection />
-        <VenturesSection />
+        <BatchesSection />
+        <ModelSection />
+        <AboutSection />
+        <PartnershipsSection />
+        <JoinSection />
+        <GovernanceSection />
       </main>
       <Footer />
     </div>
