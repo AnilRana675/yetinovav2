@@ -22,7 +22,9 @@ export function VentureCard({
   offsetTop = false,
 }: VentureCardProps) {
   return (
-    <div className={`group relative flex flex-col ${offsetTop ? "md:mt-24" : ""}`}>
+    <div
+      className={`group relative flex flex-col ${offsetTop ? "md:mt-24" : ""}`}
+    >
       <div className="relative w-full aspect-4/3 rounded-[2rem] overflow-hidden mb-8 border border-white/5">
         <Image
           src={image}

@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import dynamic from "next/dynamic";
 
@@ -5,7 +7,7 @@ import dynamic from "next/dynamic";
 const Aurora = dynamic(() => import("@/components/ui/aurora/Aurora"), {
   ssr: false,
   loading: () => (
-    <div className="absolute inset-0 bg-gradient-to-b from-purple-900/20 to-black" />
+    <div className="absolute inset-0 bg-linear-to-b from-purple-900/20 to-black" />
   ),
 });
 
