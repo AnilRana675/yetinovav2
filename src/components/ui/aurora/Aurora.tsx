@@ -133,11 +133,7 @@ export default function Aurora(props: AuroraProps) {
 
   useEffect(() => {
     const ctn = ctnDom.current;
-    if (!ctn) {
-      console.warn("Aurora container not found during useEffect");
-      return;
-    }
-    console.log("Aurora: Mounting and initializing OGL renderer");
+    if (!ctn) return;
 
     const renderer = new Renderer({
       alpha: true,
@@ -145,7 +141,8 @@ export default function Aurora(props: AuroraProps) {
       antialias: true,
     });
     const gl = renderer.gl;
-    if (!gl) console.error("Aurora: WebGL context creation failed");
+    if (!gl) return;
+    
     gl.clearColor(0, 0, 0, 0);
     gl.enable(gl.BLEND);
     gl.blendFunc(gl.ONE, gl.ONE_MINUS_SRC_ALPHA);
@@ -155,7 +152,6 @@ export default function Aurora(props: AuroraProps) {
     gl.canvas.style.left = "0";
     gl.canvas.style.width = "100%";
     gl.canvas.style.height = "100%";
-    // gl.canvas.style.zIndex = "-1"; // Don't force behind, let document flow or parent control stacking
 
     const geometry = new Triangle(gl);
     if (geometry.attributes.uv) {

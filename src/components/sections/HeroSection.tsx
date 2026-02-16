@@ -1,12 +1,20 @@
 import Link from "next/link";
-import Aurora from "@/components/ui/aurora/Aurora";
+import dynamic from "next/dynamic";
+
+// Lazy load Aurora WebGL component for better initial page load
+const Aurora = dynamic(() => import("@/components/ui/aurora/Aurora"), {
+  ssr: false,
+  loading: () => (
+    <div className="absolute inset-0 bg-gradient-to-b from-purple-900/20 to-black" />
+  ),
+});
 
 export function HeroSection() {
   return (
     <section className="relative min-h-screen flex flex-col items-center justify-center px-8 md:px-16 lg:px-32 overflow-hidden bg-black text-center">
       <div className="absolute inset-0 z-0">
         <Aurora
-          colorStops={["#3A29FF", "#FF94B4", "#FF3232"]} // Brighter colors for debugging visibility
+          colorStops={["#3A29FF", "#FF94B4", "#FF3232"]}
           amplitude={1.2}
           blend={0.5}
           speed={0.5}
