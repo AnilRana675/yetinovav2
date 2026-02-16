@@ -42,18 +42,16 @@ const LEADERSHIP = [
 export function AboutSection() {
   return (
     <section
-      id="about"
-      className="relative bg-black py-32 px-8 md:px-16 lg:px-32 border-t border-white/5"
+      id="manifesto"
+      className="relative bg-black py-16 sm:py-24 lg:py-32 px-4 sm:px-6 lg:px-8 xl:px-32 border-t border-white/5"
     >
       <div className="max-w-7xl mx-auto">
-        {/* Split Layout Header */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 mb-24">
-          {/* The Manifesto */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 sm:gap-16 lg:gap-16 mb-16 sm:mb-24">
           <div>
-            <h2 className="font-serif text-4xl md:text-5xl text-white mb-8">
+            <h2 className="font-serif text-2xl sm:text-4xl md:text-5xl text-white mb-6 sm:mb-8">
               Redefining &ldquo;Made in Nepal&rdquo;
             </h2>
-            <div className="space-y-6 text-lg text-neutral-text/80 font-light leading-relaxed">
+            <div className="space-y-4 sm:space-y-6 text-base sm:text-lg text-neutral-text/80 font-light leading-relaxed">
               <p>
                 For too long, we have exported labor. It is time to export
                 innovation.
@@ -68,12 +66,11 @@ export function AboutSection() {
             </div>
           </div>
 
-          {/* Our DNA - Core Values */}
           <div>
-            <p className="text-xs font-bold tracking-widest uppercase text-purple-400 mb-8">
+            <p className="text-xs font-bold tracking-widest uppercase text-purple-400 mb-6 sm:mb-8">
               Our DNA
             </p>
-            <div className="space-y-8">
+            <div className="space-y-6 sm:space-y-8">
               {DNA_VALUES.map((value) => (
                 <ValueCard
                   key={value.title}
@@ -86,14 +83,12 @@ export function AboutSection() {
           </div>
         </div>
 
-        {/* Leadership & Team */}
-        <div className="border-t border-white/10 pt-16">
-          <p className="text-3xl font-bold tracking-widest uppercase text-purple-400 mb-10">
+        <div className="border-t border-white/10 pt-12 sm:pt-16">
+          <p className="text-xl sm:text-3xl font-bold tracking-widest uppercase text-purple-400 mb-8 sm:mb-10">
             THIS SECTION NEEDS TO CHANGE (IGNORE THIS SECTION )
           </p>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {/* Chairman with Quote */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8">
             <LeaderCard
               role="The Chairman"
               name="Basudev P. Gautam"
@@ -101,7 +96,6 @@ export function AboutSection() {
               variant="featured"
             />
 
-            {/* Exec Team */}
             {LEADERSHIP.map((leader) => (
               <LeaderCard
                 key={leader.name}

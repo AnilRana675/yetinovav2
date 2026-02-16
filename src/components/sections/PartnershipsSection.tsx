@@ -29,57 +29,56 @@ export function PartnershipsSection() {
   return (
     <section
       id="partnerships"
-      className="relative bg-black py-32 px-8 md:px-16 lg:px-32 border-t border-white/5"
+      className="relative bg-black py-16 sm:py-24 lg:py-32 px-4 sm:px-6 lg:px-8 xl:px-32 border-t border-white/5"
     >
       <div className="max-w-7xl mx-auto">
-        {/* Header */}
-        <div className="mb-16">
-          <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl text-white mb-4">
+        <div className="mb-10 sm:mb-16">
+          <h2 className="font-serif text-2xl sm:text-4xl md:text-5xl lg:text-6xl text-white mb-3 sm:mb-4">
             Don&apos;t Just Fund. Fuel.
           </h2>
-          <p className="text-neutral-text-muted text-lg md:text-xl font-light max-w-2xl">
+          <p className="text-neutral-text-muted text-base sm:text-lg md:text-xl font-light max-w-2xl">
             Partner with us to deploy capital into high-growth ventures and
             national infrastructure.
           </p>
         </div>
 
-        {/* Partnership Accordion */}
-        <div className="space-y-4">
+        <div className="space-y-3 sm:space-y-4">
           {PARTNERSHIP_TYPES.map((partnership, index) => (
             <div
               key={partnership.category}
-              className="group border border-white/10 rounded-2xl overflow-hidden hover:border-purple-500/30 transition-all duration-300"
+              className="group border border-white/10 rounded-xl sm:rounded-2xl overflow-hidden hover:border-purple-500/30 transition-all duration-300"
             >
-              <div className="p-6 md:p-8">
-                <div className="flex items-start justify-between gap-4">
-                  <div className="flex-1">
-                    <div className="flex items-center gap-4 mb-2">
-                      <span className="text-xs font-medium text-purple-400">
+              <div className="p-4 sm:p-6 md:p-8">
+                <div className="flex items-start justify-between gap-3 sm:gap-4">
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center gap-2 sm:gap-4 mb-2">
+                      <span className="text-xs font-medium text-purple-400 flex-shrink-0">
                         {String(index + 1).padStart(2, "0")}
                       </span>
-                      <h3 className="text-xl md:text-2xl font-serif text-white group-hover:text-glow-purple transition-all">
+                      <h3 className="text-lg sm:text-xl md:text-2xl font-serif text-white group-hover:text-glow-purple transition-all truncate">
                         {partnership.category}
                       </h3>
                     </div>
-                    <p className="text-neutral-text-muted font-light leading-relaxed max-w-2xl ml-8">
+                    <p className="text-neutral-text-muted font-light leading-relaxed max-w-2xl ml-6 sm:ml-8 text-sm sm:text-base">
                       {partnership.description}
                     </p>
                   </div>
-                  <ChevronDown className="w-6 h-6 text-neutral-text-muted group-hover:text-purple-400 transition-all flex-shrink-0" />
+                  <ChevronDown className="w-5 h-5 sm:w-6 sm:h-6 text-neutral-text-muted group-hover:text-purple-400 transition-all flex-shrink-0" />
                 </div>
               </div>
             </div>
           ))}
         </div>
 
-        {/* CTA */}
-        <div className="mt-16 text-center">
+        <div className="mt-10 sm:mt-16 text-center">
           <a
             href="#contact"
-            className="inline-flex items-center gap-2 px-8 py-4 bg-purple-600 hover:bg-purple-500 rounded-full text-white font-medium transition-all duration-300 shadow-[0_0_20px_rgba(124,58,237,0.3)] hover:shadow-[0_0_30px_rgba(124,58,237,0.5)]"
+            className="inline-flex items-center gap-2 px-6 sm:px-8 py-3 sm:py-4 bg-purple-600 hover:bg-purple-500 rounded-full text-white font-medium transition-all duration-300 shadow-[0_0_20px_rgba(124,58,237,0.3)] hover:shadow-[0_0_30px_rgba(124,58,237,0.5)] text-sm sm:text-base"
           >
             Become a Partner
-            <span className="material-symbols-outlined">arrow_forward</span>
+            <span className="material-symbols-outlined text-lg">
+              arrow_forward
+            </span>
           </a>
         </div>
       </div>
