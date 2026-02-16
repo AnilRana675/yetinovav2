@@ -12,8 +12,9 @@
   --color-surface-dark: #252b29;
   --color-neutral-text: #e0e0d8;
   --color-neutral-text-muted: #a0a5a3;
-  --color-arc-purple: #7c3aed;
+  --color-arc-purple: #a3ff12;
   --color-arc-blue: #3b82f6;
+  --color-neon-green: #a3ff12;
 
   --font-sans: var(--font-geist-mono), monospace;
   --font-serif: var(--font-hongkong), serif;
@@ -52,12 +53,12 @@
     border-radius: 50%;
   }
 
-  .text-glow-purple {
-    text-shadow: 0 0 30px rgba(139, 92, 246, 0.5);
+  .text-glow-neon {
+    text-shadow: 0 0 30px rgba(163, 255, 18, 0.5);
   }
 
-  .text-glow-purple .split-word {
-    background: linear-gradient(135deg, #a78bfa 0%, #818cf8 100%);
+  .text-glow-neon .split-word {
+    background: linear-gradient(135deg, #a3ff12 0%, #d4ff70 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }

@@ -32,7 +32,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`dark ${geistMono.variable} ${hongKong.variable}`}>
       <body
-        className={`antialiased bg-black text-neutral-text font-mono selection:bg-purple-500 selection:text-white transition-colors duration-500`}
+        className={`antialiased bg-black text-neutral-text font-mono selection:bg-[#a3ff12] selection:text-black transition-colors duration-500`}
       >
         {children}
       </body>
