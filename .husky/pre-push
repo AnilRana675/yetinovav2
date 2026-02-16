@@ -1,0 +1,4 @@
+echo "Running type check..."
+npm run lint
+
+echo "Pre-push checks passed!"
