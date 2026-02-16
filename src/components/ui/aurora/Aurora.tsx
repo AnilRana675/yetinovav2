@@ -1,9 +1,38 @@
 "use client";
 
 import { useEffect, useRef, ReactNode } from "react";
-import { Renderer, Program, Mesh, Color, Triangle } from "ogl";
+import { Renderer, Program, Mesh, Triangle } from "ogl";
 
 import "./Aurora.css";
+
+function hexToRgb(hex: string): [number, number, number] {
+  // Remove # if present
+  hex = hex.replace("#", "");
+
+  // Handle 3-character hex
+  if (hex.length === 3) {
+    hex = hex
+      .split("")
+      .map((c) => c + c)
+      .join("");
+  }
+
+  // Handle 6-character hex (ignore alpha if 8 chars)
+  if (hex.length === 8) {
+    hex = hex.slice(0, 6);
+  }
+
+  if (hex.length !== 6) {
+    console.error(`Invalid hex color: #${hex}`);
+    return [0, 0, 0];
+  }
+
+  const r = parseInt(hex.slice(0, 2), 16) / 255;
+  const g = parseInt(hex.slice(2, 4), 16) / 255;
+  const b = parseInt(hex.slice(4, 6), 16) / 255;
+
+  return [r, g, b];
+}
 
 const VERT = `#version 300 es
 in vec2 position;
@@ -122,7 +151,7 @@ interface AuroraProps {
 
 export default function Aurora(props: AuroraProps) {
   const {
-    colorStops = ["#5227FF", "#7cff67", "#5227FF"],
+    colorStops = ["#5227FF", "#7cff67", "#ffffff"],
     amplitude = 1.0,
     blend = 0.5,
   } = props;
@@ -142,7 +171,7 @@ export default function Aurora(props: AuroraProps) {
     });
     const gl = renderer.gl;
     if (!gl) return;
-    
+
     gl.clearColor(0, 0, 0, 0);
     gl.enable(gl.BLEND);
     gl.blendFunc(gl.ONE, gl.ONE_MINUS_SRC_ALPHA);
@@ -158,10 +187,7 @@ export default function Aurora(props: AuroraProps) {
       delete geometry.attributes.uv;
     }
 
-    const colorStopsArray = colorStops.map((hex) => {
-      const c = new Color(hex);
-      return [c.r, c.g, c.b];
-    });
+    const colorStopsArray = colorStops.map((hex) => hexToRgb(hex));
 
     const program = new Program(gl, {
       vertex: VERT,
@@ -197,10 +223,9 @@ export default function Aurora(props: AuroraProps) {
       program.uniforms.uAmplitude.value = propsRef.current.amplitude ?? 1.0;
       program.uniforms.uBlend.value = propsRef.current.blend ?? blend;
       const stops = propsRef.current.colorStops ?? colorStops;
-      program.uniforms.uColorStops.value = stops.map((hex: string) => {
-        const c = new Color(hex);
-        return [c.r, c.g, c.b];
-      });
+      program.uniforms.uColorStops.value = stops.map((hex: string) =>
+        hexToRgb(hex)
+      );
       renderer.render({ scene: mesh });
     };
     animateId = requestAnimationFrame(update);

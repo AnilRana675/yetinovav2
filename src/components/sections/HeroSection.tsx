@@ -15,12 +15,7 @@ export function HeroSection() {
   return (
     <section className="relative min-h-screen flex flex-col items-center justify-center px-8 md:px-16 lg:px-32 overflow-hidden bg-black text-center">
       <div className="absolute inset-0 z-0">
-        <Aurora
-          colorStops={["#3A29FF", "#FF94B4", "#FF3232"]}
-          amplitude={1.2}
-          blend={0.5}
-          speed={0.5}
-        />
+        <Aurora amplitude={1.2} blend={0.5} speed={0.5} />
       </div>
 
       <div className="relative z-10 max-w-4xl mx-auto flex flex-col items-center mt-20">
