@@ -1,0 +1,190 @@
+import { LucideIcon } from "lucide-react";
+
+interface CardProps {
+  children: React.ReactNode;
+  className?: string;
+}
+
+export function Card({ children, className = "" }: CardProps) {
+  return (
+    <div
+      className={`rounded-3xl border border-white/10 bg-surface-dark/30 hover:bg-surface-dark/50 transition-all duration-500 ${className}`}
+    >
+      {children}
+    </div>
+  );
+}
+
+interface CardWithIconProps {
+  icon: LucideIcon;
+  title: string;
+  description: string;
+  stepNumber?: number;
+  subtitle?: string;
+  variant?: "dark" | "light";
+}
+
+export function CardWithIcon({
+  icon: Icon,
+  title,
+  description,
+  stepNumber,
+  subtitle,
+  variant = "dark",
+}: CardWithIconProps) {
+  const isDark = variant === "dark";
+
+  return (
+    <div
+      className={`group relative p-8 md:p-10 rounded-3xl border transition-all duration-500 ${isDark ? "border-white/10 bg-surface-dark/20 hover:bg-surface-dark/40 hover:border-purple-500/30" : "border-neutral-200 bg-white hover:border-neutral-300 hover:shadow-lg"}`}
+    >
+      {stepNumber && (
+        <div
+          className={`absolute top-6 right-6 text-6xl font-serif font-bold transition-all ${isDark ? "text-white/5 group-hover:text-purple-500/10" : "text-neutral-100 group-hover:text-neutral-200"}`}
+        >
+          0{stepNumber}
+        </div>
+      )}
+
+      <div
+        className={`w-12 h-12 rounded-xl flex items-center justify-center mb-6 transition-all ${isDark ? "bg-purple-500/10 border border-purple-500/20 group-hover:bg-purple-500/20" : "bg-neutral-100 group-hover:bg-neutral-200"}`}
+      >
+        <Icon
+          className={`w-6 h-6 ${isDark ? "text-purple-400" : "text-neutral-600"}`}
+        />
+      </div>
+
+      <h3
+        className={`font-serif text-2xl md:text-3xl mb-1 ${isDark ? "text-white" : "text-neutral-900"}`}
+      >
+        {title}
+      </h3>
+
+      {subtitle && (
+        <p
+          className={`text-sm font-medium tracking-wider uppercase mb-4 ${isDark ? "text-purple-400" : "text-neutral-500"}`}
+        >
+          {subtitle}
+        </p>
+      )}
+
+      <p
+        className={`font-light leading-relaxed ${isDark ? "text-neutral-text-muted" : "text-neutral-500"}`}
+      >
+        {description}
+      </p>
+    </div>
+  );
+}
+
+interface LeaderCardProps {
+  role: string;
+  name: string;
+  quote?: string;
+  variant?: "featured" | "default";
+}
+
+export function LeaderCard({
+  role,
+  name,
+  quote,
+  variant = "default",
+}: LeaderCardProps) {
+  if (variant === "featured") {
+    return (
+      <div className="md:col-span-2 lg:col-span-2 p-8 rounded-3xl border border-white/10 bg-surface-dark/30">
+        <p className="text-xs font-medium tracking-wider uppercase text-neutral-text-muted mb-2">
+          {role}
+        </p>
+        <h3 className="font-serif text-2xl text-white mb-4">{name}</h3>
+        {quote && (
+          <p className="text-neutral-text/80 font-light italic border-l-2 border-purple-500/50 pl-4">
+            &ldquo;{quote}&rdquo;
+          </p>
+        )}
+      </div>
+    );
+  }
+
+  return (
+    <div className="p-6 rounded-2xl border border-white/5 bg-white/5">
+      <p className="text-xs font-medium tracking-wider uppercase text-neutral-text-muted mb-2">
+        {role}
+      </p>
+      <h3 className="font-serif text-xl text-white">{name}</h3>
+    </div>
+  );
+}
+
+interface VentureCardProps {
+  badge: string;
+  badgeColor: string;
+  name: string;
+  tagline: string;
+  description: string;
+  status: string;
+  statusColor: string;
+  offsetTop?: boolean;
+}
+
+export function VentureCard({
+  badge,
+  badgeColor,
+  name,
+  tagline,
+  description,
+  status,
+  statusColor,
+  offsetTop = false,
+}: VentureCardProps) {
+  return (
+    <div
+      className={`group relative p-8 md:p-10 rounded-3xl border border-white/10 bg-surface-dark/30 hover:bg-surface-dark/50 transition-all duration-500 ${offsetTop ? "md:mt-24" : ""}`}
+    >
+      <div
+        className={`inline-flex px-3 py-1 rounded-full text-xs font-medium tracking-wider uppercase border mb-6 ${badgeColor}`}
+      >
+        {badge}
+      </div>
+
+      <h3 className="font-serif text-3xl md:text-4xl text-white mb-2 group-hover:text-glow-purple transition-all">
+        {name}
+      </h3>
+
+      <p className="text-lg text-neutral-text font-medium mb-4">{tagline}</p>
+
+      <p className="text-neutral-text-muted font-light leading-relaxed mb-6">
+        {description}
+      </p>
+
+      <div className="flex items-center gap-2">
+        <div
+          className={`w-2 h-2 rounded-full ${statusColor.replace("text-", "bg-")}`}
+        />
+        <span className={`text-sm font-medium ${statusColor}`}>{status}</span>
+      </div>
+    </div>
+  );
+}
+
+interface ValueCardProps {
+  icon: LucideIcon;
+  title: string;
+  description: string;
+}
+
+export function ValueCard({ icon: Icon, title, description }: ValueCardProps) {
+  return (
+    <div className="flex gap-4">
+      <div className="w-10 h-10 rounded-lg bg-purple-500/10 border border-purple-500/20 flex items-center justify-center flex-shrink-0">
+        <Icon className="w-5 h-5 text-purple-400" />
+      </div>
+      <div>
+        <h3 className="text-white font-medium mb-1">{title}</h3>
+        <p className="text-neutral-text-muted font-light text-sm leading-relaxed">
+          {description}
+        </p>
+      </div>
+    </div>
+  );
+}
