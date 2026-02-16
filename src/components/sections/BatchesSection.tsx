@@ -1,6 +1,7 @@
 "use client";
 
 import { VentureCard } from "@/components/ui/Card";
+import Particles from "@/components/ui/Particles";
 
 const FOCUS_PILLARS = [
   "Technology & Future Research",
@@ -38,7 +39,20 @@ export function BatchesSection() {
       id="ventures"
       className="relative bg-black py-16 sm:py-24 lg:py-32 px-4 sm:px-6 lg:px-8 xl:px-32 border-t border-white/5 overflow-hidden"
     >
-      <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none overflow-hidden">
+      <div className="absolute inset-0 z-0">
+        <Particles
+          particleColors={['#ffffff', '#a78bfa']}
+          particleCount={200}
+          particleSpread={10}
+          speed={0.1}
+          particleBaseSize={100}
+          moveParticlesOnHover={true}
+          alphaParticles={false}
+          disableRotation={false}
+        />
+      </div>
+
+      <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none overflow-hidden z-[1]">
         <span className="text-[15vw] sm:text-[20vw] font-serif font-bold text-white/[0.02] tracking-tighter whitespace-nowrap">
           ASCEND
         </span>

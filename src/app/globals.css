@@ -53,10 +53,13 @@
   }
 
   .text-glow-purple {
+    text-shadow: 0 0 30px rgba(139, 92, 246, 0.5);
+  }
+
+  .text-glow-purple .split-word {
     background: linear-gradient(135deg, #a78bfa 0%, #818cf8 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    text-shadow: 0 0 30px rgba(139, 92, 246, 0.5);
   }
 }
 

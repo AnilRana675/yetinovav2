@@ -1,5 +1,7 @@
 "use client";
 
+import SplitText from "@/components/ui/SplitText";
+import ShinyText from "@/components/ui/ShinyText";
 import dynamic from "next/dynamic";
 
 const Aurora = dynamic(() => import("@/components/ui/aurora/Aurora"), {
@@ -17,11 +19,24 @@ export function HeroSection() {
       </div>
 
       <div className="relative z-10 max-w-5xl mx-auto flex flex-col items-center px-2 sm:px-4">
-        <h1 className="font-serif text-3xl sm:text-3xl md:text-5xl lg:text-6xl xl:text-7xl leading-[1.05] sm:leading-[0.95] text-white mb-4 sm:mb-6 lg:mb-8 tracking-tight">
-          We Back Nepal&apos;s
-          <br className="hidden sm:block" />
-          <span className="text-glow-purple">Boldest Builders.</span>
-        </h1>
+        <div className="mb-4 sm:mb-6 lg:mb-8 flex flex-col items-center">
+          <SplitText
+            text="We Back Nepal's"
+            className="font-serif text-3xl sm:text-3xl md:text-5xl lg:text-6xl xl:text-7xl leading-[1.05] sm:leading-[0.95] text-white tracking-tight"
+            delay={50}
+            duration={1.5}
+            splitType="words"
+            textAlign="center"
+          />
+          <ShinyText
+            text="Boldest Builders."
+            disabled={false}
+            speed={3}
+            className="font-serif text-3xl sm:text-3xl md:text-5xl lg:text-6xl xl:text-7xl leading-[1.05] sm:leading-[0.95] tracking-tight"
+            color="#a78bfa"
+            shineColor="#ffffff"
+          />
+        </div>
 
         <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-neutral-text/80 font-light leading-relaxed max-w-3xl mx-auto px-2 sm:px-0">
           Funding. Mentorship. Network. <br />
