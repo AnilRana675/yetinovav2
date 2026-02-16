@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { VentureCard } from "./VentureCard";
+import { VentureCard } from "@/components/ui/VentureCard";
 
 const FILTER_BUTTONS = [
   { label: "All Ventures", active: true },
