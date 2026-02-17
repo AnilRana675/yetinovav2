@@ -30,9 +30,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`dark ${GeistMono.variable}`}>
+    <html
+      lang="en"
+      className={`dark ${GeistMono.variable}`}
+      style={{ "--accent-color": "#606FCC" } as React.CSSProperties}
+    >
       <body
-        className={`antialiased bg-black text-neutral-text font-sans selection:bg-[#606FCC] selection:text-black transition-colors duration-500`}
+        className={`antialiased bg-black text-neutral-text font-sans selection:bg-[var(--accent-color)] selection:text-black transition-colors duration-500`}
       >
         {children}
       </body>

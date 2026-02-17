@@ -13,7 +13,10 @@ const Aurora = dynamic(() => import("@/components/ui/aurora/Aurora"), {
 
 export function HeroSection() {
   return (
-    <section className="relative min-h-screen flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8 xl:px-32 pt-20 sm:pt-24 lg:pt-0 pb-12 sm:pb-16 overflow-hidden bg-black text-center">
+    <section
+      className="relative min-h-screen flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8 xl:px-32 pt-20 sm:pt-24 lg:pt-0 pb-12 sm:pb-16 overflow-hidden bg-black text-center"
+      style={{ "--accent-color": "#606FCC" } as React.CSSProperties}
+    >
       <div className="absolute inset-0 z-0">
         <Aurora amplitude={1.2} blend={0.5} speed={0.5} />
       </div>
@@ -32,8 +35,7 @@ export function HeroSection() {
             text="Boldest Builders."
             disabled={false}
             speed={3}
-            className="font-serif text-3xl sm:text-3xl md:text-5xl lg:text-6xl xl:text-7xl leading-[1.05] sm:leading-[0.95] tracking-tight"
-            color="#606FCC"
+            className="font-serif text-3xl sm:text-3xl md:text-5xl lg:text-6xl xl:text-7xl leading-[1.05] sm:leading-[0.95] tracking-tight text-[var(--accent-color)]"
             shineColor="#ffffff"
           />
         </div>

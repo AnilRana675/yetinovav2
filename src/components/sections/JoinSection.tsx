@@ -13,6 +13,7 @@ export function JoinSection() {
     <section
       id="join"
       className="relative bg-[#0a0a0a] py-16 sm:py-24 lg:py-32 px-4 sm:px-6 lg:px-8 xl:px-32 border-t border-white/5 overflow-hidden"
+      style={{ "--accent-color": "#77C76C" } as React.CSSProperties}
     >
       <div className="absolute inset-0 bg-gradient-to-b from-black via-[#0a0a0a] to-black" />
 
@@ -28,7 +29,7 @@ export function JoinSection() {
         </div>
 
         <div className="mb-10 sm:mb-16">
-          <p className="text-xs font-mono font-bold tracking-widest uppercase text-[#606FCC] mb-4 sm:mb-6 text-center">
+          <p className="text-xs font-mono font-bold tracking-widest uppercase text-[var(--accent-color)] mb-4 sm:mb-6 text-center">
             Who Should Apply
           </p>
           <div className="space-y-3 sm:space-y-4">
@@ -37,8 +38,8 @@ export function JoinSection() {
                 key={item}
                 className="flex items-center gap-3 sm:gap-4 p-3 sm:p-4 rounded-xl border border-white/10 bg-white/5"
               >
-                <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-[#606FCC]/20 flex items-center justify-center flex-shrink-0">
-                  <Check className="w-3 h-3 sm:w-4 sm:h-4 text-[#606FCC]" />
+                <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-[var(--accent-color)]/20 flex items-center justify-center flex-shrink-0">
+                  <Check className="w-3 h-3 sm:w-4 sm:h-4 text-[var(--accent-color)]" />
                 </div>
                 <p className="text-neutral-text font-light text-sm sm:text-base">
                   {item}
