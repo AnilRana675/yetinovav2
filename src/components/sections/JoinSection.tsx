@@ -28,7 +28,7 @@ export function JoinSection() {
         </div>
 
         <div className="mb-10 sm:mb-16">
-          <p className="text-xs font-bold tracking-widest uppercase text-[#a3ff12] mb-4 sm:mb-6 text-center">
+          <p className="text-xs font-mono font-bold tracking-widest uppercase text-[#606FCC] mb-4 sm:mb-6 text-center">
             Who Should Apply
           </p>
           <div className="space-y-3 sm:space-y-4">
@@ -37,8 +37,8 @@ export function JoinSection() {
                 key={item}
                 className="flex items-center gap-3 sm:gap-4 p-3 sm:p-4 rounded-xl border border-white/10 bg-white/5"
               >
-                <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-[#a3ff12]/20 flex items-center justify-center flex-shrink-0">
-                  <Check className="w-3 h-3 sm:w-4 sm:h-4 text-[#a3ff12]" />
+                <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-[#606FCC]/20 flex items-center justify-center flex-shrink-0">
+                  <Check className="w-3 h-3 sm:w-4 sm:h-4 text-[#606FCC]" />
                 </div>
                 <p className="text-neutral-text font-light text-sm sm:text-base">
                   {item}

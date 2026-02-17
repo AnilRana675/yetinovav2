@@ -67,7 +67,7 @@ export function AboutSection() {
           </div>
 
           <div>
-            <p className="text-xs font-bold tracking-widest uppercase text-[#a3ff12] mb-6 sm:mb-8">
+            <p className="text-xs font-mono font-bold tracking-widest uppercase text-[#606FCC] mb-6 sm:mb-8">
               Our DNA
             </p>
             <div className="space-y-6 sm:space-y-8">
@@ -84,7 +84,7 @@ export function AboutSection() {
         </div>
 
         <div className="border-t border-white/10 pt-12 sm:pt-16">
-          <p className="text-xl sm:text-3xl font-bold tracking-widest uppercase text-[#a3ff12] mb-8 sm:mb-10">
+          <p className="text-xl sm:text-3xl font-mono font-bold tracking-widest uppercase text-[#606FCC] mb-8 sm:mb-10">
             THIS SECTION NEEDS TO CHANGE (IGNORE THIS SECTION )
           </p>
 

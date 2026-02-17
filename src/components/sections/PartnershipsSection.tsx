@@ -46,16 +46,16 @@ export function PartnershipsSection() {
           {PARTNERSHIP_TYPES.map((partnership, index) => (
             <div
               key={partnership.category}
-              className="group border border-white/10 rounded-xl sm:rounded-2xl overflow-hidden hover:border-[#a3ff12] transition-all duration-300"
+              className="group border border-white/10 rounded-xl sm:rounded-2xl overflow-hidden hover:border-[#606FCC] transition-all duration-300"
             >
               <div className="p-4 sm:p-6 md:p-8">
                 <div className="flex items-start justify-between gap-3 sm:gap-4">
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2 sm:gap-4 mb-2">
-                      <span className="text-xs font-medium text-[#a3ff12] flex-shrink-0">
+                      <span className="text-xs font-mono font-medium text-[#606FCC] flex-shrink-0">
                         {String(index + 1).padStart(2, "0")}
                       </span>
-                      <h3 className="text-lg sm:text-xl md:text-2xl font-serif text-white group-hover:text-glow-neon transition-all truncate">
+                      <h3 className="text-lg sm:text-xl md:text-2xl font-serif text-white group-hover:text-glow-accent transition-all truncate">
                         {partnership.category}
                       </h3>
                     </div>
@@ -63,7 +63,7 @@ export function PartnershipsSection() {
                       {partnership.description}
                     </p>
                   </div>
-                  <ChevronDown className="w-5 h-5 sm:w-6 sm:h-6 text-neutral-text-muted group-hover:text-[#a3ff12] transition-all flex-shrink-0" />
+                  <ChevronDown className="w-5 h-5 sm:w-6 sm:h-6 text-neutral-text-muted group-hover:text-[#606FCC] transition-all flex-shrink-0" />
                 </div>
               </div>
             </div>
@@ -73,7 +73,7 @@ export function PartnershipsSection() {
         <div className="mt-10 sm:mt-16 text-center">
           <a
             href="#contact"
-            className="inline-flex items-center gap-2 px-6 sm:px-8 py-3 sm:py-4 bg-[#a3ff12] hover:bg-[#8edb10] rounded-full text-black font-medium transition-all duration-300 shadow-[0_0_20px_rgba(163,255,18,0.3)] hover:shadow-[0_0_30px_rgba(163,255,18,0.5)] text-sm sm:text-base"
+            className="inline-flex items-center gap-2 px-6 sm:px-8 py-3 sm:py-4 bg-[#606FCC] hover:bg-[#4A5BB5] rounded-full text-white font-medium transition-all duration-300 shadow-[0_0_20px_rgba(96,111,204,0.3)] hover:shadow-[0_0_30px_rgba(96,111,204,0.5)] text-sm sm:text-base"
           >
             Become a Partner
             <span className="material-symbols-outlined text-lg">
