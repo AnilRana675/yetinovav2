@@ -1,17 +1,13 @@
 import type { Metadata } from "next";
-import { Inter, Playfair_Display } from "next/font/google";
+import { GeistMono } from "geist/font/mono";
+import localFont from "next/font/local";
 import "material-symbols/outlined.css";
 import "./globals.css";
 
-const inter = Inter({
-  variable: "--font-inter",
-  subsets: ["latin"],
-  display: "swap",
-});
-
-const playfair = Playfair_Display({
-  variable: "--font-playfair",
-  subsets: ["latin"],
+const geistMono = GeistMono;
+const hongKong = localFont({
+  src: "../../public/font/HongKong-Medium.ttf",
+  variable: "--font-hongkong",
   display: "swap",
 });
 
@@ -34,9 +30,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark">
+    <html lang="en" className={`dark ${geistMono.variable} ${hongKong.variable}`}>
       <body
-        className={`${inter.variable} ${playfair.variable} antialiased bg-black text-neutral-text font-sans selection:bg-purple-500 selection:text-white transition-colors duration-500`}
+        className={`antialiased bg-black text-neutral-text font-mono selection:bg-purple-500 selection:text-white transition-colors duration-500`}
       >
         {children}
       </body>
