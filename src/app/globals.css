@@ -12,12 +12,11 @@
   --color-surface-dark: #252b29;
   --color-neutral-text: #e0e0d8;
   --color-neutral-text-muted: #a0a5a3;
-  --color-arc-purple: #a3ff12;
+  --color-accent: #606fcc;
   --color-arc-blue: #3b82f6;
-  --color-neon-green: #a3ff12;
 
-  --font-sans: var(--font-geist-mono), monospace;
-  --font-serif: var(--font-hongkong), serif;
+  --font-sans: "Instrument Sans", system-ui, sans-serif;
+  --font-serif: "Manrope", system-ui, sans-serif;
   --font-mono: var(--font-geist-mono), monospace;
 
   --radius-lg: 1.5rem;
@@ -42,23 +41,25 @@
   }
 
   .atmospheric-arc {
-    background: conic-gradient(from 180deg at 50% 100%,
-        #0000 0deg,
-        #3b82f6 60deg,
-        #a855f7 90deg,
-        #3b82f6 120deg,
-        #0000 180deg);
+    background: conic-gradient(
+      from 180deg at 50% 100%,
+      #0000 0deg,
+      #3b82f6 60deg,
+      #a855f7 90deg,
+      #3b82f6 120deg,
+      #0000 180deg
+    );
     filter: blur(60px);
     opacity: 0.8;
     border-radius: 50%;
   }
 
-  .text-glow-neon {
-    text-shadow: 0 0 30px rgba(163, 255, 18, 0.5);
+  .text-glow-accent {
+    text-shadow: 0 0 30px rgba(96, 111, 204, 0.5);
   }
 
-  .text-glow-neon .split-word {
-    background: linear-gradient(135deg, #a3ff12 0%, #d4ff70 100%);
+  .text-glow-accent .split-word {
+    background: linear-gradient(135deg, #606fcc 0%, #8b9fe8 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }

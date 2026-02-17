@@ -10,7 +10,7 @@ import { GovernanceSection } from "@/components/sections/GovernanceSection";
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-black text-neutral-text selection:bg-[#a3ff12] selection:text-black">
+    <div className="min-h-screen bg-black text-neutral-text selection:bg-[#606FCC] selection:text-black">
       <Header />
       <main>
         <HeroSection />

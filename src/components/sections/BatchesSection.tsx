@@ -23,7 +23,7 @@ const STARTUPS = [
   },
   {
     badge: "Winter 2026 (W26)",
-    badgeColor: "bg-[#a3ff12]/10 text-[#a3ff12] border-[#a3ff12]/20",
+    badgeColor: "bg-[#606FCC]/10 text-[#606FCC] border-[#606FCC]/20",
     name: "AstraYug",
     tagline: "Digital Infrastructure for Scaling Brands.",
     description:
@@ -41,7 +41,7 @@ export function BatchesSection() {
     >
       <div className="absolute inset-0 z-0">
         <Particles
-          particleColors={['#ffffff', '#a3ff12', '#ccff00']}
+          particleColors={["#ffffff", "#606FCC", "#ccff00"]}
           particleCount={200}
           particleSpread={10}
           speed={0.1}
@@ -69,14 +69,14 @@ export function BatchesSection() {
         </div>
 
         <div className="mb-12 sm:mb-20">
-          <p className="text-xs font-bold tracking-widest uppercase text-[#a3ff12] mb-4 sm:mb-6">
+          <p className="text-xs font-mono font-bold tracking-widest uppercase text-[#606FCC] mb-4 sm:mb-6">
             Core Focus Pillars
           </p>
           <div className="flex flex-wrap gap-2 sm:gap-3">
             {FOCUS_PILLARS.map((pillar) => (
               <div
                 key={pillar}
-                className="px-3 sm:px-5 py-2 sm:py-2.5 rounded-full border border-white/10 bg-white/5 text-neutral-text text-xs sm:text-sm font-medium hover:border-[#a3ff12]/30 hover:bg-[#a3ff12]/10 transition-all cursor-default"
+                className="px-3 sm:px-5 py-2 sm:py-2.5 rounded-full border border-white/10 bg-white/5 text-neutral-text text-xs sm:text-sm font-medium hover:border-[#606FCC]/30 hover:bg-[#606FCC]/10 transition-all cursor-default"
               >
                 {pillar}
               </div>

@@ -1,15 +1,15 @@
 import type { Metadata } from "next";
 import { GeistMono } from "geist/font/mono";
-import localFont from "next/font/local";
+import "@fontsource/manrope/400.css";
+import "@fontsource/manrope/500.css";
+import "@fontsource/manrope/600.css";
+import "@fontsource/manrope/700.css";
+import "@fontsource/instrument-sans/400.css";
+import "@fontsource/instrument-sans/500.css";
+import "@fontsource/instrument-sans/600.css";
+import "@fontsource/instrument-sans/700.css";
 import "material-symbols/outlined.css";
 import "./globals.css";
-
-const geistMono = GeistMono;
-const hongKong = localFont({
-  src: "../../public/font/HongKong-Medium.ttf",
-  variable: "--font-hongkong",
-  display: "swap",
-});
 
 export const metadata: Metadata = {
   title: "YetiNova - Building Sustainable Digital Ventures",
@@ -30,9 +30,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`dark ${geistMono.variable} ${hongKong.variable}`}>
+    <html lang="en" className={`dark ${GeistMono.variable}`}>
       <body
-        className={`antialiased bg-black text-neutral-text font-mono selection:bg-[#a3ff12] selection:text-black transition-colors duration-500`}
+        className={`antialiased bg-black text-neutral-text font-sans selection:bg-[#606FCC] selection:text-black transition-colors duration-500`}
       >
         {children}
       </body>

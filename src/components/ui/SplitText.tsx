@@ -1,9 +1,8 @@
-import { useRef, useEffect, useState } from 'react';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-// @ts-ignore - warning: imports premium plugin. Ensure you have the appropriate license/package installed.
-import { SplitText as GSAPSplitText } from 'gsap/SplitText';
-import { useGSAP } from '@gsap/react';
+import { useRef, useEffect, useState } from "react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { SplitText as GSAPSplitText } from "gsap/SplitText";
+import { useGSAP } from "@gsap/react";
 
 gsap.registerPlugin(ScrollTrigger, GSAPSplitText, useGSAP);
 
@@ -13,30 +12,30 @@ interface SplitTextProps {
   delay?: number;
   duration?: number;
   ease?: string;
-  splitType?: 'chars' | 'words' | 'lines';
+  splitType?: "chars" | "words" | "lines";
   from?: gsap.TweenVars;
   to?: gsap.TweenVars;
   threshold?: number;
   rootMargin?: string;
-  textAlign?: 'left' | 'center' | 'right' | 'justify';
+  textAlign?: "left" | "center" | "right" | "justify";
   tag?: string;
   onLetterAnimationComplete?: () => void;
 }
 
 const SplitText = ({
-  text = '',
-  className = '',
+  text = "",
+  className = "",
   delay = 50,
   duration = 1.25,
-  ease = 'power3.out',
-  splitType = 'chars',
+  ease = "power3.out",
+  splitType = "chars",
   from = { opacity: 0, y: 40 },
   to = { opacity: 1, y: 0 },
   threshold = 0.1,
-  rootMargin = '-100px',
-  textAlign = 'center',
-  tag = 'p',
-  onLetterAnimationComplete
+  rootMargin = "-100px",
+  textAlign = "center",
+  tag = "p",
+  onLetterAnimationComplete,
 }: SplitTextProps) => {
   const ref = useRef<HTMLElement>(null);
   const animationCompletedRef = useRef(false);
@@ -49,13 +48,15 @@ const SplitText = ({
   }, [onLetterAnimationComplete]);
 
   useEffect(() => {
-    if (document.fonts.status === 'loaded') {
-      setFontsLoaded(true);
-    } else {
-      document.fonts.ready.then(() => {
+    const checkFonts = async () => {
+      if (document.fonts.status === "loaded") {
         setFontsLoaded(true);
-      });
-    }
+      } else {
+        await document.fonts.ready;
+        setFontsLoaded(true);
+      }
+    };
+    void checkFonts();
   }, []);
 
   useGSAP(
@@ -69,7 +70,7 @@ const SplitText = ({
       if (el._rbsplitInstance) {
         try {
           el._rbsplitInstance.revert();
-        } catch (_) { // eslint-disable-line @typescript-eslint/no-unused-vars
+        } catch {
           /* ignore */
         }
         el._rbsplitInstance = null;
@@ -78,10 +79,10 @@ const SplitText = ({
       const startPct = (1 - threshold) * 100;
       const marginMatch = /^(-?\d+(?:\.\d+)?)(px|em|rem|%)?$/.exec(rootMargin);
       const marginValue = marginMatch ? parseFloat(marginMatch[1]) : 0;
-      const marginUnit = marginMatch ? marginMatch[2] || 'px' : 'px';
+      const marginUnit = marginMatch ? marginMatch[2] || "px" : "px";
       const sign =
         marginValue === 0
-          ? ''
+          ? ""
           : marginValue < 0
             ? `-=${Math.abs(marginValue)}${marginUnit}`
             : `+=${marginValue}${marginUnit}`;
@@ -91,19 +92,22 @@ const SplitText = ({
       let targets: any;
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const assignTargets = (self: any) => {
-        if (splitType.includes('chars') && self.chars.length) targets = self.chars;
-        if (!targets && splitType.includes('words') && self.words.length) targets = self.words;
-        if (!targets && splitType.includes('lines') && self.lines.length) targets = self.lines;
+        if (splitType.includes("chars") && self.chars.length)
+          targets = self.chars;
+        if (!targets && splitType.includes("words") && self.words.length)
+          targets = self.words;
+        if (!targets && splitType.includes("lines") && self.lines.length)
+          targets = self.lines;
         if (!targets) targets = self.chars || self.words || self.lines;
       };
 
       const splitInstance = new GSAPSplitText(el, {
         type: splitType,
         smartWrap: true,
-        autoSplit: splitType === 'lines',
-        linesClass: 'split-line',
-        wordsClass: 'split-word',
-        charsClass: 'split-char',
+        autoSplit: splitType === "lines",
+        linesClass: "split-line",
+        wordsClass: "split-word",
+        charsClass: "split-char",
         reduceWhiteSpace: false,
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         onSplit: (self: any) => {
@@ -121,27 +125,27 @@ const SplitText = ({
                 start,
                 once: true,
                 fastScrollEnd: true,
-                anticipatePin: 0.4
+                anticipatePin: 0.4,
               },
               onComplete: () => {
                 animationCompletedRef.current = true;
                 onCompleteRef.current?.();
               },
-              willChange: 'transform, opacity',
-              force3D: true
+              willChange: "transform, opacity",
+              force3D: true,
             }
           );
-        }
+        },
       });
       el._rbsplitInstance = splitInstance;
 
       return () => {
-        ScrollTrigger.getAll().forEach(st => {
+        ScrollTrigger.getAll().forEach((st) => {
           if (st.trigger === el) st.kill();
         });
         try {
           splitInstance.revert();
-        } catch (_) { // eslint-disable-line @typescript-eslint/no-unused-vars
+        } catch {
           /* ignore */
         }
         el._rbsplitInstance = null;
@@ -158,21 +162,21 @@ const SplitText = ({
         JSON.stringify(to),
         threshold,
         rootMargin,
-        fontsLoaded
+        fontsLoaded,
       ],
-      scope: ref
+      scope: ref,
     }
   );
 
   const renderTag = () => {
     const style: React.CSSProperties = {
       textAlign: textAlign as any, // eslint-disable-line @typescript-eslint/no-explicit-any
-      wordWrap: 'break-word',
-      willChange: 'transform, opacity'
+      wordWrap: "break-word",
+      willChange: "transform, opacity",
     };
-    const classes = `split-parent overflow-hidden inline-block whitespace-normal ${className}`;
+    const classes = `split-parent overflow-visible inline-block whitespace-normal ${className}`;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const Tag = (tag || 'p') as any;
+    const Tag = (tag || "p") as any;
 
     return (
       <Tag ref={ref} style={style} className={classes}>
