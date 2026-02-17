@@ -7,7 +7,7 @@ import dynamic from "next/dynamic";
 const Aurora = dynamic(() => import("@/components/ui/aurora/Aurora"), {
   ssr: false,
   loading: () => (
-    <div className="absolute inset-0 bg-linear-to-b from-purple-900/20 to-black" />
+    <div className="absolute inset-0 bg-linear-to-b from-[#a3ff12]/10 to-black" />
   ),
 });
 
@@ -15,14 +15,19 @@ export function HeroSection() {
   return (
     <section className="relative min-h-screen flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8 xl:px-32 pt-20 sm:pt-24 lg:pt-0 pb-12 sm:pb-16 overflow-hidden bg-black text-center">
       <div className="absolute inset-0 z-0">
-        <Aurora amplitude={1.2} blend={0.5} speed={0.5} />
+        <Aurora
+          amplitude={1.2}
+          blend={0.5}
+          speed={0.5}
+          
+        />
       </div>
 
       <div className="relative z-10 max-w-5xl mx-auto flex flex-col items-center px-2 sm:px-4">
-        <div className="mb-4 sm:mb-6 lg:mb-8 flex flex-col items-center">
+        <div className="mb-4 sm:mb-6">
           <SplitText
-            text="We Back Nepal's"
-            className="font-serif text-3xl sm:text-3xl md:text-5xl lg:text-6xl xl:text-7xl leading-[1.05] sm:leading-[0.95] text-white tracking-tight"
+            text="Crafting The"
+            className="font-serif text-3xl sm:text-3xl md:text-5xl lg:text-6xl xl:text-7xl leading-[1.05] sm:leading-[0.95] tracking-tight text-white/90"
             delay={50}
             duration={1.5}
             splitType="words"
@@ -33,7 +38,7 @@ export function HeroSection() {
             disabled={false}
             speed={3}
             className="font-serif text-3xl sm:text-3xl md:text-5xl lg:text-6xl xl:text-7xl leading-[1.05] sm:leading-[0.95] tracking-tight"
-            color="#a78bfa"
+            color="#a3ff12"
             shineColor="#ffffff"
           />
         </div>
