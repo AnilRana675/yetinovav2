@@ -2,7 +2,9 @@
 
 import SplitText from "@/components/ui/SplitText";
 import ShinyText from "@/components/ui/ShinyText";
+import { CurrentlyBacking } from "@/components/ui/Pills";
 import dynamic from "next/dynamic";
+import { motion, useScroll, useTransform } from "motion/react";
 
 const Aurora = dynamic(() => import("@/components/ui/aurora/Aurora"), {
   ssr: false,
@@ -12,6 +14,9 @@ const Aurora = dynamic(() => import("@/components/ui/aurora/Aurora"), {
 });
 
 export function HeroSection() {
+  const { scrollY } = useScroll();
+  const scrollOpacity = useTransform(scrollY, [0, 300], [0.5, 0]);
+
   return (
     <section
       className="relative min-h-screen flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8 xl:px-32 pt-20 sm:pt-24 lg:pt-0 pb-12 sm:pb-16 overflow-hidden bg-black text-center"
@@ -31,13 +36,19 @@ export function HeroSection() {
             splitType="words"
             textAlign="center"
           />
-          <ShinyText
-            text="Boldest Builders."
-            disabled={false}
-            speed={3}
-            className="font-serif text-3xl sm:text-3xl md:text-5xl lg:text-6xl xl:text-7xl leading-[1.05] sm:leading-[0.95] tracking-tight text-[var(--accent-color)]"
-            shineColor="#ffffff"
-          />
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1.25, ease: "easeOut", delay: 0.3 }}
+          >
+            <ShinyText
+              text="Boldest Builders."
+              disabled={false}
+              speed={3}
+              className="font-serif text-3xl sm:text-3xl md:text-5xl lg:text-6xl xl:text-7xl leading-[1.05] sm:leading-[0.95] tracking-tight text-[var(--accent-color)]"
+              shineColor="#ffffff"
+            />
+          </motion.div>
         </div>
 
         <div className="flex flex-col gap-2">
@@ -58,13 +69,28 @@ export function HeroSection() {
             textAlign="center"
           />
         </div>
+
+        <motion.div
+          className="mt-6 sm:mt-8"
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1.25, ease: "easeOut", delay: 0.8 }}
+        >
+          <CurrentlyBacking />
+        </motion.div>
       </div>
 
-      <div className="absolute bottom-6 sm:bottom-8 lg:bottom-12 left-1/2 -translate-x-1/2 animate-bounce opacity-50">
+      <motion.div
+        className="absolute bottom-6 sm:bottom-8 lg:bottom-12 left-1/2 -translate-x-1/2 animate-bounce"
+        initial={{ y: 20 }}
+        animate={{ y: 0 }}
+        style={{ opacity: scrollOpacity }}
+        transition={{ duration: 1, ease: "easeOut", delay: 1.2 }}
+      >
         <span className="material-symbols-outlined text-white text-2xl sm:text-3xl font-light">
           keyboard_arrow_down
         </span>
-      </div>
+      </motion.div>
     </section>
   );
 }
