@@ -3,8 +3,6 @@
 import { useEffect, useRef, ReactNode } from "react";
 import { Renderer, Program, Mesh, Triangle } from "ogl";
 
-import "./Aurora.css";
-
 function hexToRgb(hex: string): [number, number, number] {
   // Remove # if present
   hex = hex.replace("#", "");
