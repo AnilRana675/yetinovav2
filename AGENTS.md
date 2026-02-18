@@ -61,12 +61,26 @@ npm run format            # Format all files with Prettier
 - Use `class-variance-authority` (cva) for variant-based styling
 - Combine Tailwind classes with `cn()` utility from `@/lib/utils`
 
-### Styling
+### Prettier Configuration
 
-- Tailwind CSS v4 with CSS variables for theming
-- Custom accent color: `#606FCC` (brand blue)
-- Dark mode is default (`dark` class on html element)
-- Use `cn()` utility to merge and conditionally apply Tailwind classes
+```json
+{
+  "semi": true,
+  "trailingComma": "es5",
+  "singleQuote": false,
+  "tabWidth": 2,
+  "useTabs": false
+}
+```
+
+### Styling Guidelines
+
+- **Tailwind CSS v4** with CSS variables for theming
+- **Mobile-first responsive design** using `sm:`, `md:`, `lg:`, `xl:` prefixes
+- **CSS Variables:** Use `var(--accent-color)` for brand color (#606FCC)
+- **Dark mode** is default (`dark` class on html element)
+- **Class merging:** Use `cn()` utility from `@/lib/utils` to conditionally merge classes
+- **Pattern:** Use template literals for simple conditionals, `cn()` for complex merging
 
 ### Error Handling
 
