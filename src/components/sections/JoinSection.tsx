@@ -1,6 +1,7 @@
 "use client";
 
 import { Check, ArrowRight } from "lucide-react";
+import { Button } from "@/components/ui/Button";
 
 const CHECKLIST_ITEMS = [
   "You have an MVP or a strong prototype.",
@@ -49,13 +50,17 @@ export function JoinSection() {
         </div>
 
         <div className="text-center">
-          <a
-            href="#contact"
-            className="inline-flex items-center gap-2 sm:gap-3 px-6 sm:px-10 py-4 sm:py-5 bg-white text-black rounded-full font-semibold text-base sm:text-lg hover:bg-neutral-100 transition-all duration-300 group"
+          <Button
+            asChild
+            variant="white"
+            size="xl"
+            className="group transition-all duration-300"
           >
-            Apply for Winter &apos;26
-            <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform" />
-          </a>
+            <a href="#contact">
+              Apply for Winter &apos;26
+              <ArrowRight className="ml-2 w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform" />
+            </a>
+          </Button>
           <p className="mt-4 sm:mt-6 text-neutral-text-muted text-xs sm:text-sm">
             Applications open &bull; Next batch starts January 2026
           </p>

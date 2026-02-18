@@ -1,6 +1,7 @@
 "use client";
 
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, ArrowRight } from "lucide-react";
+import { Button } from "@/components/ui/Button";
 
 const PARTNERSHIP_TYPES = [
   {
@@ -71,15 +72,17 @@ export function PartnershipsSection() {
         </div>
 
         <div className="mt-10 sm:mt-16 text-center">
-          <a
-            href="#contact"
-            className="inline-flex items-center gap-2 px-6 sm:px-8 py-3 sm:py-4 bg-[#606FCC] hover:bg-[#4A5BB5] rounded-full text-white font-medium transition-all duration-300 shadow-[0_0_20px_rgba(96,111,204,0.3)] hover:shadow-[0_0_30px_rgba(96,111,204,0.5)] text-sm sm:text-base"
+          <Button
+            asChild
+            variant="brand"
+            size="pill"
+            className="group transition-all duration-300"
           >
-            Become a Partner
-            <span className="material-symbols-outlined text-lg">
-              arrow_forward
-            </span>
-          </a>
+            <a href="#contact">
+              Become a Partner
+              <ArrowRight className="ml-2 w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform" />
+            </a>
+          </Button>
         </div>
       </div>
     </section>
