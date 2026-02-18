@@ -1,0 +1,22 @@
+{
+  "name": "YetiNova",
+  "short_name": "YetiNova",
+  "description": "Building software for the future",
+  "start_url": "/",
+  "icons": [
+    {
+      "src": "/icons/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icons/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "theme_color": "#606FCC",
+  "background_color": "#0A0A0F",
+  "display": "standalone",
+  "orientation": "portrait"
+}

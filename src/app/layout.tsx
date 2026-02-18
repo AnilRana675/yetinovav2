@@ -1,15 +1,20 @@
 import type { Metadata } from "next";
 import { GeistMono } from "geist/font/mono";
-import "@fontsource/manrope/400.css";
-import "@fontsource/manrope/500.css";
-import "@fontsource/manrope/600.css";
-import "@fontsource/manrope/700.css";
-import "@fontsource/instrument-sans/400.css";
-import "@fontsource/instrument-sans/500.css";
-import "@fontsource/instrument-sans/600.css";
-import "@fontsource/instrument-sans/700.css";
+import { Manrope, Instrument_Sans } from "next/font/google";
 import "material-symbols/outlined.css";
 import "./globals.css";
+
+const manrope = Manrope({
+  subsets: ["latin"],
+  variable: "--font-manrope",
+  display: "swap",
+});
+
+const instrumentSans = Instrument_Sans({
+  subsets: ["latin"],
+  variable: "--font-instrument-sans",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: "YetiNova - Building Sustainable Digital Ventures",
@@ -32,7 +37,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`dark ${GeistMono.variable}`}
+      className={`dark ${GeistMono.variable} ${manrope.variable} ${instrumentSans.variable}`}
       style={{ "--accent-color": "#606FCC" } as React.CSSProperties}
     >
       <body
