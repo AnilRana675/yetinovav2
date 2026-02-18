@@ -31,6 +31,7 @@ export function GovernanceSection() {
     <section
       id="governance"
       className="relative bg-[#f9f8f6] py-16 sm:py-24 lg:py-32 px-4 sm:px-6 lg:px-8 xl:px-32"
+      style={{ "--accent-color": "#7DDC4D" } as React.CSSProperties}
     >
       <div className="max-w-7xl mx-auto">
         <div className="mb-10 sm:mb-16">

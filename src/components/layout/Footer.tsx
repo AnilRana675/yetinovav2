@@ -7,6 +7,7 @@ export function Footer() {
     <footer
       id="contact"
       className="bg-black py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8 xl:px-32 border-t border-white/5"
+      style={{ "--accent-color": "#7cff67" } as React.CSSProperties}
     >
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 sm:gap-16 lg:gap-16 mb-12 sm:mb-20">
@@ -21,8 +22,8 @@ export function Footer() {
 
             <div className="space-y-4 sm:space-y-6">
               <div className="flex items-center gap-3 sm:gap-4">
-                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-[#606FCC]/10 border border-[#606FCC]/20 flex items-center justify-center flex-shrink-0">
-                  <Mail className="w-4 h-4 sm:w-5 sm:h-5 text-[#606FCC]" />
+                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-[var(--accent-color)]/10 border border-[var(--accent-color)]/20 flex items-center justify-center flex-shrink-0">
+                  <Mail className="w-4 h-4 sm:w-5 sm:h-5 text-[var(--accent-color)]" />
                 </div>
                 <div>
                   <p className="text-xs text-neutral-text-muted uppercase tracking-wider">
@@ -35,8 +36,8 @@ export function Footer() {
               </div>
 
               <div className="flex items-center gap-3 sm:gap-4">
-                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-[#606FCC]/10 border border-[#606FCC]/20 flex items-center justify-center flex-shrink-0">
-                  <Phone className="w-4 h-4 sm:w-5 sm:h-5 text-[#606FCC]" />
+                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-[var(--accent-color)]/10 border border-[var(--accent-color)]/20 flex items-center justify-center flex-shrink-0">
+                  <Phone className="w-4 h-4 sm:w-5 sm:h-5 text-[var(--accent-color)]" />
                 </div>
                 <div>
                   <p className="text-xs text-neutral-text-muted uppercase tracking-wider">
@@ -49,8 +50,8 @@ export function Footer() {
               </div>
 
               <div className="flex items-center gap-3 sm:gap-4">
-                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-[#606FCC]/10 border border-[#606FCC]/20 flex items-center justify-center flex-shrink-0">
-                  <MapPin className="w-4 h-4 sm:w-5 sm:h-5 text-[#606FCC]" />
+                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-[var(--accent-color)]/10 border border-[var(--accent-color)]/20 flex items-center justify-center flex-shrink-0">
+                  <MapPin className="w-4 h-4 sm:w-5 sm:h-5 text-[var(--accent-color)]" />
                 </div>
                 <div>
                   <p className="text-xs text-neutral-text-muted uppercase tracking-wider">
@@ -73,7 +74,7 @@ export function Footer() {
                   </label>
                   <input
                     type="text"
-                    className="w-full px-3 sm:px-4 py-2.5 sm:py-3 rounded-xl bg-black/50 border border-white/10 text-white placeholder-neutral-text-muted focus:border-[#606FCC]/50 focus:outline-none transition-all text-sm sm:text-base"
+                    className="w-full px-3 sm:px-4 py-2.5 sm:py-3 rounded-xl bg-black/50 border border-white/10 text-white placeholder-neutral-text-muted focus:border-[var(--accent-color)]/50 focus:outline-none transition-all text-sm sm:text-base"
                     placeholder="Your name"
                   />
                 </div>
@@ -83,7 +84,7 @@ export function Footer() {
                   </label>
                   <input
                     type="email"
-                    className="w-full px-3 sm:px-4 py-2.5 sm:py-3 rounded-xl bg-black/50 border border-white/10 text-white placeholder-neutral-text-muted focus:border-[#606FCC]/50 focus:outline-none transition-all text-sm sm:text-base"
+                    className="w-full px-3 sm:px-4 py-2.5 sm:py-3 rounded-xl bg-black/50 border border-white/10 text-white placeholder-neutral-text-muted focus:border-[var(--accent-color)]/50 focus:outline-none transition-all text-sm sm:text-base"
                     placeholder="your@email.com"
                   />
                 </div>
@@ -93,7 +94,7 @@ export function Footer() {
                 <label className="block text-xs text-neutral-text-muted uppercase tracking-wider mb-1 sm:mb-2">
                   Inquiry Type
                 </label>
-                <select className="w-full px-3 sm:px-4 py-2.5 sm:py-3 rounded-xl bg-black/50 border border-white/10 text-white focus:border-[#606FCC]/50 focus:outline-none transition-all appearance-none cursor-pointer text-sm sm:text-base">
+                <select className="w-full px-3 sm:px-4 py-2.5 sm:py-3 rounded-xl bg-black/50 border border-white/10 text-white focus:border-[var(--accent-color)]/50 focus:outline-none transition-all appearance-none cursor-pointer text-sm sm:text-base">
                   <option value="">Select an option</option>
                   <option value="funding">Apply for Funding</option>
                   <option value="partnership">Strategic Partnership</option>
@@ -108,14 +109,14 @@ export function Footer() {
                 </label>
                 <textarea
                   rows={3}
-                  className="w-full px-3 sm:px-4 py-2.5 sm:py-3 rounded-xl bg-black/50 border border-white/10 text-white placeholder-neutral-text-muted focus:border-[#606FCC]/50 focus:outline-none transition-all resize-none text-sm sm:text-base"
+                  className="w-full px-3 sm:px-4 py-2.5 sm:py-3 rounded-xl bg-black/50 border border-white/10 text-white placeholder-neutral-text-muted focus:border-[var(--accent-color)]/50 focus:outline-none transition-all resize-none text-sm sm:text-base"
                   placeholder="Tell us about your idea or inquiry..."
                 />
               </div>
 
               <button
                 type="submit"
-                className="w-full flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-4 bg-[#606FCC] hover:bg-[#4A5BB5] rounded-xl text-white font-medium transition-all duration-300 text-sm sm:text-base"
+                className="w-full flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-4 bg-[var(--accent-color)] hover:bg-[#25A84D] rounded-xl text-white font-medium transition-all duration-300 text-sm sm:text-base"
               >
                 Send Message
                 <Send className="w-4 h-4" />
@@ -127,7 +128,7 @@ export function Footer() {
         <div className="pt-6 sm:pt-8 border-t border-white/10">
           <div className="flex flex-col md:flex-row items-start md:items-center gap-4 sm:gap-8 mb-6 sm:mb-8">
             <div className="flex items-center gap-2 sm:gap-3">
-              <div className="w-2 h-2 bg-[#606FCC] rounded-full"></div>
+              <div className="w-2 h-2 bg-[var(--accent-color)] rounded-full"></div>
               <span className="text-base sm:text-lg font-serif tracking-tight text-white">
                 YetiNova
               </span>

@@ -3,7 +3,7 @@
 import { Lightbulb, Network } from "lucide-react";
 import Image from "next/image";
 
-export function AboutSection() {
+export function ChairmanSection() {
   return (
     <section
       id="about"
