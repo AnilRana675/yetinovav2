@@ -19,7 +19,7 @@ export function ChairmanSection() {
             </div>
             {
               <Image
-                src="/images/chairman.avif"
+                src="/images/ChairMan.avif"
                 alt="Basudev P. Gautam"
                 fill
                 className="object-cover"
@@ -83,10 +83,10 @@ export function ChairmanSection() {
           {/* Signature & Link */}
           <div className="space-y-6">
             <div className="font-serif text-2xl italic text-white/90">
-              Basudev P. Gautam
+              Mr. Basudev P. Gautam
             </div>
             <p className="font-mono text-sm uppercase tracking-widest text-neutral-500">
-              The Chairman
+              Executive Chairman
             </p>
           </div>
         </div>
