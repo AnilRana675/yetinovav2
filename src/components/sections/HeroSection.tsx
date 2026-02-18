@@ -26,11 +26,11 @@ export function HeroSection() {
         <Aurora amplitude={1.2} blend={0.5} speed={0.5} />
       </div>
 
-      <div className="relative z-10 max-w-5xl mx-auto flex flex-col items-center px-2 sm:px-4">
-        <div className="mb-4 sm:mb-6 flex flex-col">
+      <div className="relative z-10 w-full max-w-5xl mx-auto flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8">
+        <div className="mb-4 sm:mb-6 flex flex-col items-center text-center w-full">
           <SplitText
             text="Crafting The"
-            className="font-serif text-3xl sm:text-3xl md:text-5xl lg:text-6xl xl:text-7xl leading-[1.05] sm:leading-[0.95] tracking-tight text-white/90"
+            className="font-serif text-3xl md:text-5xl lg:text-6xl xl:text-7xl leading-[1.1] sm:leading-[0.95] tracking-tight text-white/90 text-center"
             delay={50}
             duration={1.5}
             splitType="words"
@@ -40,21 +40,22 @@ export function HeroSection() {
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.25, ease: "easeOut", delay: 0.3 }}
+            className="w-full flex justify-center"
           >
             <ShinyText
               text="Boldest Builders."
               disabled={false}
               speed={3}
-              className="font-serif text-3xl sm:text-3xl md:text-5xl lg:text-6xl xl:text-7xl leading-[1.05] sm:leading-[0.95] tracking-tight text-[var(--accent-color)]"
+              className="font-serif text-3xl md:text-5xl lg:text-6xl xl:text-7xl leading-[1.1] sm:leading-[0.95] tracking-tight text-[var(--accent-color)] text-center"
               shineColor="#ffffff"
             />
           </motion.div>
         </div>
 
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col gap-2 items-center text-center w-full">
           <SplitText
             text="Funding. Mentorship. Network."
-            className="text-base sm:text-lg md:text-xl lg:text-2xl text-neutral-text/80 font-light leading-relaxed max-w-3xl mx-auto px-2 sm:px-0"
+            className="text-base sm:text-lg md:text-xl lg:text-2xl text-neutral-text/80 font-light leading-relaxed max-w-3xl mx-auto text-center"
             delay={50}
             duration={1.5}
             splitType="words"
@@ -62,7 +63,7 @@ export function HeroSection() {
           />
           <SplitText
             text="Bring your idea or MVP. We provide the capital and the playbook to turn your vision into Nepal's next big tech company."
-            className="text-neutral-text/60 text-sm sm:text-base md:text-lg lg:text-2xl font-light leading-relaxed max-w-3xl mx-auto px-2 sm:px-0"
+            className="text-neutral-text/60 text-sm sm:text-base md:text-lg lg:text-2xl font-light leading-relaxed max-w-3xl mx-auto text-center"
             delay={50}
             duration={1.5}
             splitType="words"
@@ -71,7 +72,7 @@ export function HeroSection() {
         </div>
 
         <motion.div
-          className="mt-6 sm:mt-8"
+          className="mt-6 sm:mt-8 w-full flex justify-center overflow-visible"
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.25, ease: "easeOut", delay: 0.8 }}

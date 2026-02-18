@@ -71,13 +71,23 @@ export function ModelAboutSection() {
       className="relative py-24 sm:py-32 lg:py-40 overflow-hidden"
       style={{ "--accent-color": "#6B9EAA" } as React.CSSProperties}
     >
-      {/* Animated Grid Background */}
-      <div className="absolute inset-0 z-0">
+      {/* Animated Grid Background - Desktop */}
+      <div className="hidden md:block absolute inset-0 z-0">
         <Squares
           direction="down"
           speed={0.25}
           borderColor="var(--accent-color)"
           squareSize={75}
+          hoverFillColor="var(--accent-color)"
+        />
+      </div>
+      {/* Animated Grid Background - Mobile */}
+      <div className="md:hidden absolute inset-0 z-0">
+        <Squares
+          direction="down"
+          speed={0.25}
+          borderColor="var(--accent-color)"
+          squareSize={40}
           hoverFillColor="var(--accent-color)"
         />
       </div>

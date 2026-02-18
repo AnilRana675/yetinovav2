@@ -107,21 +107,21 @@ export function Header() {
         >
           <Link
             href="#manifesto"
-            className="text-xl sm:text-2xl font-serif text-white py-3 px-6 hover:bg-white/5 rounded-xl transition-colors active:scale-95 min-w-[200px] text-center"
+            className="text-xl sm:text-2xl font-serif text-white py-3 px-6 hover:bg-white/5 rounded-xl transition-colors active:scale-95 min-w-[160px] sm:min-w-[200px] text-center"
             onClick={() => setIsMobileMenuOpen(false)}
           >
             Manifesto
           </Link>
           <Link
             href="#ventures"
-            className="text-xl sm:text-2xl font-serif text-white py-3 px-6 hover:bg-white/5 rounded-xl transition-colors active:scale-95 min-w-[200px] text-center"
+            className="text-xl sm:text-2xl font-serif text-white py-3 px-6 hover:bg-white/5 rounded-xl transition-colors active:scale-95 min-w-[160px] sm:min-w-[200px] text-center"
             onClick={() => setIsMobileMenuOpen(false)}
           >
             Ventures
           </Link>
           <Link
             href="#ecosystem"
-            className="text-xl sm:text-2xl font-serif text-white py-3 px-6 hover:bg-white/5 rounded-xl transition-colors active:scale-95 min-w-[200px] text-center"
+            className="text-xl sm:text-2xl font-serif text-white py-3 px-6 hover:bg-white/5 rounded-xl transition-colors active:scale-95 min-w-[160px] sm:min-w-[200px] text-center"
             onClick={() => setIsMobileMenuOpen(false)}
           >
             Ecosystem

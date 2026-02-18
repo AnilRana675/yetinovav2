@@ -108,8 +108,8 @@ export function Footer() {
                   Message
                 </label>
                 <textarea
-                  rows={3}
-                  className="w-full px-3 sm:px-4 py-2.5 sm:py-3 rounded-xl bg-black/50 border border-white/10 text-white placeholder-neutral-text-muted focus:border-[var(--accent-color)]/50 focus:outline-none transition-all resize-none text-sm sm:text-base"
+                  rows={4}
+                  className="w-full min-h-[100px] px-3 sm:px-4 py-2.5 sm:py-3 rounded-xl bg-black/50 border border-white/10 text-white placeholder-neutral-text-muted focus:border-[var(--accent-color)]/50 focus:outline-none transition-all resize-none text-sm sm:text-base"
                   placeholder="Tell us about your idea or inquiry..."
                 />
               </div>

@@ -42,19 +42,19 @@ function ProjectPill({
 
 export function CurrentlyBacking() {
   return (
-    <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
-      <span className="text-xs sm:text-sm font-sans font-medium tracking-wider uppercase text-neutral-text-muted">
+    <div className="flex flex-col items-center justify-center gap-3 sm:gap-4 w-full">
+      <span className="text-xs sm:text-sm font-sans font-medium tracking-wider uppercase text-neutral text-center">
         Currently backing:
       </span>
-      <div className="flex items-center gap-2 sm:gap-3">
+      <div className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-3 flex-wrap">
         <ProjectPill
           initials="w26"
           bgColor="rgba(124,58,237,0.3)"
           projectName="AstraYug"
-          category="SaaS"
+          category="Digital Agency"
           href="/projects/AstraYug"
         />
-        <div className="w-px h-4 sm:h-5 bg-white/20" />
+        <div className="hidden sm:block w-px h-4 sm:h-5 bg-white/20" />
         <ProjectPill
           initials="w25"
           bgColor="rgba(74,222,128,0.2)"
