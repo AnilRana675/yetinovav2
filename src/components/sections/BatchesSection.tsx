@@ -41,13 +41,14 @@ export function BatchesSection() {
       className="relative bg-black py-16 sm:py-24 lg:py-32 px-4 sm:px-6 lg:px-8 xl:px-32 border-t border-white/5 overflow-hidden"
       style={{ "--accent-color": "#6589C9" } as React.CSSProperties}
     >
-      <div className="absolute inset-0 z-0">
+      {/* Particles Background - responsive with CSS transforms */}
+      <div className="absolute inset-0 z-0 origin-center scale-75 md:scale-100">
         <Particles
           particleColors={["#ffffff", "#5B7BC4", "#ccff00"]}
-          particleCount={200}
+          particleCount={150}
           particleSpread={10}
-          speed={0.1}
-          particleBaseSize={100}
+          speed={0.08}
+          particleBaseSize={80}
           moveParticlesOnHover={true}
           alphaParticles={false}
           disableRotation={false}
