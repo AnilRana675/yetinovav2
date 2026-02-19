@@ -17,10 +17,7 @@ export function HeroContent({ children }: HeroContentProps) {
         >
           Crafting The
         </p>
-        <div
-          className="w-full flex justify-center hero-ghost-text"
-          data-animate="title-2-wrapper"
-        >
+        <div className="w-full flex justify-center hero-ghost-text" data-animate="title-2-wrapper">
           <ShinyText
             text="Boldest Builders."
             className="font-serif text-3xl md:text-5xl lg:text-6xl xl:text-7xl leading-[1.1] sm:leading-[0.95] tracking-tight text-center"
