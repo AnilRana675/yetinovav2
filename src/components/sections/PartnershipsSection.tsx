@@ -81,65 +81,32 @@ export function PartnershipsSection() {
           </p>
         </div>
 
-        {/* Desktop Version */}
-        <div className="hidden md:block">
-          <List>
-            {PARTNERSHIP_TYPES.map((partnership, index) => (
-              <ListItem
-                key={partnership.id}
-                className={`animate-fade-in opacity-0 [--animation-delay:${
-                  200 + index * 150
-                }ms] group`}
-              >
-                <ListItemContent className="group">
-                  <div className="grid grid-cols-[1fr_auto_2fr] gap-8 items-center w-full">
-                    <h3 className="font-serif font-bold text-[#dcdcdc] group-hover:text-black text-4xl tracking-[0] leading-[36px] whitespace-pre-line">
+        <List>
+          {PARTNERSHIP_TYPES.map((partnership, index) => (
+            <ListItem
+              key={partnership.id}
+              className={`animate-fade-in opacity-0 [--animation-delay:${
+                200 + index * 150
+              }ms] group`}
+            >
+              <ListItemContent className="group">
+                <div className="grid grid-cols-1 md:grid-cols-[1fr_auto_2fr] gap-2 md:gap-6 lg:gap-8 items-center w-full">
+                  <div className="flex items-start justify-between md:contents">
+                    <h3 className="font-serif font-bold text-[#dcdcdc] group-hover:text-black text-base md:text-xl lg:text-2xl tracking-[0] leading-tight md:leading-[29px] whitespace-pre-line">
                       {partnership.category}
                     </h3>
-                    <div className="font-serif font-black text-[#315434] group-hover:text-[#3759a4] text-4xl text-center tracking-[0] leading-[36px] min-w-[80px] transition-colors">
+                    <div className="font-serif font-black text-[#315434] group-hover:text-[#3759a4] text-base md:text-xl lg:text-2xl text-right md:text-center tracking-[0] leading-tight md:leading-[29px] md:min-w-[60px] lg:min-w-[80px] transition-colors md:self-center">
                       {partnership.romanNumeral}
                     </div>
-                    <p className="font-sans font-normal text-white group-hover:text-black text-xl tracking-[0] leading-[20px]">
-                      {partnership.description}
-                    </p>
                   </div>
-                </ListItemContent>
-              </ListItem>
-            ))}
-          </List>
-        </div>
-
-        {/* Mobile Version */}
-        <div className="md:hidden">
-          <List>
-            {PARTNERSHIP_TYPES.map((partnership, index) => (
-              <ListItem
-                key={partnership.id}
-                className={`animate-fade-in opacity-0 [--animation-delay:${
-                  200 + index * 150
-                }ms] group`}
-              >
-                <ListItemContent className="group">
-                  <div className="relative w-full">
-                    {/* Category title with roman numeral absolutely positioned */}
-                    <div className="relative pr-10 pb-2">
-                      <h3 className="font-serif font-bold text-[#dcdcdc] group-hover:text-black text-lg tracking-[0] leading-[24px] whitespace-pre-line">
-                        {partnership.category}
-                      </h3>
-                      <div className="absolute top-0 right-0 font-serif font-black text-[#315434] group-hover:text-[#3759a4] text-lg tracking-[0] leading-[24px] transition-colors">
-                        {partnership.romanNumeral}
-                      </div>
-                    </div>
-                    {/* Description below */}
-                    <p className="font-sans font-normal text-white group-hover:text-black text-sm tracking-[0] leading-[20px]">
-                      {partnership.description}
-                    </p>
-                  </div>
-                </ListItemContent>
-              </ListItem>
-            ))}
-          </List>
-        </div>
+                  <p className="font-sans font-normal text-white group-hover:text-black text-sm md:text-base lg:text-lg tracking-[0] leading-[18px]">
+                    {partnership.description}
+                  </p>
+                </div>
+              </ListItemContent>
+            </ListItem>
+          ))}
+        </List>
 
         <div className="mt-10 sm:mt-16 text-center animate-fade-in opacity-0 [--animation-delay:800ms]">
           <Button asChild variant="brand" size="pill" className="group transition-all duration-300">
