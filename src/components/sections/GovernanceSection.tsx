@@ -1,6 +1,6 @@
 "use client";
 
-import { Scale, Users, FileText, Building2 } from "lucide-react";
+import { Building2, FileText, Scale, Users } from "lucide-react";
 import { CardWithIcon } from "@/components/ui/Card";
 
 const GOVERNANCE_PILLARS = [
@@ -42,8 +42,8 @@ export function GovernanceSection() {
             Governance
           </h2>
           <p className="text-neutral-600 text-base sm:text-lg font-light max-w-2xl">
-            Innovation requires a solid foundation. We protect our investors and
-            founders with rigorous structure.
+            Innovation requires a solid foundation. We protect our investors and founders with
+            rigorous structure.
           </p>
         </div>
 
@@ -62,19 +62,16 @@ export function GovernanceSection() {
         <div className="mt-10 sm:mt-16 p-4 sm:p-6 md:p-8 rounded-xl sm:rounded-2xl bg-neutral-100 border border-neutral-200">
           <div className="flex flex-col sm:flex-row items-start gap-4 sm:gap-6">
             <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-white border border-neutral-200 flex items-center justify-center flex-shrink-0">
-              <span className="text-xl sm:text-2xl font-serif text-neutral-400">
-                ®
-              </span>
+              <span className="text-xl sm:text-2xl font-serif text-neutral-400">®</span>
             </div>
             <div>
               <h4 className="font-medium text-neutral-900 mb-2 text-base sm:text-lg">
                 Fully Compliant & Registered
               </h4>
               <p className="text-neutral-600 font-light leading-relaxed text-sm sm:text-base">
-                YetiNova operates under full legal compliance with the
-                Government of Nepal. All ventures are incorporated with proper
-                governance structures, audited financials, and transparent cap
-                tables. We maintain institutional standards while supporting
+                YetiNova operates under full legal compliance with the Government of Nepal. All
+                ventures are incorporated with proper governance structures, audited financials, and
+                transparent cap tables. We maintain institutional standards while supporting
                 early-stage innovation.
               </p>
             </div>

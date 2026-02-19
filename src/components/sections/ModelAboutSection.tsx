@@ -1,16 +1,8 @@
 "use client";
 
-import {
-  Search,
-  Zap,
-  Rocket,
-  TrendingUp,
-  Lightbulb,
-  Shield,
-  Globe,
-} from "lucide-react";
-import { CardWithIcon, ValueCard } from "@/components/ui/Card";
+import { Globe, Lightbulb, Rocket, Search, Shield, TrendingUp, Zap } from "lucide-react";
 import dynamic from "next/dynamic";
+import { CardWithIcon, ValueCard } from "@/components/ui/Card";
 
 const Particles = dynamic(() => import("@/components/ui/Particles"), {
   ssr: false,
@@ -103,8 +95,8 @@ export function ModelAboutSection() {
               Our Model
             </h2>
             <p className="text-neutral-text-muted text-lg sm:text-xl md:text-2xl font-light max-w-3xl">
-              From idea to market in four phases. We provide the structure,
-              resources, and network to turn vision into reality.
+              From idea to market in four phases. We provide the structure, resources, and network
+              to turn vision into reality.
             </p>
           </div>
 
@@ -130,16 +122,14 @@ export function ModelAboutSection() {
               The Yeti Code
             </h2>
             <p className="text-neutral-text-muted text-lg sm:text-xl md:text-2xl font-light max-w-3xl mb-8 sm:mb-12">
-              We are more than an accelerator. We are a movement of builders
-              committed to solving Nepal&apos;s hardest problems through
-              technology and entrepreneurship.
+              We are more than an accelerator. We are a movement of builders committed to solving
+              Nepal&apos;s hardest problems through technology and entrepreneurship.
             </p>
             <p className="text-neutral-text/80 font-light leading-relaxed max-w-3xl text-base sm:text-lg">
-              Born from the belief that Nepal&apos;s greatest export should be
-              innovation, not labor, we exist to prove that world-class tech
-              companies can emerge from the Himalayas. Every line of code we
-              write, every product we ship, and every entrepreneur we back is a
-              step toward that future.
+              Born from the belief that Nepal&apos;s greatest export should be innovation, not
+              labor, we exist to prove that world-class tech companies can emerge from the
+              Himalayas. Every line of code we write, every product we ship, and every entrepreneur
+              we back is a step toward that future.
             </p>
           </div>
 

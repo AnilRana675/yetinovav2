@@ -10,13 +10,7 @@ interface ProjectPillProps {
   href: string;
 }
 
-function ProjectPill({
-  initials,
-  bgColor,
-  projectName,
-  category,
-  href,
-}: ProjectPillProps) {
+function ProjectPill({ initials, bgColor, projectName, category, href }: ProjectPillProps) {
   return (
     <Link
       href={href}
@@ -32,9 +26,7 @@ function ProjectPill({
         <span className="font-serif text-sm sm:text-base font-semibold text-white">
           {projectName}
         </span>
-        <span className="text-neutral-text-muted text-sm sm:text-base">
-          · {category}
-        </span>
+        <span className="text-neutral-text-muted text-sm sm:text-base">· {category}</span>
       </div>
     </Link>
   );

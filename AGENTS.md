@@ -9,10 +9,11 @@ Next.js 16+ with React 19, TypeScript, Tailwind CSS v4, and shadcn/ui.
 ```bash
 npm run dev          # Start dev server
 npm run build        # Production build
-npm run lint         # Check lint errors
-npm run lint:fix     # Auto-fix lint errors
+npm run lint         # Check lint errors with Biome
+npm run lint:fix     # Auto-fix lint errors with Biome
 npm run typecheck    # TypeScript check (no emit)
-npm run format       # Format with Prettier
+npm run format       # Format with Biome
+npm run check        # Lint + format in one command (Biome)
 ```
 
 **Note:** No unit tests configured.
@@ -62,23 +63,19 @@ Button.displayName = "Button";
 - Use `cn()` for class merging
 - CSS variables: `var(--accent-color)` for section colors
 
-### Prettier Config
+### Biome Config
 
-```json
-{
-  "semi": true,
-  "trailingComma": "es5",
-  "singleQuote": false,
-  "tabWidth": 2,
-  "useTabs": false
-}
-```
+Configuration in `biome.json`:
+
+- **Formatter:** Double quotes, semicolons, 2-space indent, line width 100, trailing commas ES5
+- **Linter:** Recommended + a11y + React hooks + security + style rules
+- **Overrides:** Suppresses non-critical warnings for GSAP/library code
 
 ## Git Workflow
 
 - **Conventional Commits** enforced: `type(scope): subject`
 - Types: `feat`, `fix`, `docs`, `style`, `refactor`, `perf`, `test`, `chore`
-- Pre-commit: typecheck → eslint --fix → prettier --write
+- Pre-commit: typecheck → biome check --write
 
 ### Pre-commit Checklist
 

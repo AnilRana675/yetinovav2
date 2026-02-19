@@ -4,9 +4,7 @@ import dynamic from "next/dynamic";
 
 const Aurora = dynamic(() => import("@/components/ui/aurora/Aurora"), {
   ssr: false,
-  loading: () => (
-    <div className="absolute inset-0 bg-linear-to-b from-[#606FCC]/10 to-black" />
-  ),
+  loading: () => <div className="absolute inset-0 bg-linear-to-b from-[#606FCC]/10 to-black" />,
 });
 
 export function AuroraBackground() {

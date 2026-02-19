@@ -1,6 +1,6 @@
-import type { Metadata } from "next";
 import { GeistMono } from "geist/font/mono";
-import { Manrope, Instrument_Sans } from "next/font/google";
+import type { Metadata } from "next";
+import { Instrument_Sans, Manrope } from "next/font/google";
 import "material-symbols/outlined.css";
 import "./globals.css";
 
