@@ -1,15 +1,13 @@
 "use client";
 
 import { ArrowRight } from "lucide-react";
+import dynamic from "next/dynamic";
 import { Button } from "@/components/ui/Button";
 import { List, ListItem, ListItemContent } from "@/components/ui/list";
-import dynamic from "next/dynamic";
 
 const Aurora = dynamic(() => import("@/components/ui/aurora/Aurora"), {
   ssr: false,
-  loading: () => (
-    <div className="absolute inset-0 bg-linear-to-b from-[#606FCC]/10 to-black" />
-  ),
+  loading: () => <div className="absolute inset-0 bg-linear-to-b from-[#606FCC]/10 to-black" />,
 });
 
 const PARTNERSHIP_TYPES = [
@@ -79,8 +77,7 @@ export function PartnershipsSection() {
             Don&apos;t Just Fund. Fuel.
           </h2>
           <p className="font-sans font-normal text-[#666060] text-xl tracking-[0] leading-normal">
-            Partner with us to deploy capital into high-growth ventures and
-            national infrastructure.
+            Partner with us to deploy capital into high-growth ventures and national infrastructure.
           </p>
         </div>
 
@@ -145,12 +142,7 @@ export function PartnershipsSection() {
         </div>
 
         <div className="mt-10 sm:mt-16 text-center animate-fade-in opacity-0 [--animation-delay:800ms]">
-          <Button
-            asChild
-            variant="brand"
-            size="pill"
-            className="group transition-all duration-300"
-          >
+          <Button asChild variant="brand" size="pill" className="group transition-all duration-300">
             <a href="#contact">
               Become a Partner
               <ArrowRight className="ml-2 w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform" />

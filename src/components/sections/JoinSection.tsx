@@ -1,6 +1,6 @@
 "use client";
 
-import { Check, ArrowRight } from "lucide-react";
+import { ArrowRight, Check } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import Squares from "@/components/ui/Squares";
 
@@ -53,8 +53,8 @@ export function JoinSection() {
             Don&apos;t just code. Launch.
           </h2>
           <p className="text-neutral-text-muted text-base sm:text-lg md:text-xl font-light max-w-2xl mx-auto px-2 sm:px-0">
-            Join the next YetiNova Batch. Work with mentors, ship real products,
-            and graduate with an investable company, not just a certificate.
+            Join the next YetiNova Batch. Work with mentors, ship real products, and graduate with
+            an investable company, not just a certificate.
           </p>
         </div>
 
@@ -78,21 +78,14 @@ export function JoinSection() {
                 <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-[var(--accent-color)]/20 flex items-center justify-center flex-shrink-0">
                   <Check className="w-3 h-3 sm:w-4 sm:h-4 text-[var(--accent-color)]" />
                 </div>
-                <p className="text-neutral-text font-light text-sm sm:text-base">
-                  {item}
-                </p>
+                <p className="text-neutral-text font-light text-sm sm:text-base">{item}</p>
               </div>
             ))}
           </div>
         </div>
 
         <div className="text-center pointer-events-auto">
-          <Button
-            asChild
-            variant="white"
-            size="xl"
-            className="group transition-all duration-300"
-          >
+          <Button asChild variant="white" size="xl" className="group transition-all duration-300">
             <a href="#contact">
               Apply for Winter &apos;26
               <ArrowRight className="ml-2 w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform" />

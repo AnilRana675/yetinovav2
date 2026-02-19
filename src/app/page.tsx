@@ -1,11 +1,11 @@
-import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+import { Header } from "@/components/layout/Header";
+import { ChairmanSection } from "@/components/sections/ChairmanSection";
+import { GovernanceSection } from "@/components/sections/GovernanceSection";
 import { HeroSection } from "@/components/sections/hero";
+import { JoinSection } from "@/components/sections/JoinSection";
 import { ModelAboutSection } from "@/components/sections/ModelAboutSection";
 import { PartnershipsSection } from "@/components/sections/PartnershipsSection";
-import { JoinSection } from "@/components/sections/JoinSection";
-import { GovernanceSection } from "@/components/sections/GovernanceSection";
-import { ChairmanSection } from "@/components/sections/ChairmanSection";
 
 export default function Home() {
   return (

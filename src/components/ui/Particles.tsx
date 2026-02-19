@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect, useRef, useMemo } from "react";
-import { Renderer, Camera, Geometry, Program, Mesh } from "ogl";
+import { Camera, Geometry, Mesh, Program, Renderer } from "ogl";
+import { useEffect, useMemo, useRef } from "react";
 
 const defaultColors = ["#ffffff", "#a5b4fc", "#c7d2fe"];
 
@@ -15,11 +15,7 @@ const hexToRgb = (hex: string): [number, number, number] => {
           .join("")
       : cleanHex;
   const int = parseInt(fullHex, 16);
-  return [
-    ((int >> 16) & 255) / 255,
-    ((int >> 8) & 255) / 255,
-    (int & 255) / 255,
-  ];
+  return [((int >> 16) & 255) / 255, ((int >> 8) & 255) / 255, (int & 255) / 255];
 };
 
 // Framerate-independent lerp
@@ -173,8 +169,7 @@ const Particles = ({
     }
 
     const gl = renderer.gl;
-    gl.canvas.style.cssText =
-      "position:absolute;top:0;left:0;width:100%;height:100%;";
+    gl.canvas.style.cssText = "position:absolute;top:0;left:0;width:100%;height:100%;";
     container.appendChild(gl.canvas);
     gl.clearColor(0, 0, 0, 0);
 
@@ -209,7 +204,7 @@ const Particles = ({
     const colors = new Float32Array(particleCount * 3);
 
     for (let i = 0; i < particleCount; i++) {
-      let x, y, z, len;
+      let x: number, y: number, z: number, len: number;
       do {
         x = Math.random() * 2 - 1;
         y = Math.random() * 2 - 1;
@@ -218,10 +213,7 @@ const Particles = ({
       } while (len > 1 || len === 0);
       const r = Math.cbrt(Math.random());
       positions.set([x * r, y * r, z * r], i * 3);
-      randoms.set(
-        [Math.random(), Math.random(), Math.random(), Math.random()],
-        i * 4
-      );
+      randoms.set([Math.random(), Math.random(), Math.random(), Math.random()], i * 4);
       const col = hexToRgb(palette[Math.floor(Math.random() * palette.length)]);
       colors.set(col, i * 3);
     }
@@ -267,22 +259,10 @@ const Particles = ({
 
       if (loopState.current.moveParticlesOnHover) {
         // Smooth dampening independent of framerate
-        mouseRef.current.x = damp(
-          mouseRef.current.x,
-          targetMouseRef.current.x,
-          0.005,
-          delta
-        );
-        mouseRef.current.y = damp(
-          mouseRef.current.y,
-          targetMouseRef.current.y,
-          0.005,
-          delta
-        );
-        particles.position.x =
-          -mouseRef.current.x * loopState.current.particleHoverFactor;
-        particles.position.y =
-          -mouseRef.current.y * loopState.current.particleHoverFactor;
+        mouseRef.current.x = damp(mouseRef.current.x, targetMouseRef.current.x, 0.005, delta);
+        mouseRef.current.y = damp(mouseRef.current.y, targetMouseRef.current.y, 0.005, delta);
+        particles.position.x = -mouseRef.current.x * loopState.current.particleHoverFactor;
+        particles.position.y = -mouseRef.current.y * loopState.current.particleHoverFactor;
       }
 
       if (!loopState.current.disableRotation) {
@@ -331,24 +311,13 @@ const Particles = ({
   useEffect(() => {
     if (programRef.current) {
       programRef.current.uniforms.uSpread.value = particleSpread;
-      programRef.current.uniforms.uBaseSize.value =
-        particleBaseSize * pixelRatio;
+      programRef.current.uniforms.uBaseSize.value = particleBaseSize * pixelRatio;
       programRef.current.uniforms.uSizeRandomness.value = sizeRandomness;
-      programRef.current.uniforms.uAlphaParticles.value = alphaParticles
-        ? 1
-        : 0;
+      programRef.current.uniforms.uAlphaParticles.value = alphaParticles ? 1 : 0;
     }
-  }, [
-    particleSpread,
-    particleBaseSize,
-    sizeRandomness,
-    alphaParticles,
-    pixelRatio,
-  ]);
+  }, [particleSpread, particleBaseSize, sizeRandomness, alphaParticles, pixelRatio]);
 
-  return (
-    <div ref={containerRef} className={className || "relative w-full h-full"} />
-  );
+  return <div ref={containerRef} className={className || "relative w-full h-full"} />;
 };
 
 export default Particles;

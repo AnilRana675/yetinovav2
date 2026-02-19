@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect, useRef, ReactNode } from "react";
-import { Renderer, Program, Mesh, Triangle } from "ogl";
+import { Mesh, Program, Renderer, Triangle } from "ogl";
+import { type ReactNode, useEffect, useRef } from "react";
 import { hexToRgb } from "@/lib/utils";
 
 const VERT = `#version 300 es
@@ -120,11 +120,7 @@ interface AuroraProps {
 }
 
 export default function Aurora(props: AuroraProps) {
-  const {
-    colorStops = ["#5227FF", "#7cff67", "#ffffff"],
-    amplitude = 1.0,
-    blend = 0.5,
-  } = props;
+  const { colorStops = ["#5227FF", "#7cff67", "#ffffff"], amplitude = 1.0, blend = 0.5 } = props;
   const propsRef = useRef<AuroraProps>(props);
   propsRef.current = props;
 
@@ -209,9 +205,7 @@ export default function Aurora(props: AuroraProps) {
       program.uniforms.uAmplitude.value = propsRef.current.amplitude ?? 1.0;
       program.uniforms.uBlend.value = propsRef.current.blend ?? blend;
       const stops = propsRef.current.colorStops ?? colorStops;
-      program.uniforms.uColorStops.value = stops.map((hex: string) =>
-        hexToRgb(hex)
-      );
+      program.uniforms.uColorStops.value = stops.map((hex: string) => hexToRgb(hex));
       renderer.render({ scene: mesh });
     };
     animationIdRef.current = requestAnimationFrame(update);
@@ -222,10 +216,7 @@ export default function Aurora(props: AuroraProps) {
       cancelAnimationFrame(animationIdRef.current);
       window.removeEventListener("resize", resize);
       gl.canvas.removeEventListener("webglcontextlost", handleContextLost);
-      gl.canvas.removeEventListener(
-        "webglcontextrestored",
-        handleContextRestored
-      );
+      gl.canvas.removeEventListener("webglcontextrestored", handleContextRestored);
       if (!isContextLost.current && ctn && gl.canvas.parentNode === ctn) {
         ctn.removeChild(gl.canvas);
       }
@@ -234,10 +225,7 @@ export default function Aurora(props: AuroraProps) {
   }, [amplitude, blend, colorStops]);
 
   return (
-    <div
-      ref={ctnDom}
-      className="aurora-container relative w-full h-full overflow-hidden"
-    >
+    <div ref={ctnDom} className="aurora-container relative w-full h-full overflow-hidden">
       {props.children}
     </div>
   );

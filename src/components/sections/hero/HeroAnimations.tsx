@@ -1,8 +1,8 @@
 "use client";
 
-import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { SplitText as GSAPSplitText } from "gsap/SplitText";
+import { useEffect, useRef } from "react";
 
 gsap.registerPlugin(GSAPSplitText);
 
@@ -20,11 +20,7 @@ export function HeroAnimations({ subtitle1, subtitle2 }: HeroAnimationsProps) {
     if (animatedRef.current) return;
     animatedRef.current = true;
 
-    const animateElement = (
-      selector: string,
-      stagger: number,
-      delay: number
-    ) => {
+    const animateElement = (selector: string, stagger: number, delay: number) => {
       const element = document.querySelector(selector);
       if (!element) return null;
 
@@ -88,12 +84,13 @@ export function HeroAnimations({ subtitle1, subtitle2 }: HeroAnimationsProps) {
           try {
             split.revert();
           } catch {
-            /* ignore */
+            // Intentionally ignore errors during cleanup
+            // GSAP SplitText may fail to revert if already cleaned up
           }
         }
       });
     };
-  }, [subtitle1, subtitle2]);
+  }, []); // Empty deps - effect should only run once on mount
 
   return null;
 }

@@ -1,7 +1,7 @@
-import { HeroContent } from "./HeroContent";
-import { HeroAnimations } from "./HeroAnimations";
-import { CurrentlyBackingWrapper } from "./CurrentlyBackingWrapper";
 import { AuroraBackground } from "./AuroraBackground";
+import { CurrentlyBackingWrapper } from "./CurrentlyBackingWrapper";
+import { HeroAnimations } from "./HeroAnimations";
+import { HeroContent } from "./HeroContent";
 
 const SUBTITLE_1 = "Funding. Mentorship. Network.";
 const SUBTITLE_2 =
