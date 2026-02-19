@@ -30,7 +30,7 @@ export function GovernanceSection() {
   return (
     <section
       id="governance"
-      className="relative bg-[#f9f8f6] py-16 sm:py-24 lg:py-32 px-4 sm:px-6 lg:px-8 xl:px-32"
+      className="relative bg-[#f9f8f6] py-16 sm:py-24 lg:py-32 px-4 sm:px-6 lg:px-8 xl:px-32 overflow-hidden"
       style={{ "--accent-color": "#7DDC4D" } as React.CSSProperties}
     >
       <div className="max-w-7xl mx-auto">
