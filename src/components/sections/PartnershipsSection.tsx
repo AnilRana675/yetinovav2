@@ -49,7 +49,8 @@ export function PartnershipsSection() {
       id="partnerships"
       className="relative bg-black py-16 sm:py-24 lg:py-32 px-4 sm:px-6 lg:px-8 xl:px-32 overflow-hidden"
     >
-      <div className="absolute -left-[100px] sm:-left-[150px] lg:-left-[200px] inset-y-0 h-full w-[150vh] opacity-60 pointer-events-none origin-center -rotate-90">
+      {/* Aurora Background - Desktop */}
+      <div className="hidden md:block absolute -left-[100px] sm:-left-[150px] lg:-left-[200px] inset-y-0 h-full w-[150vh] opacity-60 pointer-events-none origin-center -rotate-90">
         <Aurora
           colorStops={["#7cff67", "#5227FF", "#ffffff"]}
           amplitude={0.8}
@@ -57,8 +58,18 @@ export function PartnershipsSection() {
           speed={0.3}
         />
       </div>
-      <div className="absolute -right-[100px] sm:-right-[150px] lg:-right-[200px] inset-y-0 h-full w-[150vh] opacity-60 pointer-events-none origin-center rotate-90">
+      <div className="hidden md:block absolute -right-[100px] sm:-right-[150px] lg:-right-[200px] inset-y-0 h-full w-[150vh] opacity-60 pointer-events-none origin-center rotate-90">
         <Aurora amplitude={0.8} blend={0.4} speed={0.3} />
+      </div>
+
+      {/* Aurora Background - Mobile (fit within section) */}
+      <div className="md:hidden absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[200%] aspect-square opacity-30 pointer-events-none">
+        <Aurora
+          colorStops={["#7cff67", "#5227FF", "#ffffff"]}
+          amplitude={0.6}
+          blend={0.4}
+          speed={0.3}
+        />
       </div>
       <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-black to-transparent pointer-events-none z-10" />
       <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-black to-transparent pointer-events-none z-10" />
@@ -73,30 +84,65 @@ export function PartnershipsSection() {
           </p>
         </div>
 
-        <List>
-          {PARTNERSHIP_TYPES.map((partnership, index) => (
-            <ListItem
-              key={partnership.id}
-              className={`animate-fade-in opacity-0 [--animation-delay:${
-                200 + index * 150
-              }ms] group`}
-            >
-              <ListItemContent className="group">
-                <div className="grid grid-cols-[1fr_auto_2fr] gap-8 items-center w-full">
-                  <h3 className="font-serif font-bold text-[#dcdcdc] group-hover:text-black text-4xl tracking-[0] leading-[36px] whitespace-pre-line">
-                    {partnership.category}
-                  </h3>
-                  <div className="font-serif font-black text-[#315434] group-hover:text-[#3759a4] text-4xl text-center tracking-[0] leading-[36px] min-w-[80px] transition-colors">
-                    {partnership.romanNumeral}
+        {/* Desktop Version */}
+        <div className="hidden md:block">
+          <List>
+            {PARTNERSHIP_TYPES.map((partnership, index) => (
+              <ListItem
+                key={partnership.id}
+                className={`animate-fade-in opacity-0 [--animation-delay:${
+                  200 + index * 150
+                }ms] group`}
+              >
+                <ListItemContent className="group">
+                  <div className="grid grid-cols-[1fr_auto_2fr] gap-8 items-center w-full">
+                    <h3 className="font-serif font-bold text-[#dcdcdc] group-hover:text-black text-4xl tracking-[0] leading-[36px] whitespace-pre-line">
+                      {partnership.category}
+                    </h3>
+                    <div className="font-serif font-black text-[#315434] group-hover:text-[#3759a4] text-4xl text-center tracking-[0] leading-[36px] min-w-[80px] transition-colors">
+                      {partnership.romanNumeral}
+                    </div>
+                    <p className="font-sans font-normal text-white group-hover:text-black text-xl tracking-[0] leading-[20px]">
+                      {partnership.description}
+                    </p>
                   </div>
-                  <p className="font-sans font-normal text-white group-hover:text-black text-xl tracking-[0] leading-[20px]">
-                    {partnership.description}
-                  </p>
-                </div>
-              </ListItemContent>
-            </ListItem>
-          ))}
-        </List>
+                </ListItemContent>
+              </ListItem>
+            ))}
+          </List>
+        </div>
+
+        {/* Mobile Version */}
+        <div className="md:hidden">
+          <List>
+            {PARTNERSHIP_TYPES.map((partnership, index) => (
+              <ListItem
+                key={partnership.id}
+                className={`animate-fade-in opacity-0 [--animation-delay:${
+                  200 + index * 150
+                }ms] group`}
+              >
+                <ListItemContent className="group">
+                  <div className="relative w-full">
+                    {/* Category title with roman numeral absolutely positioned */}
+                    <div className="relative pr-10 pb-2">
+                      <h3 className="font-serif font-bold text-[#dcdcdc] group-hover:text-black text-lg tracking-[0] leading-[24px] whitespace-pre-line">
+                        {partnership.category}
+                      </h3>
+                      <div className="absolute top-0 right-0 font-serif font-black text-[#315434] group-hover:text-[#3759a4] text-lg tracking-[0] leading-[24px] transition-colors">
+                        {partnership.romanNumeral}
+                      </div>
+                    </div>
+                    {/* Description below */}
+                    <p className="font-sans font-normal text-white group-hover:text-black text-sm tracking-[0] leading-[20px]">
+                      {partnership.description}
+                    </p>
+                  </div>
+                </ListItemContent>
+              </ListItem>
+            ))}
+          </List>
+        </div>
 
         <div className="mt-10 sm:mt-16 text-center animate-fade-in opacity-0 [--animation-delay:800ms]">
           <Button

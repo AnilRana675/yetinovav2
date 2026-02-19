@@ -1,4 +1,6 @@
-// Server Component - Static hero text rendered in HTML for fast LCP
+"use client";
+
+import ShinyText from "@/components/ui/ShinyText";
 
 interface HeroContentProps {
   children?: React.ReactNode;
@@ -19,12 +21,14 @@ export function HeroContent({ children }: HeroContentProps) {
           className="w-full flex justify-center hero-ghost-text"
           data-animate="title-2-wrapper"
         >
-          <p
-            className="font-serif text-3xl md:text-5xl lg:text-6xl xl:text-7xl leading-[1.1] sm:leading-[0.95] tracking-tight text-[var(--accent-color)] text-center"
-            data-animate="title-2"
-          >
-            Boldest Builders.
-          </p>
+          <ShinyText
+            text="Boldest Builders."
+            className="font-serif text-3xl md:text-5xl lg:text-6xl xl:text-7xl leading-[1.1] sm:leading-[0.95] tracking-tight text-center"
+            speed={3.2}
+            spread={120}
+            yoyo={false}
+            pauseOnHover={false}
+          />
         </div>
       </div>
       {children}
