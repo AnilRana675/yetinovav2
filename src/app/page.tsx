@@ -1,7 +1,6 @@
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
-import { HeroSection } from "@/components/sections/HeroSection";
-import { BatchesSection } from "@/components/sections/BatchesSection";
+import { HeroSection } from "@/components/sections/hero";
 import { ModelAboutSection } from "@/components/sections/ModelAboutSection";
 import { PartnershipsSection } from "@/components/sections/PartnershipsSection";
 import { JoinSection } from "@/components/sections/JoinSection";
@@ -14,7 +13,6 @@ export default function Home() {
       <Header />
       <main>
         <HeroSection />
-        <BatchesSection />
         <ModelAboutSection />
         <ChairmanSection />
         <PartnershipsSection />

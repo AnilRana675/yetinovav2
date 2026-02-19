@@ -52,12 +52,17 @@ const Squares: React.FC<SquaresProps> = ({
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext("2d");
+    if (!ctx) return;
 
     const resizeCanvas = () => {
-      canvas.width = canvas.offsetWidth;
-      canvas.height = canvas.offsetHeight;
-      numSquaresX.current = Math.ceil(canvas.width / squareSize) + 1;
-      numSquaresY.current = Math.ceil(canvas.height / squareSize) + 1;
+      try {
+        canvas.width = canvas.offsetWidth;
+        canvas.height = canvas.offsetHeight;
+        numSquaresX.current = Math.ceil(canvas.width / squareSize) + 1;
+        numSquaresY.current = Math.ceil(canvas.height / squareSize) + 1;
+      } catch (error) {
+        console.error("Canvas resize error:", error);
+      }
     };
 
     window.addEventListener("resize", resizeCanvas);
@@ -66,29 +71,54 @@ const Squares: React.FC<SquaresProps> = ({
     const drawGrid = () => {
       if (!ctx) return;
 
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      try {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      const startX = Math.floor(gridOffset.current.x / squareSize) * squareSize;
-      const startY = Math.floor(gridOffset.current.y / squareSize) * squareSize;
+        const startX =
+          Math.floor(gridOffset.current.x / squareSize) * squareSize;
+        const startY =
+          Math.floor(gridOffset.current.y / squareSize) * squareSize;
 
-      for (let x = startX; x < canvas.width + squareSize; x += squareSize) {
-        for (let y = startY; y < canvas.height + squareSize; y += squareSize) {
-          const squareX = x - (gridOffset.current.x % squareSize);
-          const squareY = y - (gridOffset.current.y % squareSize);
-
-          if (
-            hoveredSquareRef.current &&
-            Math.floor((x - startX) / squareSize) ===
-              hoveredSquareRef.current.x &&
-            Math.floor((y - startY) / squareSize) === hoveredSquareRef.current.y
+        for (let x = startX; x < canvas.width + squareSize; x += squareSize) {
+          for (
+            let y = startY;
+            y < canvas.height + squareSize;
+            y += squareSize
           ) {
-            ctx.fillStyle = resolvedHoverFillColor;
-            ctx.fillRect(squareX, squareY, squareSize, squareSize);
-          }
+            const squareX = x - (gridOffset.current.x % squareSize);
+            const squareY = y - (gridOffset.current.y % squareSize);
 
-          ctx.strokeStyle = resolvedBorderColor;
-          ctx.strokeRect(squareX, squareY, squareSize, squareSize);
+            if (
+              hoveredSquareRef.current &&
+              Math.floor((x - startX) / squareSize) ===
+                hoveredSquareRef.current.x &&
+              Math.floor((y - startY) / squareSize) ===
+                hoveredSquareRef.current.y
+            ) {
+              ctx.fillStyle = resolvedHoverFillColor;
+              ctx.fillRect(squareX, squareY, squareSize, squareSize);
+            }
+
+            ctx.strokeStyle = resolvedBorderColor;
+            ctx.strokeRect(squareX, squareY, squareSize, squareSize);
+          }
         }
+
+        const gradient = ctx.createRadialGradient(
+          canvas.width / 2,
+          canvas.height / 2,
+          0,
+          canvas.width / 2,
+          canvas.height / 2,
+          Math.sqrt(canvas.width ** 2 + canvas.height ** 2) / 2
+        );
+        gradient.addColorStop(0, "rgba(0, 0, 0, 0)");
+        gradient.addColorStop(1, "#060010");
+
+        ctx.fillStyle = gradient;
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+      } catch (error) {
+        console.error("Canvas draw error:", error);
       }
 
       const gradient = ctx.createRadialGradient(
@@ -100,66 +130,76 @@ const Squares: React.FC<SquaresProps> = ({
         Math.sqrt(canvas.width ** 2 + canvas.height ** 2) / 2
       );
       gradient.addColorStop(0, "rgba(0, 0, 0, 0)");
-      gradient.addColorStop(1, "#060010");
+      gradient.addColorStop(1, "#000000");
 
       ctx.fillStyle = gradient;
       ctx.fillRect(0, 0, canvas.width, canvas.height);
     };
 
     const updateAnimation = () => {
-      const effectiveSpeed = Math.max(speed, 0.1);
-      switch (direction) {
-        case "right":
-          gridOffset.current.x =
-            (gridOffset.current.x - effectiveSpeed + squareSize) % squareSize;
-          break;
-        case "left":
-          gridOffset.current.x =
-            (gridOffset.current.x + effectiveSpeed + squareSize) % squareSize;
-          break;
-        case "up":
-          gridOffset.current.y =
-            (gridOffset.current.y + effectiveSpeed + squareSize) % squareSize;
-          break;
-        case "down":
-          gridOffset.current.y =
-            (gridOffset.current.y - effectiveSpeed + squareSize) % squareSize;
-          break;
-        case "diagonal":
-          gridOffset.current.x =
-            (gridOffset.current.x - effectiveSpeed + squareSize) % squareSize;
-          gridOffset.current.y =
-            (gridOffset.current.y - effectiveSpeed + squareSize) % squareSize;
-          break;
-        default:
-          break;
-      }
+      try {
+        const effectiveSpeed = Math.max(speed, 0.1);
+        switch (direction) {
+          case "right":
+            gridOffset.current.x =
+              (gridOffset.current.x - effectiveSpeed + squareSize) % squareSize;
+            break;
+          case "left":
+            gridOffset.current.x =
+              (gridOffset.current.x + effectiveSpeed + squareSize) % squareSize;
+            break;
+          case "up":
+            gridOffset.current.y =
+              (gridOffset.current.y + effectiveSpeed + squareSize) % squareSize;
+            break;
+          case "down":
+            gridOffset.current.y =
+              (gridOffset.current.y - effectiveSpeed + squareSize) % squareSize;
+            break;
+          case "diagonal":
+            gridOffset.current.x =
+              (gridOffset.current.x - effectiveSpeed + squareSize) % squareSize;
+            gridOffset.current.y =
+              (gridOffset.current.y - effectiveSpeed + squareSize) % squareSize;
+            break;
+          default:
+            break;
+        }
 
-      drawGrid();
-      requestRef.current = requestAnimationFrame(updateAnimation);
+        drawGrid();
+        requestRef.current = requestAnimationFrame(updateAnimation);
+      } catch (error) {
+        console.error("Canvas animation error:", error);
+      }
     };
 
     const handleMouseMove = (event: MouseEvent) => {
-      const rect = canvas.getBoundingClientRect();
-      const mouseX = event.clientX - rect.left;
-      const mouseY = event.clientY - rect.top;
+      try {
+        const rect = canvas.getBoundingClientRect();
+        const mouseX = event.clientX - rect.left;
+        const mouseY = event.clientY - rect.top;
 
-      const startX = Math.floor(gridOffset.current.x / squareSize) * squareSize;
-      const startY = Math.floor(gridOffset.current.y / squareSize) * squareSize;
+        const startX =
+          Math.floor(gridOffset.current.x / squareSize) * squareSize;
+        const startY =
+          Math.floor(gridOffset.current.y / squareSize) * squareSize;
 
-      const hoveredSquareX = Math.floor(
-        (mouseX + gridOffset.current.x - startX) / squareSize
-      );
-      const hoveredSquareY = Math.floor(
-        (mouseY + gridOffset.current.y - startY) / squareSize
-      );
+        const hoveredSquareX = Math.floor(
+          (mouseX + gridOffset.current.x - startX) / squareSize
+        );
+        const hoveredSquareY = Math.floor(
+          (mouseY + gridOffset.current.y - startY) / squareSize
+        );
 
-      if (
-        !hoveredSquareRef.current ||
-        hoveredSquareRef.current.x !== hoveredSquareX ||
-        hoveredSquareRef.current.y !== hoveredSquareY
-      ) {
-        hoveredSquareRef.current = { x: hoveredSquareX, y: hoveredSquareY };
+        if (
+          !hoveredSquareRef.current ||
+          hoveredSquareRef.current.x !== hoveredSquareX ||
+          hoveredSquareRef.current.y !== hoveredSquareY
+        ) {
+          hoveredSquareRef.current = { x: hoveredSquareX, y: hoveredSquareY };
+        }
+      } catch (error) {
+        console.error("Canvas mouse move error:", error);
       }
     };
 

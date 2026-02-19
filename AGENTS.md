@@ -2,66 +2,67 @@
 
 ## Project Overview
 
-Next.js 16+ web application using React 19+, TypeScript, Tailwind CSS v4, and shadcn/ui components.
+Next.js 16+ with React 19, TypeScript, Tailwind CSS v4, and shadcn/ui.
 
-## Build & Development Commands
+## Build Commands
 
 ```bash
-# Development server
-npm run dev
-
-# Production build
-npm run build
-
-# Start production server
-npm run start
-
-# Linting
-npm run lint              # Check for lint errors
-npm run lint:fix          # Auto-fix lint errors
-
-# Type checking
-npm run typecheck         # Run TypeScript compiler (no emit)
-
-# Formatting
-npm run format            # Format all files with Prettier
+npm run dev          # Start dev server
+npm run build        # Production build
+npm run lint         # Check lint errors
+npm run lint:fix     # Auto-fix lint errors
+npm run typecheck    # TypeScript check (no emit)
+npm run format       # Format with Prettier
 ```
 
-**Note:** This project does not have unit tests configured. No test commands are available.
+**Note:** No unit tests configured.
 
-## Code Style Guidelines
+## Code Style
 
 ### TypeScript
 
-- Enable strict mode - all code must pass `tsc --noEmit`
-- Use explicit types for function parameters and return values
-- Prefer `interface` over `type` for object definitions
-- Use `type` for unions, conditionals, and mapped types
+- Strict mode enabled - all code must pass `tsc --noEmit`
+- Use explicit types for functions
+- Prefer `interface` for objects, `type` for unions
 
 ### Naming Conventions
 
-- **Components:** PascalCase (e.g., `Button.tsx`, `HeroSection`)
-- **Files:** PascalCase for components, camelCase for utilities
-- **Variables/Functions:** camelCase
-- **Constants:** UPPER_SNAKE_CASE for true constants
-- **Types/Interfaces:** PascalCase with descriptive names
+- **Components/Files:** PascalCase (e.g., `Button.tsx`)
+- **Utilities:** camelCase
+- **Constants:** UPPER_SNAKE_CASE
 - **CSS Classes:** kebab-case in Tailwind
 
-### Imports
+### Import Order
 
-- Order: React → External libs → Internal aliases (`@/*`) → Relative imports
-- Group and separate import sections with blank lines
-- Use `@/` path alias for all internal imports (configured in tsconfig.json)
+React → External libs → Internal aliases (`@/*`) → Relative imports
 
-### Component Structure
+### Component Pattern (CVA)
 
-- Use functional components with explicit return types
-- Props interface named `{ComponentName}Props`
-- Forward refs using `React.forwardRef` with `displayName` set
-- Use `class-variance-authority` (cva) for variant-based styling
-- Combine Tailwind classes with `cn()` utility from `@/lib/utils`
+```typescript
+const buttonVariants = cva("base-classes", {
+  variants: {
+    variant: { default: "bg-primary", brand: "bg-[#606FCC]" },
+    size: { default: "h-10 px-4", xl: "px-6 py-4" },
+  },
+  defaultVariants: { variant: "default", size: "default" },
+});
 
-### Prettier Configuration
+const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
+  ({ className, variant, size, ...props }, ref) => (
+    <Comp className={cn(buttonVariants({ variant, size, className }))} ref={ref} {...props} />
+  )
+);
+Button.displayName = "Button";
+```
+
+### Styling
+
+- Tailwind CSS v4 in `src/app/globals.css`
+- Mobile-first: `sm:`, `md:`, `lg:`, `xl:`
+- Use `cn()` for class merging
+- CSS variables: `var(--accent-color)` for section colors
+
+### Prettier Config
 
 ```json
 {
@@ -73,61 +74,99 @@ npm run format            # Format all files with Prettier
 }
 ```
 
-### Styling Guidelines
+## Git Workflow
 
-- **Tailwind CSS v4** with CSS variables for theming
-- **Mobile-first responsive design** using `sm:`, `md:`, `lg:`, `xl:` prefixes
-- **CSS Variables:** Use `var(--accent-color)` for brand color (#606FCC)
-- **Dark mode** is default (`dark` class on html element)
-- **Class merging:** Use `cn()` utility from `@/lib/utils` to conditionally merge classes
-- **Pattern:** Use template literals for simple conditionals, `cn()` for complex merging
+- **Conventional Commits** enforced: `type(scope): subject`
+- Types: `feat`, `fix`, `docs`, `style`, `refactor`, `perf`, `test`, `chore`
+- Pre-commit: typecheck → eslint --fix → prettier --write
 
-### Error Handling
-
-- Prefer early returns over nested conditionals
-- Use TypeScript's strict null checks to prevent runtime errors
-- Handle async errors with try/catch blocks
-
-### React Patterns
-
-- React Compiler enabled (configured in next.config.ts)
-- Use `"use client"` directive only when necessary (client components)
-- Server Components by default (Next.js App Router)
-- Use `@radix-ui/react-slot` for polymorphic components
-
-### Git Workflow
-
-- **Conventional Commits required** - enforced by commitlint
-- Format: `type(scope): subject`
-- Valid types: `feat`, `fix`, `docs`, `style`, `refactor`, `perf`, `test`, `chore`, `revert`, `ci`, `build`
-- Subject: lowercase, no period at end, max 100 chars
-- Pre-commit hooks run: typecheck → eslint --fix → prettier --write
-
-### Code Quality Checks
-
-Before committing, ensure:
+### Pre-commit Checklist
 
 1. `npm run typecheck` passes
 2. `npm run lint` shows no errors
-3. `npm run format` has been applied
+3. `npm run format` applied
 
 ## Project Structure
 
 ```
 src/
-  app/              # Next.js App Router pages
+  app/              # Next.js App Router
+    globals.css     # Tailwind v4 config
+    layout.tsx      # Root layout
+    page.tsx        # Home page
   components/
     ui/             # shadcn/ui components
     sections/       # Page sections
-    layout/         # Layout components (Header, Footer)
+    layout/         # Header, Footer
   lib/
-    utils.ts        # Utility functions (cn, etc.)
-  styles/           # Global styles
+    utils.ts        # cn(), hexToRgb()
+public/
+  images/           # Image assets
 ```
 
 ## Key Dependencies
 
 - **UI:** shadcn/ui, Radix UI, Lucide icons
-- **Animation:** GSAP, Motion (Framer Motion)
+- **Animation:** GSAP, Motion (Framer Motion), ogl (WebGL)
 - **Styling:** Tailwind CSS v4, class-variance-authority
-- **Fonts:** Geist Mono, Manrope, Instrument Sans
+- **Fonts:** JetBrains Mono, Manrope, Instrument Sans
+
+## Animation Patterns
+
+### GSAP - Scroll Animations
+
+```typescript
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+gsap.registerPlugin(ScrollTrigger);
+
+gsap.to(element, {
+  scrollTrigger: { trigger: element, start: "top 80%" },
+  opacity: 1,
+  duration: 0.8,
+});
+```
+
+### Motion - React Animations
+
+```typescript
+import { motion, useScroll, useTransform } from "motion/react";
+const { scrollYProgress } = useScroll();
+const opacity = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
+```
+
+### WebGL Components
+
+All WebGL components (Aurora, Particles, Squares) use `ogl` and handle context loss:
+
+```typescript
+"use client";
+// Listen for 'webglcontextlost' and 'webglcontextrestored' events
+```
+
+## Section Accent Colors
+
+| Section      | Hex       |
+| ------------ | --------- |
+| Hero         | `#606FCC` |
+| Batches      | `#6589C9` |
+| Model        | `#6B9EAA` |
+| Partnerships | `#71B28B` |
+| Join         | `#77C76C` |
+| Governance   | `#7DDC4D` |
+| Footer       | `#7cff67` |
+
+Usage: `<section style={{ "--accent-color": "#6589C9" }}>`
+
+## Navigation
+
+- Hash-based: `#section-id`
+- Single-page app with smooth scroll
+
+## Docs
+
+Additional documentation in `/docs/`:
+
+- `DELETION_LOG.md`
+- `MOBILE_RESPONSIVENESS_FIXES.md`
+- `websiteColorTheory.md`

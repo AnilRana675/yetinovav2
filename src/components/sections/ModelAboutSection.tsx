@@ -10,7 +10,12 @@ import {
   Globe,
 } from "lucide-react";
 import { CardWithIcon, ValueCard } from "@/components/ui/Card";
-import Squares from "@/components/ui/Squares";
+import dynamic from "next/dynamic";
+
+const Particles = dynamic(() => import("@/components/ui/Particles"), {
+  ssr: false,
+  loading: () => <div className="absolute inset-0 bg-transparent" />,
+});
 
 const MODEL_STAGES = [
   {
@@ -71,24 +76,15 @@ export function ModelAboutSection() {
       className="relative py-24 sm:py-32 lg:py-40 overflow-hidden"
       style={{ "--accent-color": "#6B9EAA" } as React.CSSProperties}
     >
-      {/* Animated Grid Background - Desktop */}
-      <div className="hidden md:block absolute inset-0 z-0">
-        <Squares
-          direction="down"
-          speed={0.25}
-          borderColor="var(--accent-color)"
-          squareSize={75}
-          hoverFillColor="var(--accent-color)"
-        />
-      </div>
-      {/* Animated Grid Background - Mobile */}
-      <div className="md:hidden absolute inset-0 z-0">
-        <Squares
-          direction="down"
-          speed={0.25}
-          borderColor="var(--accent-color)"
-          squareSize={40}
-          hoverFillColor="var(--accent-color)"
+      <div className="absolute inset-0 z-0">
+        <Particles
+          className="w-full h-full"
+          particleColors={["#6B9EAA", "#5B7BC4", "#ffffff"]}
+          particleCount={80}
+          particleSpread={12}
+          speed={0.08}
+          particleBaseSize={140}
+          moveParticlesOnHover={true}
         />
       </div>
 
