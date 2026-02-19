@@ -19,7 +19,7 @@ export function ChairmanSection() {
             </div>
             {
               <Image
-                src="/images/ChairMan.avif"
+                src="/images/chairman.avif"
                 alt="Basudev P. Gautam"
                 fill
                 className="object-cover"
