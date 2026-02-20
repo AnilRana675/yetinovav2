@@ -36,21 +36,21 @@ export function CardWithIcon({
 
   return (
     <div
-      className={`group relative p-5 sm:p-8 lg:p-10 rounded-2xl sm:rounded-3xl border transition-all duration-500 backdrop-blur-md ${isDark ? "border-white/20 bg-surface-dark/70 hover:bg-surface-dark/80 hover:border-[var(--accent-color)]/40" : "border-neutral-200 bg-white/90 hover:border-[var(--accent-color)]/40 hover:shadow-lg hover:shadow-[var(--accent-color)]/5"}`}
+      className={`group relative p-5 sm:p-8 lg:p-10 rounded-2xl sm:rounded-3xl border transition-all duration-500 backdrop-blur-md ${isDark ? "border-white/20 bg-surface-dark/70 hover:bg-surface-dark/80 hover:border-(--accent-color)/40" : "border-neutral-200 bg-white/90 hover:border-(--accent-color)/40 hover:shadow-lg hover:shadow-(--accent-color)/5"}`}
     >
       {stepNumber && (
         <div
-          className={`absolute top-4 sm:top-6 right-4 sm:right-6 text-4xl sm:text-6xl font-serif font-bold transition-all ${isDark ? "text-white/5 group-hover:text-[var(--accent-color)]/10" : "text-neutral-100 group-hover:text-neutral-200"}`}
+          className={`absolute top-4 sm:top-6 right-4 sm:right-6 text-4xl sm:text-6xl font-serif font-bold transition-all ${isDark ? "text-white/5 group-hover:text-(--accent-color)/10" : "text-neutral-100 group-hover:text-neutral-200"}`}
         >
           0{stepNumber}
         </div>
       )}
 
       <div
-        className={`w-10 h-10 sm:w-12 sm:h-12 rounded-xl flex items-center justify-center mb-4 sm:mb-6 transition-all ${isDark ? "bg-[var(--accent-color)]/10 border border-[var(--accent-color)]/20 group-hover:bg-[var(--accent-color)]/20" : "bg-[var(--accent-color)]/5 border border-[var(--accent-color)]/10 group-hover:bg-[var(--accent-color)]/10 group-hover:border-[var(--accent-color)]/20"}`}
+        className={`w-10 h-10 sm:w-12 sm:h-12 rounded-xl flex items-center justify-center mb-4 sm:mb-6 transition-all ${isDark ? "bg-(--accent-color)/10 border border-(--accent-color)/20 group-hover:bg-(--accent-color)/20" : "bg-(--accent-color)/5 border border-(--accent-color)/10 group-hover:bg-(--accent-color)/10 group-hover:border-(--accent-color)/20"}`}
       >
         <Icon
-          className={`w-5 h-5 sm:w-6 sm:h-6 ${isDark ? "text-[var(--accent-color)]" : "text-[var(--accent-color)]"}`}
+          className={`w-5 h-5 sm:w-6 sm:h-6 ${isDark ? "text-(--accent-color)" : "text-(--accent-color)"}`}
         />
       </div>
 
@@ -62,7 +62,7 @@ export function CardWithIcon({
 
       {subtitle && (
         <p
-          className={`text-xs sm:text-sm font-mono font-medium tracking-wider uppercase mb-3 sm:mb-4 ${isDark ? "text-[var(--accent-color)]" : "text-neutral-500"}`}
+          className={`text-xs sm:text-sm font-mono font-medium tracking-wider uppercase mb-3 sm:mb-4 ${isDark ? "text-(--accent-color)" : "text-neutral-500"}`}
         >
           {subtitle}
         </p>
@@ -93,7 +93,7 @@ export function LeaderCard({ role, name, quote, variant = "default" }: LeaderCar
         </p>
         <h3 className="font-serif text-xl sm:text-2xl text-white mb-3 sm:mb-4">{name}</h3>
         {quote && (
-          <p className="text-neutral-text/80 font-light italic border-l-2 border-[var(--accent-color)]/50 pl-3 sm:pl-4 text-sm sm:text-base">
+          <p className="text-neutral-text/80 font-light italic border-l-2 border-(--accent-color)/50 pl-3 sm:pl-4 text-sm sm:text-base">
             &ldquo;{quote}&rdquo;
           </p>
         )}
@@ -168,10 +168,10 @@ interface ValueCardProps {
 
 export function ValueCard({ icon: Icon, title, description }: ValueCardProps) {
   return (
-    <div className="p-4 sm:p-6 rounded-xl sm:rounded-2xl border border-white/20 bg-surface-dark/100 backdrop-blur-md transition-all duration-300 hover:bg-surface-dark/80 hover:border-[var(--accent-color)]/40">
+    <div className="p-4 sm:p-6 rounded-xl sm:rounded-2xl border border-white/20 bg-surface-dark backdrop-blur-md transition-all duration-300 hover:bg-surface-dark/80 hover:border-(--accent-color)/40">
       <div className="flex gap-3 sm:gap-4">
-        <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-lg bg-[var(--accent-color)]/20 border border-[var(--accent-color)]/30 flex items-center justify-center flex-shrink-0">
-          <Icon className="w-4 h-4 sm:w-5 sm:h-5 text-[var(--accent-color)]" />
+        <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-lg bg-(--accent-color)/20 border border-(--accent-color)/30 flex items-center justify-center shrink-0">
+          <Icon className="w-4 h-4 sm:w-5 sm:h-5 text-(--accent-color)" />
         </div>
         <div>
           <h3 className="text-white font-medium mb-1 text-sm sm:text-base">{title}</h3>

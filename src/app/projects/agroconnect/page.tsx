@@ -4,19 +4,19 @@ import { Header } from "@/components/layout/Header";
 
 export default function AgroConnectPage() {
   return (
-    <div className="min-h-screen bg-black text-neutral-text selection:bg-[var(--accent-color)] selection:text-black">
+    <div className="min-h-screen bg-black text-neutral-text selection:bg-(--accent-color) selection:text-black">
       <Header />
       <main className="pt-24 sm:pt-32 pb-16 sm:pb-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-16">
           <Link
             href="/projects"
-            className="inline-flex items-center text-xs sm:text-sm font-mono text-neutral-500 hover:text-[var(--accent-color)] transition-colors mb-8 sm:mb-12"
+            className="inline-flex items-center text-xs sm:text-sm font-mono text-neutral-500 hover:text-(--accent-color) transition-colors mb-8 sm:mb-12"
           >
             &larr; Back to Projects
           </Link>
 
           <div className="mb-12 sm:mb-16">
-            <p className="text-xs sm:text-sm font-mono font-bold tracking-widest uppercase text-[var(--accent-color)] mb-4 sm:mb-6">
+            <p className="text-xs sm:text-sm font-mono font-bold tracking-widest uppercase text-(--accent-color) mb-4 sm:mb-6">
               w25 | AgroConnect
             </p>
             <h1 className="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-white mb-6 sm:mb-8">
@@ -54,7 +54,7 @@ export default function AgroConnectPage() {
                     key={focus}
                     className="flex items-center text-sm sm:text-base text-neutral-400"
                   >
-                    <span className="w-1.5 h-1.5 rounded-full bg-[var(--accent-color)] mr-3" />
+                    <span className="w-1.5 h-1.5 rounded-full bg-(--accent-color) mr-3" />
                     {focus}
                   </li>
                 ))}

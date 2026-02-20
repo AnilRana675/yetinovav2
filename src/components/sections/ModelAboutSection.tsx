@@ -68,10 +68,10 @@ export function ModelAboutSection() {
       </div>
 
       {/* Top Fade Mask - blends with BatchesSection (black) */}
-      <div className="absolute top-0 left-0 right-0 h-32 sm:h-48 bg-gradient-to-b from-black via-black/80 to-transparent z-10 pointer-events-none" />
+      <div className="absolute top-0 left-0 right-0 h-32 sm:h-48 bg-linear-to-b from-black via-black/80 to-transparent z-10 pointer-events-none" />
 
       {/* Bottom Fade Mask - blends with PartnershipsSection (black) */}
-      <div className="absolute bottom-0 left-0 right-0 h-32 sm:h-48 bg-gradient-to-t from-black via-black/80 to-transparent z-10 pointer-events-none" />
+      <div className="absolute bottom-0 left-0 right-0 h-32 sm:h-48 bg-linear-to-t from-black via-black/80 to-transparent z-10 pointer-events-none" />
 
       {/* Content Container */}
       <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-32">

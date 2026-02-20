@@ -241,7 +241,7 @@ export default function Aurora(props: AuroraProps) {
   return (
     <div ref={ctnDom} className="aurora-container relative w-full h-full overflow-hidden">
       {!webglAvailable && (
-        <div className="absolute inset-0 bg-gradient-to-b from-[#5227FF]/20 via-[#7cff67]/10 to-transparent" />
+        <div className="absolute inset-0 bg-linear-to-b from-[#5227FF]/20 via-[#7cff67]/10 to-transparent" />
       )}
       {props.children}
     </div>

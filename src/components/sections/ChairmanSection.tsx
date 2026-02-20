@@ -8,10 +8,10 @@ export function ChairmanSection() {
     <section id="about" style={{ "--accent-color": "#6B9EAA" } as React.CSSProperties}>
       <div className="max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-center">
         {/* Left Column - Image */}
-        <div className="relative aspect-[3/4] w-full max-w-md mx-auto lg:max-w-none">
+        <div className="relative aspect-3/4 w-full max-w-md mx-auto lg:max-w-none">
           {/* Placeholder for Chairman image - adapting to dark mode aesthetic */}
           <div className="absolute inset-0 bg-neutral-900 rounded-sm overflow-hidden">
-            <div className="w-full h-full bg-gradient-to-br from-neutral-800 to-black flex items-center justify-center text-neutral-700 font-mono text-xs tracking-widest uppercase">
+            <div className="w-full h-full bg-linear-to-br from-neutral-800 to-black flex items-center justify-center text-neutral-700 font-mono text-xs tracking-widest uppercase">
               Chairman Portrait Placeholder
             </div>
             {
@@ -42,7 +42,7 @@ export function ChairmanSection() {
           </div>
 
           <div className="mb-12">
-            <p className="text-xs font-mono font-bold tracking-widest uppercase text-[var(--accent-color)] mb-6">
+            <p className="text-xs font-mono font-bold tracking-widest uppercase text-(--accent-color) mb-6">
               The Long-Term View
             </p>
 
@@ -75,7 +75,7 @@ export function ChairmanSection() {
           {/* Signature & Link */}
           <div className="space-y-6">
             <div className="font-serif text-2xl italic text-white/90">Mr. Basudev P. Gautam</div>
-            <p className="font-mono text-sm uppercase tracking-widest text-[var(--accent-color)]">
+            <p className="font-mono text-sm uppercase tracking-widest text-(--accent-color)">
               Executive Chairman
             </p>
           </div>
