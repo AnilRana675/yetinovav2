@@ -1,8 +1,124 @@
 "use client";
 
-import { Mail, MapPin, Phone, Send } from "lucide-react";
+import { ChevronDown, Loader2, Mail, MapPin, Phone, Send } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { toast } from "sonner";
 import { BlurGradient } from "@/components/ui/blurGradient";
+
+import type { InquiryType } from "@/lib/validations/contact";
+
+const INQUIRY_OPTIONS: { value: InquiryType; label: string }[] = [
+  { value: "funding", label: "Apply for Funding" },
+  { value: "partnership", label: "Strategic Partnership" },
+  { value: "government", label: "Government & NGO" },
+  { value: "general", label: "General" },
+];
+
+interface FormState {
+  name: string;
+  email: string;
+  inquiryType: string;
+  message: string;
+  websiteUrl: string;
+}
+
+const INITIAL_FORM_STATE: FormState = {
+  name: "",
+  email: "",
+  inquiryType: "",
+  message: "",
+  websiteUrl: "",
+};
+
 export function Footer() {
+  const [formState, setFormState] = useState<FormState>(INITIAL_FORM_STATE);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsDropdownOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { id, value } = e.target;
+    const fieldName = id.replace("contact-", "");
+    setFormState((prev) => ({ ...prev, [fieldName]: value }));
+  };
+
+  const handleSelectChange = (value: string) => {
+    setFormState((prev) => ({ ...prev, inquiryType: value }));
+    setIsDropdownOpen(false);
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    if (!formState.inquiryType) {
+      toast.error("Validation error", {
+        description: "Please select an inquiry type.",
+      });
+      return;
+    }
+
+    if (isSubmitting) return;
+
+    setIsSubmitting(true);
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: formState.name,
+          email: formState.email,
+          inquiryType: formState.inquiryType,
+          message: formState.message,
+          websiteUrl: formState.websiteUrl,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        if (response.status === 429) {
+          toast.error("Too many requests", {
+            description: `Please wait ${data.error?.retryAfter || 60} seconds before trying again.`,
+          });
+        } else if (response.status === 422 && data.error?.details) {
+          const firstError = data.error.details[0];
+          toast.error("Validation error", {
+            description: firstError?.message || "Please check your input.",
+          });
+        } else {
+          toast.error("Something went wrong", {
+            description: data.error?.message || "Please try again later.",
+          });
+        }
+        return;
+      }
+
+      toast.success("Message sent successfully!", {
+        description: "We'll get back to you within 24-48 hours.",
+      });
+
+      setFormState(INITIAL_FORM_STATE);
+    } catch {
+      toast.error("Something went wrong", {
+        description: "Please try again or email us directly at hello@yetinova.com",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
     <footer
       id="contact"
@@ -28,8 +144,8 @@ export function Footer() {
 
             <div className="space-y-4 sm:space-y-6">
               <div className="flex items-center gap-3 sm:gap-4">
-                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-[var(--accent-color)]/10 border border-[var(--accent-color)]/20 flex items-center justify-center flex-shrink-0">
-                  <Mail className="w-4 h-4 sm:w-5 sm:h-5 text-[var(--accent-color)]" />
+                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-(--accent-color)/10 border border-(--accent-color)/20 flex items-center justify-center shrink-0">
+                  <Mail className="w-4 h-4 sm:w-5 sm:h-5 text-(--accent-color)" />
                 </div>
                 <div>
                   <p className="text-xs text-neutral-text-muted uppercase tracking-wider">Email</p>
@@ -38,8 +154,8 @@ export function Footer() {
               </div>
 
               <div className="flex items-center gap-3 sm:gap-4">
-                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-[var(--accent-color)]/10 border border-[var(--accent-color)]/20 flex items-center justify-center flex-shrink-0">
-                  <Phone className="w-4 h-4 sm:w-5 sm:h-5 text-[var(--accent-color)]" />
+                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-(--accent-color)/10 border border-(--accent-color)/20 flex items-center justify-center shrink-0">
+                  <Phone className="w-4 h-4 sm:w-5 sm:h-5 text-(--accent-color)" />
                 </div>
                 <div>
                   <p className="text-xs text-neutral-text-muted uppercase tracking-wider">Phone</p>
@@ -48,8 +164,8 @@ export function Footer() {
               </div>
 
               <div className="flex items-center gap-3 sm:gap-4">
-                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-[var(--accent-color)]/10 border border-[var(--accent-color)]/20 flex items-center justify-center flex-shrink-0">
-                  <MapPin className="w-4 h-4 sm:w-5 sm:h-5 text-[var(--accent-color)]" />
+                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-(--accent-color)/10 border border-(--accent-color)/20 flex items-center justify-center shrink-0">
+                  <MapPin className="w-4 h-4 sm:w-5 sm:h-5 text-(--accent-color)" />
                 </div>
                 <div>
                   <p className="text-xs text-neutral-text-muted uppercase tracking-wider">
@@ -62,7 +178,19 @@ export function Footer() {
           </div>
 
           <div className="p-4 sm:p-6 lg:p-8 rounded-2xl sm:rounded-3xl border border-white/10 bg-surface-dark/30">
-            <form className="space-y-4 sm:space-y-6">
+            <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
+              <input
+                id="contact-websiteUrl"
+                type="text"
+                name="websiteUrl"
+                value={formState.websiteUrl || ""}
+                onChange={handleInputChange}
+                className="absolute -left-[9999px]"
+                tabIndex={-1}
+                autoComplete="off"
+                aria-hidden="true"
+              />
+
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
                 <div>
                   <label
@@ -73,8 +201,15 @@ export function Footer() {
                   </label>
                   <input
                     id="contact-name"
+                    name="name"
                     type="text"
-                    className="w-full px-3 sm:px-4 py-2.5 sm:py-3 rounded-xl bg-black/50 border border-white/10 text-white placeholder-neutral-text-muted focus:border-[var(--accent-color)]/50 focus:outline-none transition-all text-sm sm:text-base"
+                    value={formState.name || ""}
+                    onChange={handleInputChange}
+                    disabled={isSubmitting}
+                    required
+                    minLength={2}
+                    maxLength={100}
+                    className="w-full px-3 sm:px-4 py-2.5 sm:py-3 rounded-xl bg-black/50 border border-white/10 text-white placeholder-neutral-text-muted focus:border-(--accent-color)/50 focus:outline-none transition-all text-sm sm:text-base disabled:opacity-50 disabled:cursor-not-allowed"
                     placeholder="Your name"
                   />
                 </div>
@@ -87,30 +222,79 @@ export function Footer() {
                   </label>
                   <input
                     id="contact-email"
+                    name="email"
                     type="email"
-                    className="w-full px-3 sm:px-4 py-2.5 sm:py-3 rounded-xl bg-black/50 border border-white/10 text-white placeholder-neutral-text-muted focus:border-[var(--accent-color)]/50 focus:outline-none transition-all text-sm sm:text-base"
+                    value={formState.email || ""}
+                    onChange={handleInputChange}
+                    disabled={isSubmitting}
+                    required
+                    className="w-full px-3 sm:px-4 py-2.5 sm:py-3 rounded-xl bg-black/50 border border-white/10 text-white placeholder-neutral-text-muted focus:border-(--accent-color)/50 focus:outline-none transition-all text-sm sm:text-base disabled:opacity-50 disabled:cursor-not-allowed"
                     placeholder="your@email.com"
                   />
                 </div>
               </div>
 
-              <div>
+              <div ref={dropdownRef} className="relative">
                 <label
-                  htmlFor="contact-inquiry-type"
+                  htmlFor="contact-inquiryType"
                   className="block text-xs text-neutral-text-muted uppercase tracking-wider mb-1 sm:mb-2"
                 >
                   Inquiry Type
                 </label>
-                <select
-                  id="contact-inquiry-type"
-                  className="w-full px-3 sm:px-4 py-2.5 sm:py-3 rounded-xl bg-black/50 border border-white/10 text-white focus:border-[var(--accent-color)]/50 focus:outline-none transition-all appearance-none cursor-pointer text-sm sm:text-base"
+
+                {/* Custom Select Button */}
+                <button
+                  type="button"
+                  id="contact-inquiryType"
+                  disabled={isSubmitting}
+                  onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                  className={`w-full flex items-center justify-between px-3 sm:px-4 py-2.5 sm:py-3 rounded-xl border transition-all text-sm sm:text-base disabled:opacity-50 disabled:cursor-not-allowed text-left ${
+                    isDropdownOpen
+                      ? "bg-black/80 border-(--accent-color)/50 text-white shadow-[0_0_15px_rgba(124,255,103,0.1)]"
+                      : "bg-black/50 border-white/10 text-white hover:border-white/20"
+                  }`}
                 >
-                  <option value="">Select an option</option>
-                  <option value="funding">Apply for Funding</option>
-                  <option value="partnership">Strategic Partnership</option>
-                  <option value="government">Government & NGO</option>
-                  <option value="general">General</option>
-                </select>
+                  <span
+                    className={!formState.inquiryType ? "text-neutral-text-muted" : "text-white"}
+                  >
+                    {formState.inquiryType
+                      ? INQUIRY_OPTIONS.find((opt) => opt.value === formState.inquiryType)?.label
+                      : "Select an option"}
+                  </span>
+                  <ChevronDown
+                    className={`w-4 h-4 sm:w-5 sm:h-5 text-neutral-text-muted transition-transform duration-300 ${
+                      isDropdownOpen ? "rotate-180 text-(--accent-color)" : ""
+                    }`}
+                  />
+                </button>
+
+                {/* Custom Dropdown Options */}
+                {isDropdownOpen && (
+                  <div className="absolute z-50 w-full mt-2 py-2 bg-[#1A1A1A] border border-white/10 rounded-xl shadow-xl backdrop-blur-xl">
+                    {INQUIRY_OPTIONS.map((option) => (
+                      <button
+                        key={option.value}
+                        type="button"
+                        onClick={() => handleSelectChange(option.value)}
+                        className={`w-full text-left px-4 py-2.5 text-sm sm:text-base transition-colors ${
+                          formState.inquiryType === option.value
+                            ? "bg-(--accent-color)/10 text-(--accent-color)"
+                            : "text-neutral-300 hover:bg-white/5 hover:text-white"
+                        }`}
+                      >
+                        {option.label}
+                      </button>
+                    ))}
+                  </div>
+                )}
+
+                {/* Hidden input for form submission if needed by traditional form handlers */}
+                <input
+                  type="hidden"
+                  name="inquiryType"
+                  value={formState.inquiryType || ""}
+                  required
+                />
               </div>
 
               <div>
@@ -122,18 +306,35 @@ export function Footer() {
                 </label>
                 <textarea
                   id="contact-message"
+                  name="message"
                   rows={4}
-                  className="w-full min-h-[100px] px-3 sm:px-4 py-2.5 sm:py-3 rounded-xl bg-black/50 border border-white/10 text-white placeholder-neutral-text-muted focus:border-[var(--accent-color)]/50 focus:outline-none transition-all resize-none text-sm sm:text-base"
+                  value={formState.message || ""}
+                  onChange={handleInputChange}
+                  disabled={isSubmitting}
+                  required
+                  minLength={10}
+                  maxLength={2000}
+                  className="w-full min-h-[100px] px-3 sm:px-4 py-2.5 sm:py-3 rounded-xl bg-black/50 border border-white/10 text-white placeholder-neutral-text-muted focus:border-(--accent-color)/50 focus:outline-none transition-all resize-none text-sm sm:text-base disabled:opacity-50 disabled:cursor-not-allowed"
                   placeholder="Tell us about your idea or inquiry..."
                 />
               </div>
 
               <button
                 type="submit"
-                className="w-full flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-4 bg-[var(--accent-color)] hover:bg-[var(--accent-color)]/80 rounded-xl text-neutral-900 font-medium transition-all duration-300 text-sm sm:text-base"
+                disabled={isSubmitting}
+                className="w-full flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-4 bg-(--accent-color) hover:bg-[#25A84D] rounded-xl text-white font-medium transition-all duration-300 text-sm sm:text-base disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                Send Message
-                <Send className="w-4 h-4" />
+                {isSubmitting ? (
+                  <>
+                    <Loader2 className="w-4 h-4 animate-spin" />
+                    Sending...
+                  </>
+                ) : (
+                  <>
+                    Send Message
+                    <Send className="w-4 h-4" />
+                  </>
+                )}
               </button>
             </form>
           </div>
@@ -142,7 +343,7 @@ export function Footer() {
         <div className="pt-6 sm:pt-8 border-t border-white/10">
           <div className="flex flex-col md:flex-row items-start md:items-center gap-4 sm:gap-8 mb-6 sm:mb-8">
             <div className="flex items-center gap-2 sm:gap-3">
-              <div className="w-2 h-2 bg-[var(--accent-color)] rounded-full" />
+              <div className="w-2 h-2 bg-(--accent-color) rounded-full" />
               <span className="text-base sm:text-lg font-serif tracking-tight text-white">
                 YetiNova
               </span>
