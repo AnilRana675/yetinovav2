@@ -35,7 +35,7 @@ export function GovernanceSection() {
     >
       <div className="max-w-7xl mx-auto">
         <div className="mb-10 sm:mb-16">
-          <p className="text-xs font-bold tracking-widest uppercase text-neutral-400 mb-3 sm:mb-4">
+          <p className="text-xs font-bold tracking-widest uppercase text-neutral-600 mb-3 sm:mb-4">
             Trust & Compliance
           </p>
           <h2 className="font-serif text-2xl sm:text-4xl md:text-5xl lg:text-6xl text-neutral-900 mb-3 sm:mb-4">
