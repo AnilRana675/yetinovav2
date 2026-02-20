@@ -7,7 +7,7 @@ export function ChairmanSection() {
   return (
     <section
       id="about"
-      className="relative bg-black py-20 sm:py-32 px-6 sm:px-12 lg:px-24 border-t border-white/5"
+      className="relative bg-black py-20 sm:py-32 px-6 sm:px-12 lg:px-24 overflow-hidden"
     >
       <div className="max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-center">
         {/* Left Column - Image */}

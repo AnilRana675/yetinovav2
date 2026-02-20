@@ -1,28 +1,45 @@
 "use client";
 
-import { ChevronDown, ArrowRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/Button";
+import { List, ListItem, ListItemContent } from "@/components/ui/list";
+import dynamic from "next/dynamic";
+
+const Aurora = dynamic(() => import("@/components/ui/aurora/Aurora"), {
+  ssr: false,
+  loading: () => (
+    <div className="absolute inset-0 bg-linear-to-b from-[#606FCC]/10 to-black" />
+  ),
+});
 
 const PARTNERSHIP_TYPES = [
   {
-    category: "Strategic Investment",
+    id: 1,
+    category: "Strategic\nInvestment",
     description:
       "Deploy capital into export-ready ventures. From green finance to fintech, acquire equity in the startups that are building a stronger Nepal.",
+    romanNumeral: "I",
   },
   {
-    category: "Government & NGO Pilots",
+    id: 2,
+    category: "Government &\nNGO's",
     description:
       "Move beyond traditional grants. Co-design scalable technology pilots in education and disaster resilience that actually survive and scale.",
+    romanNumeral: "II",
   },
   {
-    category: "Corporate Innovation",
+    id: 3,
+    category: "Corporate\nInnovation",
     description:
       "Partner with our labs to modernize your legacy systems. We deploy our builder teams to solve your organization's hardest technical problems.",
+    romanNumeral: "III",
   },
   {
-    category: "The Reinvestment Cycle",
+    id: 4,
+    category: "The Reinvestment\nCycle",
     description:
       "Every partnership feeds the engine. A portion of all returns is reinvested into youth training and applied R&D.",
+    romanNumeral: "-",
   },
 ];
 
@@ -30,49 +47,58 @@ export function PartnershipsSection() {
   return (
     <section
       id="partnerships"
-      className="relative bg-black py-16 sm:py-24 lg:py-32 px-4 sm:px-6 lg:px-8 xl:px-32 border-t border-white/5"
-      style={{ "--accent-color": "#71B28B" } as React.CSSProperties}
+      className="relative bg-black py-16 sm:py-24 lg:py-32 px-4 sm:px-6 lg:px-8 xl:px-32 overflow-hidden"
     >
-      <div className="max-w-7xl mx-auto">
-        <div className="mb-10 sm:mb-16">
-          <h2 className="font-serif text-2xl sm:text-4xl md:text-5xl lg:text-6xl text-white mb-3 sm:mb-4">
+      <div className="absolute -left-[100px] sm:-left-[150px] lg:-left-[200px] inset-y-0 h-full w-[150vh] opacity-60 pointer-events-none origin-center -rotate-90">
+        <Aurora
+          colorStops={["#7cff67", "#5227FF", "#ffffff"]}
+          amplitude={0.8}
+          blend={0.4}
+          speed={0.3}
+        />
+      </div>
+      <div className="absolute -right-[100px] sm:-right-[150px] lg:-right-[200px] inset-y-0 h-full w-[150vh] opacity-60 pointer-events-none origin-center rotate-90">
+        <Aurora amplitude={0.8} blend={0.4} speed={0.3} />
+      </div>
+      <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-black to-transparent pointer-events-none z-10" />
+      <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-black to-transparent pointer-events-none z-10" />
+      <div className="max-w-[1200px] mx-auto relative z-10">
+        <div className="mb-10 sm:mb-16 animate-fade-in opacity-0 [--animation-delay:0ms]">
+          <h2 className="font-serif font-normal text-white text-2xl sm:text-4xl md:text-5xl lg:text-6xl tracking-[0] leading-normal mb-4">
             Don&apos;t Just Fund. Fuel.
           </h2>
-          <p className="text-neutral-text-muted text-base sm:text-lg md:text-xl font-light max-w-2xl">
+          <p className="font-sans font-normal text-[#666060] text-xl tracking-[0] leading-normal">
             Partner with us to deploy capital into high-growth ventures and
             national infrastructure.
           </p>
         </div>
 
-        <div className="space-y-3 sm:space-y-4">
+        <List>
           {PARTNERSHIP_TYPES.map((partnership, index) => (
-            <div
-              key={partnership.category}
-              className="group border border-white/10 rounded-xl sm:rounded-2xl overflow-hidden hover:border-[var(--accent-color)] transition-all duration-300"
+            <ListItem
+              key={partnership.id}
+              className={`animate-fade-in opacity-0 [--animation-delay:${
+                200 + index * 150
+              }ms] group`}
             >
-              <div className="p-4 sm:p-6 md:p-8">
-                <div className="flex items-start justify-between gap-3 sm:gap-4">
-                  <div className="flex-1 min-w-0">
-                    <div className="flex items-center gap-2 sm:gap-4 mb-2">
-                      <span className="text-xs font-mono font-medium text-[var(--accent-color)] flex-shrink-0">
-                        {String(index + 1).padStart(2, "0")}
-                      </span>
-                      <h3 className="text-lg sm:text-xl md:text-2xl font-serif text-white group-hover:text-glow-accent transition-all truncate">
-                        {partnership.category}
-                      </h3>
-                    </div>
-                    <p className="text-neutral-text-muted font-light leading-relaxed max-w-2xl ml-6 sm:ml-8 text-sm sm:text-base">
-                      {partnership.description}
-                    </p>
+              <ListItemContent className="group">
+                <div className="grid grid-cols-[1fr_auto_2fr] gap-8 items-center w-full">
+                  <h3 className="font-serif font-bold text-[#dcdcdc] group-hover:text-black text-4xl tracking-[0] leading-[36px] whitespace-pre-line">
+                    {partnership.category}
+                  </h3>
+                  <div className="font-serif font-black text-[#315434] group-hover:text-[#3759a4] text-4xl text-center tracking-[0] leading-[36px] min-w-[80px] transition-colors">
+                    {partnership.romanNumeral}
                   </div>
-                  <ChevronDown className="w-5 h-5 sm:w-6 sm:h-6 text-neutral-text-muted group-hover:text-[var(--accent-color)] transition-all flex-shrink-0" />
+                  <p className="font-sans font-normal text-white group-hover:text-black text-xl tracking-[0] leading-[20px]">
+                    {partnership.description}
+                  </p>
                 </div>
-              </div>
-            </div>
+              </ListItemContent>
+            </ListItem>
           ))}
-        </div>
+        </List>
 
-        <div className="mt-10 sm:mt-16 text-center">
+        <div className="mt-10 sm:mt-16 text-center animate-fade-in opacity-0 [--animation-delay:800ms]">
           <Button
             asChild
             variant="brand"
