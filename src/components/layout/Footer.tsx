@@ -16,8 +16,8 @@ export function Footer() {
               Initiate a Partnership
             </h2>
             <p className="text-neutral-text-muted text-base sm:text-lg font-light mb-6 sm:mb-10 max-w-md">
-              Whether you are a founder looking for funding or an investor
-              looking for impact, we are ready to build.
+              Whether you are a founder looking for funding or an investor looking for impact, we
+              are ready to build.
             </p>
 
             <div className="space-y-4 sm:space-y-6">
@@ -26,12 +26,8 @@ export function Footer() {
                   <Mail className="w-4 h-4 sm:w-5 sm:h-5 text-[var(--accent-color)]" />
                 </div>
                 <div>
-                  <p className="text-xs text-neutral-text-muted uppercase tracking-wider">
-                    Email
-                  </p>
-                  <p className="text-white font-medium text-sm sm:text-base">
-                    hello@yetinova.com
-                  </p>
+                  <p className="text-xs text-neutral-text-muted uppercase tracking-wider">Email</p>
+                  <p className="text-white font-medium text-sm sm:text-base">hello@yetinova.com</p>
                 </div>
               </div>
 
@@ -40,12 +36,8 @@ export function Footer() {
                   <Phone className="w-4 h-4 sm:w-5 sm:h-5 text-[var(--accent-color)]" />
                 </div>
                 <div>
-                  <p className="text-xs text-neutral-text-muted uppercase tracking-wider">
-                    Phone
-                  </p>
-                  <p className="text-white font-medium text-sm sm:text-base">
-                    +977 XXX XXX XXXX
-                  </p>
+                  <p className="text-xs text-neutral-text-muted uppercase tracking-wider">Phone</p>
+                  <p className="text-white font-medium text-sm sm:text-base">+977 XXX XXX XXXX</p>
                 </div>
               </div>
 
@@ -57,9 +49,7 @@ export function Footer() {
                   <p className="text-xs text-neutral-text-muted uppercase tracking-wider">
                     Location
                   </p>
-                  <p className="text-white font-medium text-sm sm:text-base">
-                    Kathmandu, Nepal
-                  </p>
+                  <p className="text-white font-medium text-sm sm:text-base">Kathmandu, Nepal</p>
                 </div>
               </div>
             </div>
@@ -69,20 +59,28 @@ export function Footer() {
             <form className="space-y-4 sm:space-y-6">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
                 <div>
-                  <label className="block text-xs text-neutral-text-muted uppercase tracking-wider mb-1 sm:mb-2">
+                  <label
+                    htmlFor="contact-name"
+                    className="block text-xs text-neutral-text-muted uppercase tracking-wider mb-1 sm:mb-2"
+                  >
                     Name
                   </label>
                   <input
+                    id="contact-name"
                     type="text"
                     className="w-full px-3 sm:px-4 py-2.5 sm:py-3 rounded-xl bg-black/50 border border-white/10 text-white placeholder-neutral-text-muted focus:border-[var(--accent-color)]/50 focus:outline-none transition-all text-sm sm:text-base"
                     placeholder="Your name"
                   />
                 </div>
                 <div>
-                  <label className="block text-xs text-neutral-text-muted uppercase tracking-wider mb-1 sm:mb-2">
+                  <label
+                    htmlFor="contact-email"
+                    className="block text-xs text-neutral-text-muted uppercase tracking-wider mb-1 sm:mb-2"
+                  >
                     Email
                   </label>
                   <input
+                    id="contact-email"
                     type="email"
                     className="w-full px-3 sm:px-4 py-2.5 sm:py-3 rounded-xl bg-black/50 border border-white/10 text-white placeholder-neutral-text-muted focus:border-[var(--accent-color)]/50 focus:outline-none transition-all text-sm sm:text-base"
                     placeholder="your@email.com"
@@ -91,10 +89,16 @@ export function Footer() {
               </div>
 
               <div>
-                <label className="block text-xs text-neutral-text-muted uppercase tracking-wider mb-1 sm:mb-2">
+                <label
+                  htmlFor="contact-inquiry-type"
+                  className="block text-xs text-neutral-text-muted uppercase tracking-wider mb-1 sm:mb-2"
+                >
                   Inquiry Type
                 </label>
-                <select className="w-full px-3 sm:px-4 py-2.5 sm:py-3 rounded-xl bg-black/50 border border-white/10 text-white focus:border-[var(--accent-color)]/50 focus:outline-none transition-all appearance-none cursor-pointer text-sm sm:text-base">
+                <select
+                  id="contact-inquiry-type"
+                  className="w-full px-3 sm:px-4 py-2.5 sm:py-3 rounded-xl bg-black/50 border border-white/10 text-white focus:border-[var(--accent-color)]/50 focus:outline-none transition-all appearance-none cursor-pointer text-sm sm:text-base"
+                >
                   <option value="">Select an option</option>
                   <option value="funding">Apply for Funding</option>
                   <option value="partnership">Strategic Partnership</option>
@@ -104,10 +108,14 @@ export function Footer() {
               </div>
 
               <div>
-                <label className="block text-xs text-neutral-text-muted uppercase tracking-wider mb-1 sm:mb-2">
+                <label
+                  htmlFor="contact-message"
+                  className="block text-xs text-neutral-text-muted uppercase tracking-wider mb-1 sm:mb-2"
+                >
                   Message
                 </label>
                 <textarea
+                  id="contact-message"
                   rows={4}
                   className="w-full min-h-[100px] px-3 sm:px-4 py-2.5 sm:py-3 rounded-xl bg-black/50 border border-white/10 text-white placeholder-neutral-text-muted focus:border-[var(--accent-color)]/50 focus:outline-none transition-all resize-none text-sm sm:text-base"
                   placeholder="Tell us about your idea or inquiry..."
@@ -128,7 +136,7 @@ export function Footer() {
         <div className="pt-6 sm:pt-8 border-t border-white/10">
           <div className="flex flex-col md:flex-row items-start md:items-center gap-4 sm:gap-8 mb-6 sm:mb-8">
             <div className="flex items-center gap-2 sm:gap-3">
-              <div className="w-2 h-2 bg-[var(--accent-color)] rounded-full"></div>
+              <div className="w-2 h-2 bg-[var(--accent-color)] rounded-full" />
               <span className="text-base sm:text-lg font-serif tracking-tight text-white">
                 YetiNova
               </span>
@@ -140,30 +148,34 @@ export function Footer() {
 
           <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4 sm:gap-6">
             <p className="text-neutral-text-muted text-sm max-w-xl">
-              We back Nepal&apos;s boldest builders. We turn raw concepts into
-              global-grade startups&mdash;reinvesting our returns to fuel the
-              next batch.
+              We back Nepal&apos;s boldest builders. We turn raw concepts into global-grade
+              startups&mdash;reinvesting our returns to fuel the next batch.
             </p>
 
             <div className="flex gap-4 sm:gap-8 text-sm">
-              <a
-                href="#"
-                className="text-neutral-text-muted hover:text-white transition-colors"
+              <button
+                type="button"
+                onClick={() => {
+                  /* TODO: Add privacy policy link */
+                }}
+                className="text-neutral-text-muted hover:text-white transition-colors cursor-pointer bg-transparent border-0 p-0"
               >
                 Privacy Policy
-              </a>
-              <a
-                href="#"
-                className="text-neutral-text-muted hover:text-white transition-colors"
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  /* TODO: Add terms of use link */
+                }}
+                className="text-neutral-text-muted hover:text-white transition-colors cursor-pointer bg-transparent border-0 p-0"
               >
                 Terms of Use
-              </a>
+              </button>
             </div>
           </div>
 
           <p className="text-neutral-text-muted text-xs mt-6 sm:mt-8 pt-6 sm:pt-8 border-t border-white/5">
-            © 2026 YetiNova AI-Tech Pvt. Ltd. | Building locally, scaling
-            globally.
+            © 2026 YetiNova AI-Tech Pvt. Ltd. | Building locally, scaling globally.
           </p>
         </div>
       </div>

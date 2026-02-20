@@ -1,7 +1,7 @@
 "use client";
 
-import { useState, useEffect } from "react";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 
 export function Header() {
@@ -32,9 +32,7 @@ export function Header() {
       <nav
         className={cn(
           "fixed top-0 left-0 right-0 z-50 transition-all duration-500",
-          isScrolled
-            ? "bg-black/80 backdrop-blur-md"
-            : "bg-transparent backdrop-blur-sm"
+          isScrolled ? "bg-black/80 backdrop-blur-md" : "bg-transparent backdrop-blur-sm"
         )}
         style={{ paddingTop: "env(safe-area-inset-top)" }}
       >
@@ -45,7 +43,7 @@ export function Header() {
           )}
         >
           <div className="flex items-center gap-2 sm:gap-3">
-            <div className="w-2 h-2 bg-white rounded-full"></div>
+            <div className="w-2 h-2 bg-white rounded-full" />
             <Link
               href="/"
               className="text-lg sm:text-xl font-serif font-medium tracking-tight text-white hover:opacity-90 transition-opacity"
@@ -55,22 +53,13 @@ export function Header() {
           </div>
 
           <div className="hidden md:flex gap-6 lg:gap-10 text-sm font-light tracking-wide text-white/70">
-            <Link
-              href="#manifesto"
-              className="hover:text-white transition-colors duration-300"
-            >
+            <Link href="#manifesto" className="hover:text-white transition-colors duration-300">
               Manifesto
             </Link>
-            <Link
-              href="#ventures"
-              className="hover:text-white transition-colors duration-300"
-            >
+            <Link href="#ventures" className="hover:text-white transition-colors duration-300">
               Ventures
             </Link>
-            <Link
-              href="#ecosystem"
-              className="hover:text-white transition-colors duration-300"
-            >
+            <Link href="#ecosystem" className="hover:text-white transition-colors duration-300">
               Ecosystem
             </Link>
           </div>
@@ -85,6 +74,7 @@ export function Header() {
           </div>
 
           <button
+            type="button"
             className="md:hidden text-white z-50 relative w-10 h-10 flex items-center justify-center rounded-lg hover:bg-white/10 transition-colors active:scale-95"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}

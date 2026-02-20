@@ -1,4 +1,4 @@
-import { LucideIcon } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
 
 interface CardProps {
   children: React.ReactNode;
@@ -84,21 +84,14 @@ interface LeaderCardProps {
   variant?: "featured" | "default";
 }
 
-export function LeaderCard({
-  role,
-  name,
-  quote,
-  variant = "default",
-}: LeaderCardProps) {
+export function LeaderCard({ role, name, quote, variant = "default" }: LeaderCardProps) {
   if (variant === "featured") {
     return (
       <div className="sm:col-span-2 lg:col-span-2 p-5 sm:p-8 rounded-2xl sm:rounded-3xl border border-white/10 bg-surface-dark/30">
         <p className="text-xs font-medium tracking-wider uppercase text-neutral-text-muted mb-2">
           {role}
         </p>
-        <h3 className="font-serif text-xl sm:text-2xl text-white mb-3 sm:mb-4">
-          {name}
-        </h3>
+        <h3 className="font-serif text-xl sm:text-2xl text-white mb-3 sm:mb-4">{name}</h3>
         {quote && (
           <p className="text-neutral-text/80 font-light italic border-l-2 border-[var(--accent-color)]/50 pl-3 sm:pl-4 text-sm sm:text-base">
             &ldquo;{quote}&rdquo;
@@ -153,21 +146,15 @@ export function VentureCard({
         {name}
       </h3>
 
-      <p className="text-base sm:text-lg text-neutral-text font-medium mb-3 sm:mb-4">
-        {tagline}
-      </p>
+      <p className="text-base sm:text-lg text-neutral-text font-medium mb-3 sm:mb-4">{tagline}</p>
 
       <p className="text-neutral-text-muted font-light leading-relaxed mb-4 sm:mb-6 text-sm sm:text-base">
         {description}
       </p>
 
       <div className="flex items-center gap-2">
-        <div
-          className={`w-2 h-2 rounded-full ${statusColor.replace("text-", "bg-")}`}
-        />
-        <span className={`text-xs sm:text-sm font-medium ${statusColor}`}>
-          {status}
-        </span>
+        <div className={`w-2 h-2 rounded-full ${statusColor.replace("text-", "bg-")}`} />
+        <span className={`text-xs sm:text-sm font-medium ${statusColor}`}>{status}</span>
       </div>
     </div>
   );
@@ -187,9 +174,7 @@ export function ValueCard({ icon: Icon, title, description }: ValueCardProps) {
           <Icon className="w-4 h-4 sm:w-5 sm:h-5 text-[var(--accent-color)]" />
         </div>
         <div>
-          <h3 className="text-white font-medium mb-1 text-sm sm:text-base">
-            {title}
-          </h3>
+          <h3 className="text-white font-medium mb-1 text-sm sm:text-base">{title}</h3>
           <p className="text-neutral-text-muted font-light text-xs sm:text-sm leading-relaxed">
             {description}
           </p>

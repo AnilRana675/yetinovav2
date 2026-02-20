@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useEffect } from "react";
+import { useEffect, useRef } from "react";
 
 type CanvasStrokeStyle = string | CanvasGradient | CanvasPattern;
 
@@ -74,26 +74,18 @@ const Squares: React.FC<SquaresProps> = ({
       try {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-        const startX =
-          Math.floor(gridOffset.current.x / squareSize) * squareSize;
-        const startY =
-          Math.floor(gridOffset.current.y / squareSize) * squareSize;
+        const startX = Math.floor(gridOffset.current.x / squareSize) * squareSize;
+        const startY = Math.floor(gridOffset.current.y / squareSize) * squareSize;
 
         for (let x = startX; x < canvas.width + squareSize; x += squareSize) {
-          for (
-            let y = startY;
-            y < canvas.height + squareSize;
-            y += squareSize
-          ) {
+          for (let y = startY; y < canvas.height + squareSize; y += squareSize) {
             const squareX = x - (gridOffset.current.x % squareSize);
             const squareY = y - (gridOffset.current.y % squareSize);
 
             if (
               hoveredSquareRef.current &&
-              Math.floor((x - startX) / squareSize) ===
-                hoveredSquareRef.current.x &&
-              Math.floor((y - startY) / squareSize) ===
-                hoveredSquareRef.current.y
+              Math.floor((x - startX) / squareSize) === hoveredSquareRef.current.x &&
+              Math.floor((y - startY) / squareSize) === hoveredSquareRef.current.y
             ) {
               ctx.fillStyle = resolvedHoverFillColor;
               ctx.fillRect(squareX, squareY, squareSize, squareSize);
@@ -179,17 +171,11 @@ const Squares: React.FC<SquaresProps> = ({
         const mouseX = event.clientX - rect.left;
         const mouseY = event.clientY - rect.top;
 
-        const startX =
-          Math.floor(gridOffset.current.x / squareSize) * squareSize;
-        const startY =
-          Math.floor(gridOffset.current.y / squareSize) * squareSize;
+        const startX = Math.floor(gridOffset.current.x / squareSize) * squareSize;
+        const startY = Math.floor(gridOffset.current.y / squareSize) * squareSize;
 
-        const hoveredSquareX = Math.floor(
-          (mouseX + gridOffset.current.x - startX) / squareSize
-        );
-        const hoveredSquareY = Math.floor(
-          (mouseY + gridOffset.current.y - startY) / squareSize
-        );
+        const hoveredSquareX = Math.floor((mouseX + gridOffset.current.x - startX) / squareSize);
+        const hoveredSquareY = Math.floor((mouseY + gridOffset.current.y - startY) / squareSize);
 
         if (
           !hoveredSquareRef.current ||
@@ -217,20 +203,9 @@ const Squares: React.FC<SquaresProps> = ({
       canvas.removeEventListener("mousemove", handleMouseMove);
       canvas.removeEventListener("mouseleave", handleMouseLeave);
     };
-  }, [
-    direction,
-    speed,
-    resolvedBorderColor,
-    resolvedHoverFillColor,
-    squareSize,
-  ]);
+  }, [direction, speed, resolvedBorderColor, resolvedHoverFillColor, squareSize]);
 
-  return (
-    <canvas
-      ref={canvasRef}
-      className="w-full h-full border-none block"
-    ></canvas>
-  );
+  return <canvas ref={canvasRef} className="w-full h-full border-none block" />;
 };
 
 export default Squares;

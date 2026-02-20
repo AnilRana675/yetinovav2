@@ -1,8 +1,8 @@
-import { useRef, useEffect, useState } from "react";
+import { useGSAP } from "@gsap/react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SplitText as GSAPSplitText } from "gsap/SplitText";
-import { useGSAP } from "@gsap/react";
+import { useEffect, useRef, useState } from "react";
 
 gsap.registerPlugin(ScrollTrigger, GSAPSplitText, useGSAP);
 
@@ -92,12 +92,9 @@ const SplitText = ({
       let targets: any;
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const assignTargets = (self: any) => {
-        if (splitType.includes("chars") && self.chars.length)
-          targets = self.chars;
-        if (!targets && splitType.includes("words") && self.words.length)
-          targets = self.words;
-        if (!targets && splitType.includes("lines") && self.lines.length)
-          targets = self.lines;
+        if (splitType.includes("chars") && self.chars.length) targets = self.chars;
+        if (!targets && splitType.includes("words") && self.words.length) targets = self.words;
+        if (!targets && splitType.includes("lines") && self.lines.length) targets = self.lines;
         if (!targets) targets = self.chars || self.words || self.lines;
       };
 

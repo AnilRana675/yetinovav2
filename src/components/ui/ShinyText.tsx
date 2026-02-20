@@ -1,10 +1,5 @@
-import { useState, useCallback, useEffect, useRef } from "react";
-import {
-  motion,
-  useMotionValue,
-  useAnimationFrame,
-  useTransform,
-} from "motion/react";
+import { motion, useAnimationFrame, useMotionValue, useTransform } from "motion/react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 interface ShinyTextProps {
   text: string;
@@ -99,14 +94,10 @@ const ShinyText = ({
     directionRef.current = direction === "left" ? 1 : -1;
     elapsedRef.current = 0;
     progress.set(0);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [direction]);
+  }, [direction, progress]);
 
   // Transform: p=0 -> 150% (shine off right), p=100 -> -50% (shine off left)
-  const backgroundPosition = useTransform(
-    progress,
-    (p) => `${150 - p * 2}% center`
-  );
+  const backgroundPosition = useTransform(progress, (p) => `${150 - p * 2}% center`);
 
   const handleMouseEnter = useCallback(() => {
     if (pauseOnHover) setIsPaused(true);

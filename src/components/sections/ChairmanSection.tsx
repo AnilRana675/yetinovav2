@@ -32,16 +32,15 @@ export function ChairmanSection() {
         {/* Right Column - Content */}
         <div className="flex flex-col justify-center">
           <blockquote className="font-serif text-3xl sm:text-4xl lg:text-5xl leading-tight text-white mb-8">
-            &ldquo;YetiNova was forged in the reality of the marketplace, not
-            the comfort of a classroom.&rdquo;
+            &ldquo;YetiNova was forged in the reality of the marketplace, not the comfort of a
+            classroom.&rdquo;
           </blockquote>
 
           <div className="prose prose-invert max-w-none mb-12">
             <p className="text-lg text-neutral-400 font-light leading-relaxed">
-              We believe that true innovation happens when grit meets
-              opportunity. We don&apos;t just write checks. We roll up our
-              sleeves to build the digital operating system for the next
-              generation of Himalayan entrepreneurs.
+              We believe that true innovation happens when grit meets opportunity. We don&apos;t
+              just write checks. We roll up our sleeves to build the digital operating system for
+              the next generation of Himalayan entrepreneurs.
             </p>
           </div>
 
@@ -55,13 +54,10 @@ export function ChairmanSection() {
               <div className="space-y-3">
                 <div className="flex items-center gap-3 text-white/90">
                   <Lightbulb className="w-5 h-5" strokeWidth={1.5} />
-                  <h4 className="font-mono text-sm uppercase tracking-wide">
-                    Systemic Impact
-                  </h4>
+                  <h4 className="font-mono text-sm uppercase tracking-wide">Systemic Impact</h4>
                 </div>
                 <p className="text-sm text-neutral-500 leading-relaxed">
-                  Systemic impact to prove and scale. Community to solutions
-                  across the market.
+                  Systemic impact to prove and scale. Community to solutions across the market.
                 </p>
               </div>
 
@@ -69,13 +65,11 @@ export function ChairmanSection() {
               <div className="space-y-3">
                 <div className="flex items-center gap-3 text-white/90">
                   <Network className="w-5 h-5" strokeWidth={1.5} />
-                  <h4 className="font-mono text-sm uppercase tracking-wide">
-                    Infrastructure
-                  </h4>
+                  <h4 className="font-mono text-sm uppercase tracking-wide">Infrastructure</h4>
                 </div>
                 <p className="text-sm text-neutral-500 leading-relaxed">
-                  Infrastructure is the cornerstone of entrepreneurial growth,
-                  connecting and building the digital processes.
+                  Infrastructure is the cornerstone of entrepreneurial growth, connecting and
+                  building the digital processes.
                 </p>
               </div>
             </div>
@@ -83,9 +77,7 @@ export function ChairmanSection() {
 
           {/* Signature & Link */}
           <div className="space-y-6">
-            <div className="font-serif text-2xl italic text-white/90">
-              Mr. Basudev P. Gautam
-            </div>
+            <div className="font-serif text-2xl italic text-white/90">Mr. Basudev P. Gautam</div>
             <p className="font-mono text-sm uppercase tracking-widest text-neutral-500">
               Executive Chairman
             </p>
