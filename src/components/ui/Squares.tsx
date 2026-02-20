@@ -30,23 +30,26 @@ const Squares: React.FC<SquaresProps> = ({
   const numSquaresY = useRef<number>(0);
   const gridOffset = useRef<GridOffset>({ x: 0, y: 0 });
   const hoveredSquareRef = useRef<GridOffset | null>(null);
+  const resolvedBorderColorRef = useRef<CanvasStrokeStyle>(borderColor);
+  const resolvedHoverFillColorRef = useRef<CanvasStrokeStyle>(hoverFillColor);
 
-  // Helper function to resolve CSS variables
-  const resolveColor = (color: CanvasStrokeStyle): CanvasStrokeStyle => {
-    if (typeof color === "string" && color.startsWith("var(")) {
-      const varName = color.match(/var\(([^)]+)\)/)?.[1];
-      if (varName && typeof window !== "undefined") {
-        const computedColor = getComputedStyle(document.documentElement)
-          .getPropertyValue(varName)
-          .trim();
-        return computedColor || color;
+  useEffect(() => {
+    const resolveColor = (color: CanvasStrokeStyle): CanvasStrokeStyle => {
+      if (typeof color === "string" && color.startsWith("var(")) {
+        const varName = color.match(/var\(([^)]+)\)/)?.[1];
+        if (varName) {
+          const computedColor = getComputedStyle(document.documentElement)
+            .getPropertyValue(varName)
+            .trim();
+          return computedColor || color;
+        }
       }
-    }
-    return color;
-  };
+      return color;
+    };
 
-  const resolvedBorderColor = resolveColor(borderColor);
-  const resolvedHoverFillColor = resolveColor(hoverFillColor);
+    resolvedBorderColorRef.current = resolveColor(borderColor);
+    resolvedHoverFillColorRef.current = resolveColor(hoverFillColor);
+  }, [borderColor, hoverFillColor]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -87,11 +90,11 @@ const Squares: React.FC<SquaresProps> = ({
               Math.floor((x - startX) / squareSize) === hoveredSquareRef.current.x &&
               Math.floor((y - startY) / squareSize) === hoveredSquareRef.current.y
             ) {
-              ctx.fillStyle = resolvedHoverFillColor;
+              ctx.fillStyle = resolvedHoverFillColorRef.current;
               ctx.fillRect(squareX, squareY, squareSize, squareSize);
             }
 
-            ctx.strokeStyle = resolvedBorderColor;
+            ctx.strokeStyle = resolvedBorderColorRef.current;
             ctx.strokeRect(squareX, squareY, squareSize, squareSize);
           }
         }
@@ -203,7 +206,7 @@ const Squares: React.FC<SquaresProps> = ({
       canvas.removeEventListener("mousemove", handleMouseMove);
       canvas.removeEventListener("mouseleave", handleMouseLeave);
     };
-  }, [direction, speed, resolvedBorderColor, resolvedHoverFillColor, squareSize]);
+  }, [direction, speed, squareSize]);
 
   return <canvas ref={canvasRef} className="w-full h-full border-none block" />;
 };

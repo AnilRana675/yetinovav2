@@ -1,7 +1,7 @@
 "use client";
 
 import { Mesh, Program, Renderer, Triangle } from "ogl";
-import { type ReactNode, useEffect, useRef } from "react";
+import { type ReactNode, useEffect, useRef, useState } from "react";
 import { hexToRgb } from "@/lib/utils";
 
 const VERT = `#version 300 es
@@ -124,6 +124,7 @@ export default function Aurora(props: AuroraProps) {
   const propsRef = useRef<AuroraProps>(props);
   propsRef.current = props;
 
+  const [webglAvailable, setWebglAvailable] = useState(false);
   const ctnDom = useRef<HTMLDivElement>(null);
   const isContextLost = useRef(false);
   const animationIdRef = useRef<number>(0);
@@ -132,13 +133,26 @@ export default function Aurora(props: AuroraProps) {
     const ctn = ctnDom.current;
     if (!ctn) return;
 
-    const renderer = new Renderer({
-      alpha: true,
-      premultipliedAlpha: true,
-      antialias: true,
-    });
+    let renderer: Renderer | null = null;
+
+    try {
+      renderer = new Renderer({
+        alpha: true,
+        premultipliedAlpha: true,
+        antialias: true,
+      });
+    } catch (e) {
+      console.warn("WebGL not available, using fallback:", e);
+      return;
+    }
+
     const gl = renderer.gl;
-    if (!gl) return;
+    if (!gl) {
+      console.warn("WebGL context is null, using fallback");
+      return;
+    }
+
+    setWebglAvailable(true);
 
     const handleContextLost = (e: Event) => {
       e.preventDefault();
@@ -189,7 +203,7 @@ export default function Aurora(props: AuroraProps) {
     ctn.appendChild(gl.canvas);
 
     function resize() {
-      if (!ctn) return;
+      if (!ctn || !renderer) return;
       const width = ctn.offsetWidth;
       const height = ctn.offsetHeight;
       renderer.setSize(width, height);
@@ -226,6 +240,9 @@ export default function Aurora(props: AuroraProps) {
 
   return (
     <div ref={ctnDom} className="aurora-container relative w-full h-full overflow-hidden">
+      {!webglAvailable && (
+        <div className="absolute inset-0 bg-gradient-to-b from-[#5227FF]/20 via-[#7cff67]/10 to-transparent" />
+      )}
       {props.children}
     </div>
   );

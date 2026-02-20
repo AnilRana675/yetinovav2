@@ -1,3 +1,7 @@
+"use client";
+
+import { useEffect, useState } from "react";
+
 import { AuroraBackground } from "./AuroraBackground";
 import { CurrentlyBackingWrapper } from "./CurrentlyBackingWrapper";
 import { HeroAnimations } from "./HeroAnimations";
@@ -8,6 +12,21 @@ const SUBTITLE_2 =
   "Bring your idea or MVP. We provide the capital and the playbook to turn your vision into Nepal's next big tech company.";
 
 export function HeroSection() {
+  const [scrollProgress, setScrollProgress] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const maxScroll = 300;
+      const currentProgress = Math.min(window.scrollY / maxScroll, 1);
+      setScrollProgress(currentProgress);
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const arrowOpacity = Math.max(1 - scrollProgress * 2, 0);
+
   return (
     <section
       className="relative min-h-screen flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8 xl:px-32 pt-20 sm:pt-24 lg:pt-0 pb-12 sm:pb-16 overflow-hidden bg-black text-center"
@@ -38,7 +57,10 @@ export function HeroSection() {
 
       <HeroAnimations subtitle1={SUBTITLE_1} subtitle2={SUBTITLE_2} />
 
-      <div className="absolute bottom-6 sm:bottom-8 lg:bottom-12 left-1/2 -translate-x-1/2 animate-bounce">
+      <div
+        className="absolute bottom-6 sm:bottom-8 lg:bottom-12 left-1/2 -translate-x-1/2 animate-bounce"
+        style={{ opacity: arrowOpacity }}
+      >
         <span className="material-symbols-outlined text-white text-2xl sm:text-3xl font-light">
           keyboard_arrow_down
         </span>
