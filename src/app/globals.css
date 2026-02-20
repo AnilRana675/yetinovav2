@@ -34,6 +34,15 @@
     scrollbar-width: none;
   }
 
+  /* Ghost text for LCP optimization - starts at 5% opacity */
+  .hero-ghost-text {
+    opacity: 0.05;
+  }
+
+  .hero-ghost-text.hydrated {
+    opacity: 1;
+  }
+
   .text-gradient-gold {
     background: linear-gradient(135deg, #d4c5a3 0%, #f5ecdf 50%, #bdb090 100%);
     -webkit-background-clip: text;

@@ -2,35 +2,7 @@
 
 import { useEffect, useRef, ReactNode } from "react";
 import { Renderer, Program, Mesh, Triangle } from "ogl";
-
-function hexToRgb(hex: string): [number, number, number] {
-  // Remove # if present
-  hex = hex.replace("#", "");
-
-  // Handle 3-character hex
-  if (hex.length === 3) {
-    hex = hex
-      .split("")
-      .map((c) => c + c)
-      .join("");
-  }
-
-  // Handle 6-character hex (ignore alpha if 8 chars)
-  if (hex.length === 8) {
-    hex = hex.slice(0, 6);
-  }
-
-  if (hex.length !== 6) {
-    console.error(`Invalid hex color: #${hex}`);
-    return [0, 0, 0];
-  }
-
-  const r = parseInt(hex.slice(0, 2), 16) / 255;
-  const g = parseInt(hex.slice(2, 4), 16) / 255;
-  const b = parseInt(hex.slice(4, 6), 16) / 255;
-
-  return [r, g, b];
-}
+import { hexToRgb } from "@/lib/utils";
 
 const VERT = `#version 300 es
 in vec2 position;
@@ -157,6 +129,8 @@ export default function Aurora(props: AuroraProps) {
   propsRef.current = props;
 
   const ctnDom = useRef<HTMLDivElement>(null);
+  const isContextLost = useRef(false);
+  const animationIdRef = useRef<number>(0);
 
   useEffect(() => {
     const ctn = ctnDom.current;
@@ -169,6 +143,20 @@ export default function Aurora(props: AuroraProps) {
     });
     const gl = renderer.gl;
     if (!gl) return;
+
+    const handleContextLost = (e: Event) => {
+      e.preventDefault();
+      isContextLost.current = true;
+      cancelAnimationFrame(animationIdRef.current);
+    };
+
+    const handleContextRestored = () => {
+      isContextLost.current = false;
+      animationIdRef.current = requestAnimationFrame(update);
+    };
+
+    gl.canvas.addEventListener("webglcontextlost", handleContextLost);
+    gl.canvas.addEventListener("webglcontextrestored", handleContextRestored);
 
     gl.clearColor(0, 0, 0, 0);
     gl.enable(gl.BLEND);
@@ -213,9 +201,9 @@ export default function Aurora(props: AuroraProps) {
     }
     window.addEventListener("resize", resize);
 
-    let animateId = 0;
     const update = (t: number) => {
-      animateId = requestAnimationFrame(update);
+      if (isContextLost.current || gl.isContextLost()) return;
+      animationIdRef.current = requestAnimationFrame(update);
       const { time = t * 0.01, speed = 1.0 } = propsRef.current;
       program.uniforms.uTime.value = time * speed * 0.1;
       program.uniforms.uAmplitude.value = propsRef.current.amplitude ?? 1.0;
@@ -226,14 +214,19 @@ export default function Aurora(props: AuroraProps) {
       );
       renderer.render({ scene: mesh });
     };
-    animateId = requestAnimationFrame(update);
+    animationIdRef.current = requestAnimationFrame(update);
 
     resize();
 
     return () => {
-      cancelAnimationFrame(animateId);
+      cancelAnimationFrame(animationIdRef.current);
       window.removeEventListener("resize", resize);
-      if (ctn && gl.canvas.parentNode === ctn) {
+      gl.canvas.removeEventListener("webglcontextlost", handleContextLost);
+      gl.canvas.removeEventListener(
+        "webglcontextrestored",
+        handleContextRestored
+      );
+      if (!isContextLost.current && ctn && gl.canvas.parentNode === ctn) {
         ctn.removeChild(gl.canvas);
       }
       gl.getExtension("WEBGL_lose_context")?.loseContext();

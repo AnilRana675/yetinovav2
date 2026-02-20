@@ -1,6 +1,6 @@
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
-import { HeroSection } from "@/components/sections/HeroSection";
+import { HeroSection } from "@/components/sections/hero";
 import { BatchesSection } from "@/components/sections/BatchesSection";
 import { ModelAboutSection } from "@/components/sections/ModelAboutSection";
 import { PartnershipsSection } from "@/components/sections/PartnershipsSection";

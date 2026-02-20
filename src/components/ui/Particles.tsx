@@ -1,15 +1,15 @@
-import { useEffect, useRef } from 'react';
-import { Renderer, Camera, Geometry, Program, Mesh } from 'ogl';
+import { useEffect, useRef } from "react";
+import { Renderer, Camera, Geometry, Program, Mesh } from "ogl";
 
-const defaultColors = ['#ffffff', '#ffffff', '#ffffff'];
+const defaultColors = ["#ffffff", "#ffffff", "#ffffff"];
 
 const hexToRgb = (hex: string): [number, number, number] => {
-  hex = hex.replace(/^#/, '');
+  hex = hex.replace(/^#/, "");
   if (hex.length === 3) {
     hex = hex
-      .split('')
-      .map(c => c + c)
-      .join('');
+      .split("")
+      .map((c) => c + c)
+      .join("");
   }
   const int = parseInt(hex, 16);
   const r = ((int >> 16) & 255) / 255;
@@ -114,11 +114,13 @@ const Particles = ({
   cameraDistance = 25, // Increased distance to push back
   disableRotation = false,
   pixelRatio = 1,
-  className
+  className,
 }: ParticlesProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const mouseRef = useRef({ x: 0, y: 0 });
   const targetMouseRef = useRef({ x: 0, y: 0 });
+  const isContextLost = useRef(false);
+  const animationFrameIdRef = useRef<number>(0);
 
   useEffect(() => {
     const container = containerRef.current;
@@ -127,11 +129,27 @@ const Particles = ({
     const renderer = new Renderer({
       dpr: pixelRatio,
       depth: false,
-      alpha: true
+      alpha: true,
     });
     const gl = renderer.gl;
     container.appendChild(gl.canvas);
     gl.clearColor(0, 0, 0, 0);
+
+    // Context loss handling
+    const handleContextLost = (e: Event) => {
+      e.preventDefault();
+      isContextLost.current = true;
+      cancelAnimationFrame(animationFrameIdRef.current);
+    };
+
+    const handleContextRestored = () => {
+      isContextLost.current = false;
+      // Reinitialize by restarting animation
+      animationFrameIdRef.current = requestAnimationFrame(update);
+    };
+
+    gl.canvas.addEventListener("webglcontextlost", handleContextLost);
+    gl.canvas.addEventListener("webglcontextrestored", handleContextRestored);
 
     const camera = new Camera(gl, { fov: 15 });
     camera.position.set(0, 0, cameraDistance);
@@ -142,7 +160,7 @@ const Particles = ({
       renderer.setSize(width, height);
       camera.perspective({ aspect: gl.canvas.width / gl.canvas.height });
     };
-    window.addEventListener('resize', resize, false);
+    window.addEventListener("resize", resize, false);
     resize();
 
     const handleMouseMove = (e: MouseEvent) => {
@@ -156,14 +174,17 @@ const Particles = ({
 
     if (moveParticlesOnHover) {
       // Listen on window to track mouse even when hovering over content
-      window.addEventListener('mousemove', handleMouseMove);
+      window.addEventListener("mousemove", handleMouseMove);
     }
 
     const count = particleCount;
     const positions = new Float32Array(count * 3);
     const randoms = new Float32Array(count * 4);
     const colors = new Float32Array(count * 3);
-    const palette = particleColors && particleColors.length > 0 ? particleColors : defaultColors;
+    const palette =
+      particleColors && particleColors.length > 0
+        ? particleColors
+        : defaultColors;
 
     for (let i = 0; i < count; i++) {
       let x, y, z, len;
@@ -175,7 +196,10 @@ const Particles = ({
       } while (len > 1 || len === 0);
       const r = Math.cbrt(Math.random());
       positions.set([x * r, y * r, z * r], i * 3);
-      randoms.set([Math.random(), Math.random(), Math.random(), Math.random()], i * 4);
+      randoms.set(
+        [Math.random(), Math.random(), Math.random(), Math.random()],
+        i * 4
+      );
       const col = hexToRgb(palette[Math.floor(Math.random() * palette.length)]);
       colors.set(col, i * 3);
     }
@@ -183,7 +207,7 @@ const Particles = ({
     const geometry = new Geometry(gl, {
       position: { size: 3, data: positions },
       random: { size: 4, data: randoms },
-      color: { size: 3, data: colors }
+      color: { size: 3, data: colors },
     });
 
     const program = new Program(gl, {
@@ -194,20 +218,20 @@ const Particles = ({
         uSpread: { value: particleSpread },
         uBaseSize: { value: particleBaseSize * pixelRatio },
         uSizeRandomness: { value: sizeRandomness },
-        uAlphaParticles: { value: alphaParticles ? 1 : 0 }
+        uAlphaParticles: { value: alphaParticles ? 1 : 0 },
       },
       transparent: true,
-      depthTest: false
+      depthTest: false,
     });
 
     const particles = new Mesh(gl, { mode: gl.POINTS, geometry, program });
 
-    let animationFrameId: number;
     let lastTime = performance.now();
     let elapsed = 0;
 
     const update = (t: number) => {
-      animationFrameId = requestAnimationFrame(update);
+      if (isContextLost.current || gl.isContextLost()) return;
+      animationFrameIdRef.current = requestAnimationFrame(update);
       const delta = t - lastTime;
       lastTime = t;
       elapsed += delta * speed;
@@ -216,9 +240,17 @@ const Particles = ({
 
       if (moveParticlesOnHover) {
         // Smooth interpolation
-        mouseRef.current.x = lerp(mouseRef.current.x, targetMouseRef.current.x, 0.1);
-        mouseRef.current.y = lerp(mouseRef.current.y, targetMouseRef.current.y, 0.1);
-        
+        mouseRef.current.x = lerp(
+          mouseRef.current.x,
+          targetMouseRef.current.x,
+          0.1
+        );
+        mouseRef.current.y = lerp(
+          mouseRef.current.y,
+          targetMouseRef.current.y,
+          0.1
+        );
+
         particles.position.x = -mouseRef.current.x * particleHoverFactor;
         particles.position.y = -mouseRef.current.y * particleHoverFactor;
       } else {
@@ -235,15 +267,20 @@ const Particles = ({
       renderer.render({ scene: particles, camera });
     };
 
-    animationFrameId = requestAnimationFrame(update);
+    animationFrameIdRef.current = requestAnimationFrame(update);
 
     return () => {
-      window.removeEventListener('resize', resize);
+      window.removeEventListener("resize", resize);
       if (moveParticlesOnHover) {
-        window.removeEventListener('mousemove', handleMouseMove);
+        window.removeEventListener("mousemove", handleMouseMove);
       }
-      cancelAnimationFrame(animationFrameId);
-      if (container.contains(gl.canvas)) {
+      cancelAnimationFrame(animationFrameIdRef.current);
+      gl.canvas.removeEventListener("webglcontextlost", handleContextLost);
+      gl.canvas.removeEventListener(
+        "webglcontextrestored",
+        handleContextRestored
+      );
+      if (!isContextLost.current && container.contains(gl.canvas)) {
         container.removeChild(gl.canvas);
       }
     };
@@ -259,10 +296,12 @@ const Particles = ({
     sizeRandomness,
     cameraDistance,
     disableRotation,
-    pixelRatio
+    pixelRatio,
   ]);
 
-  return <div ref={containerRef} className={`relative w-full h-full ${className}`} />;
+  return (
+    <div ref={containerRef} className={`relative w-full h-full ${className}`} />
+  );
 };
 
 export default Particles;

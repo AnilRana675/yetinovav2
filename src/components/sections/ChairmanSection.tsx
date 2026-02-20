@@ -22,6 +22,7 @@ export function ChairmanSection() {
                 src="/images/chairman.avif"
                 alt="Basudev P. Gautam"
                 fill
+                sizes="(max-width: 1024px) 448px, 50vw"
                 className="object-cover"
               />
             }
