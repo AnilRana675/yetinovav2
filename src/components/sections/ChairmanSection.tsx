@@ -5,10 +5,7 @@ import Image from "next/image";
 
 export function ChairmanSection() {
   return (
-    <section
-      id="about"
-      className="relative bg-black py-20 sm:py-32 px-6 sm:px-12 lg:px-24 overflow-hidden"
-    >
+    <section id="about" style={{ "--accent-color": "#6B9EAA" } as React.CSSProperties}>
       <div className="max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-center">
         {/* Left Column - Image */}
         <div className="relative aspect-[3/4] w-full max-w-md mx-auto lg:max-w-none">
@@ -45,7 +42,7 @@ export function ChairmanSection() {
           </div>
 
           <div className="mb-12">
-            <p className="text-xs font-mono font-bold tracking-widest uppercase text-neutral-500 mb-6">
+            <p className="text-xs font-mono font-bold tracking-widest uppercase text-[var(--accent-color)] mb-6">
               The Long-Term View
             </p>
 
@@ -56,7 +53,7 @@ export function ChairmanSection() {
                   <Lightbulb className="w-5 h-5" strokeWidth={1.5} />
                   <h4 className="font-mono text-sm uppercase tracking-wide">Systemic Impact</h4>
                 </div>
-                <p className="text-sm text-neutral-500 leading-relaxed">
+                <p className="text-sm text-neutral-300 leading-relaxed">
                   Systemic impact to prove and scale. Community to solutions across the market.
                 </p>
               </div>
@@ -67,7 +64,7 @@ export function ChairmanSection() {
                   <Network className="w-5 h-5" strokeWidth={1.5} />
                   <h4 className="font-mono text-sm uppercase tracking-wide">Infrastructure</h4>
                 </div>
-                <p className="text-sm text-neutral-500 leading-relaxed">
+                <p className="text-sm text-neutral-300 leading-relaxed">
                   Infrastructure is the cornerstone of entrepreneurial growth, connecting and
                   building the digital processes.
                 </p>
@@ -78,7 +75,7 @@ export function ChairmanSection() {
           {/* Signature & Link */}
           <div className="space-y-6">
             <div className="font-serif text-2xl italic text-white/90">Mr. Basudev P. Gautam</div>
-            <p className="font-mono text-sm uppercase tracking-widest text-neutral-500">
+            <p className="font-mono text-sm uppercase tracking-widest text-[var(--accent-color)]">
               Executive Chairman
             </p>
           </div>

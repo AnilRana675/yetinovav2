@@ -85,7 +85,7 @@ export function Header() {
             <Link href="#manifesto" className="hover:text-white transition-colors duration-300">
               Manifesto
             </Link>
-            <Link href="#ventures" className="hover:text-white transition-colors duration-300">
+            <Link href="/projects" className="hover:text-white transition-colors duration-300">
               Ventures
             </Link>
             <Link href="#ecosystem" className="hover:text-white transition-colors duration-300">

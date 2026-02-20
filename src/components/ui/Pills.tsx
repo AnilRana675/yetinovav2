@@ -44,7 +44,7 @@ export function CurrentlyBacking() {
           bgColor="rgba(124,58,237,0.3)"
           projectName="AstraYug"
           category="Digital Agency"
-          href="/projects/AstraYug"
+          href="/projects/astrayug"
         />
         <div className="hidden sm:block w-px h-4 sm:h-5 bg-white/20" />
         <ProjectPill
@@ -52,7 +52,7 @@ export function CurrentlyBacking() {
           bgColor="rgba(74,222,128,0.2)"
           projectName="AgroConnect"
           category="AgroTech"
-          href="/projects/AgroConnect"
+          href="/projects/agroconnect"
         />
       </div>
     </div>

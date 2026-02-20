@@ -130,7 +130,7 @@ export function Footer() {
 
               <button
                 type="submit"
-                className="w-full flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-4 bg-[var(--accent-color)] hover:bg-[#25A84D] rounded-xl text-white font-medium transition-all duration-300 text-sm sm:text-base"
+                className="w-full flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-4 bg-[var(--accent-color)] hover:bg-[var(--accent-color)]/80 rounded-xl text-neutral-900 font-medium transition-all duration-300 text-sm sm:text-base"
               >
                 Send Message
                 <Send className="w-4 h-4" />
