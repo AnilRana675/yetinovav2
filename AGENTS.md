@@ -134,11 +134,15 @@ const opacity = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
 
 ### WebGL Components
 
-All WebGL components (Aurora, Particles, Squares) use `ogl` and handle context loss:
+All WebGL components (Aurora, Particles, Squares) use `ogl` and handle:
+
+- **Context loss/restoration:** Listen for `webglcontextlost` and `webglcontextrestored` events
+- **Graceful fallback:** Try-catch around `new Renderer()` with CSS gradient fallback when WebGL unavailable
 
 ```typescript
 "use client";
-// Listen for 'webglcontextlost' and 'webglcontextrestored' events
+// Try-catch wrapper around Renderer initialization
+// State tracks webglAvailable for conditional fallback rendering
 ```
 
 ## Section Accent Colors

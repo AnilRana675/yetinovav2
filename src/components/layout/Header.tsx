@@ -1,33 +1,48 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 
 export function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
-  const [lastScrollY, setLastScrollY] = useState(0);
+  const lastScrollY = useRef(0);
+  const lastScrollTime = useRef(0);
 
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
+      const now = Date.now();
+
       setIsScrolled(currentScrollY > 50);
 
-      if (currentScrollY < 100) {
-        setIsVisible(true);
-      } else if (currentScrollY > lastScrollY) {
-        setIsVisible(false);
-      } else {
-        setIsVisible(true);
+      // Only update visibility if enough time has passed (debounce)
+      if (now - lastScrollTime.current > 100) {
+        setIsVisible(() => {
+          // Always show when near top
+          if (currentScrollY < 100) {
+            return true;
+          }
+
+          // Hide when scrolling down, show when scrolling up
+          if (currentScrollY > lastScrollY.current) {
+            return false;
+          }
+
+          return true;
+        });
+
+        lastScrollTime.current = now;
       }
 
-      setLastScrollY(currentScrollY);
+      lastScrollY.current = currentScrollY;
     };
+
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [lastScrollY]);
+  }, []);
 
   useEffect(() => {
     if (isMobileMenuOpen) {

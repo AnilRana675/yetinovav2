@@ -1,15 +1,21 @@
 "use client";
 
 import { Mail, MapPin, Phone, Send } from "lucide-react";
-
+import { BlurGradient } from "@/components/ui/blurGradient";
 export function Footer() {
   return (
     <footer
       id="contact"
-      className="bg-black py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8 xl:px-32 border-t border-white/5"
+      className="relative bg-black py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8 xl:px-32 border-t border-white/5 overflow-visible"
       style={{ "--accent-color": "#7cff67" } as React.CSSProperties}
     >
-      <div className="max-w-7xl mx-auto">
+      <BlurGradient
+        colorStops={["#5227FF", "#7cff67", "#606FCC"]}
+        speed="slow"
+        opacity={0.4}
+        className="inset-0"
+      />
+      <div className="max-w-7xl mx-auto relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 sm:gap-16 lg:gap-16 mb-12 sm:mb-20">
           <div>
             <h2 className="font-serif text-2xl sm:text-4xl md:text-5xl text-white mb-3 sm:mb-4">
