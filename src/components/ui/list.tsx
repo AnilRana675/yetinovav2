@@ -3,7 +3,7 @@ import { cn } from "@/lib/utils";
 
 const List = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
   ({ className, ...props }, ref) => (
-    <div ref={ref} className={cn("flex flex-col gap-4", className)} {...props} />
+    <div ref={ref} className={cn("flex flex-col gap-3", className)} {...props} />
   )
 );
 List.displayName = "List";
@@ -13,7 +13,7 @@ const ListItem = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivEl
     <div
       ref={ref}
       className={cn(
-        "rounded-[20px] border border-[#222] bg-black hover:bg-white transition-all duration-300 cursor-pointer overflow-hidden",
+        "rounded-2xl border border-[#222] bg-black hover:bg-white transition-all duration-300 cursor-pointer overflow-hidden",
         className
       )}
       {...props}
@@ -26,7 +26,7 @@ const ListItemContent = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HT
   ({ className, ...props }, ref) => (
     <div
       ref={ref}
-      className={cn("h-[121px] flex items-center justify-between px-6", className)}
+      className={cn("h-24 flex items-center justify-between px-4", className)}
       {...props}
     />
   )
