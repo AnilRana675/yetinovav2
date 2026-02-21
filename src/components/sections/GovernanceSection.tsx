@@ -30,7 +30,7 @@ export function GovernanceSection() {
   return (
     <section
       id="governance"
-      className="relative bg-[#f9f8f6] py-16 sm:py-24 lg:py-32 px-4 sm:px-6 lg:px-8 xl:px-32 overflow-hidden"
+      className="relative bg-background-light py-16 sm:py-24 lg:py-32 px-4 sm:px-6 lg:px-8 xl:px-32 overflow-hidden"
       style={{ "--accent-color": "#7DDC4D" } as React.CSSProperties}
     >
       <div className="max-w-7xl mx-auto">
@@ -61,7 +61,7 @@ export function GovernanceSection() {
 
         <div className="mt-10 sm:mt-16 p-4 sm:p-6 md:p-8 rounded-xl sm:rounded-2xl bg-neutral-100 border border-neutral-200">
           <div className="flex flex-col sm:flex-row items-start gap-4 sm:gap-6">
-            <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-white border border-neutral-200 flex items-center justify-center flex-shrink-0">
+            <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-white border border-neutral-200 flex items-center justify-center shrink-0">
               <span className="text-xl sm:text-2xl font-serif text-neutral-400">®</span>
             </div>
             <div>

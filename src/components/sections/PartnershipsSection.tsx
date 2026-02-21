@@ -57,8 +57,8 @@ function DesktopLayout() {
       <div className="hidden md:block absolute -right-[100px] sm:-right-[150px] lg:-right-[200px] inset-y-0 h-full w-[150vh] opacity-60 pointer-events-none origin-center rotate-90">
         <Aurora amplitude={0.8} blend={0.4} speed={0.3} />
       </div>
-      <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-black to-transparent pointer-events-none z-10" />
-      <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-black to-transparent pointer-events-none z-10" />
+      <div className="absolute inset-x-0 top-0 h-32 bg-linear-to-b from-black to-transparent pointer-events-none z-10" />
+      <div className="absolute inset-x-0 bottom-0 h-32 bg-linear-to-t from-black to-transparent pointer-events-none z-10" />
 
       <div className="max-w-[1200px] mx-auto relative z-10">
         <div className="mb-10 sm:mb-16 animate-fade-in opacity-0 [--animation-delay:0ms]">
@@ -119,8 +119,8 @@ function MobileLayout() {
         opacity={0.4}
         className="inset-0"
       />
-      <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-black to-transparent pointer-events-none z-10" />
-      <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-black to-transparent pointer-events-none z-10" />
+      <div className="absolute inset-x-0 top-0 h-32 bg-linear-to-b from-black to-transparent pointer-events-none z-10" />
+      <div className="absolute inset-x-0 bottom-0 h-32 bg-linear-to-t from-black to-transparent pointer-events-none z-10" />
 
       <div className="max-w-[1200px] mx-auto relative z-10">
         <div className="mb-10 animate-fade-in opacity-0 [--animation-delay:0ms]">

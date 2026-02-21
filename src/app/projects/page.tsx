@@ -31,12 +31,12 @@ const VENTURES = [
 
 export default function ProjectsPage() {
   return (
-    <div className="min-h-screen bg-black text-neutral-text selection:bg-[var(--accent-color)] selection:text-black">
+    <div className="min-h-screen bg-black text-neutral-text selection:bg-(--accent-color) selection:text-black">
       <Header />
       <main className="pt-24 sm:pt-32 pb-16 sm:pb-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-16">
           <div className="mb-16 sm:mb-24">
-            <p className="text-xs sm:text-sm font-mono font-bold tracking-widest uppercase text-[var(--accent-color)] mb-4 sm:mb-6">
+            <p className="text-xs sm:text-sm font-mono font-bold tracking-widest uppercase text-(--accent-color) mb-4 sm:mb-6">
               Projects
             </p>
             <h1 className="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-white mb-6 sm:mb-8">
@@ -49,7 +49,7 @@ export default function ProjectsPage() {
           </div>
 
           <div className="mb-8 sm:mb-12">
-            <p className="text-xs sm:text-sm font-mono font-bold tracking-widest uppercase text-[var(--accent-color)] mb-2 sm:mb-3">
+            <p className="text-xs sm:text-sm font-mono font-bold tracking-widest uppercase text-(--accent-color) mb-2 sm:mb-3">
               Currently Backing
             </p>
             <p className="text-sm sm:text-base text-neutral-500 font-light">
@@ -76,11 +76,11 @@ export default function ProjectsPage() {
                   </span>
                 </div>
 
-                <h2 className="font-serif text-xl sm:text-2xl text-white mb-2 group-hover:text-[var(--accent-color)] transition-colors duration-300">
+                <h2 className="font-serif text-xl sm:text-2xl text-white mb-2 group-hover:text-(--accent-color) transition-colors duration-300">
                   {venture.name}
                 </h2>
 
-                <p className="text-xs sm:text-sm font-medium uppercase tracking-wider text-[var(--accent-color)] mb-4">
+                <p className="text-xs sm:text-sm font-medium uppercase tracking-wider text-(--accent-color) mb-4">
                   {venture.category}
                 </p>
 
@@ -89,7 +89,7 @@ export default function ProjectsPage() {
                 </p>
 
                 <div className="absolute bottom-6 sm:bottom-8 right-6 sm:right-8 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <span className="text-xs font-mono text-[var(--accent-color)] uppercase tracking-wider">
+                  <span className="text-xs font-mono text-(--accent-color) uppercase tracking-wider">
                     View Details &rarr;
                   </span>
                 </div>
