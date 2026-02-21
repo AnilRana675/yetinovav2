@@ -2,24 +2,28 @@
 
 ## Project Overview
 
-Next.js 16+ with React 19, TypeScript, Tailwind CSS v4, and shadcn/ui.
+Next.js 16+ with React 19, TypeScript, Tailwind CSS v4, and shadcn/ui. Uses Biome for linting/formatting (not ESLint/Prettier).
 
 ## Build Commands
 
 ```bash
-npm run dev          # Start dev server
+npm run dev          # Start dev server (localhost:3000)
 npm run build        # Production build
 npm run start        # Start production server
-npm run lint         # Check lint errors with Biome
-npm run lint:fix     # Auto-fix lint errors with Biome
+npm run lint         # Check lint errors (Biome)
+npm run lint:fix     # Auto-fix lint errors (Biome --unsafe)
 npm run typecheck    # TypeScript check (no emit)
-npm run format       # Format with Biome
+npm run format       # Format code (Biome)
 npm run check        # Lint + format in one command (Biome)
 ```
 
-**Testing:** No tests currently configured. When adding tests:
-- Unit tests: `npm run test -- path/to/test.ts` (single file)
-- Configure Vitest or Jest before writing tests
+**Testing:** No tests currently configured. When adding tests, configure Vitest or Jest first.
+
+**Git Hooks (Husky):**
+- **pre-commit**: Runs `lint-staged` on staged *.ts, *.tsx, *.json files
+  - `biome check --write` (format + lint)
+  - `tsc --noEmit` (type check)
+- **commit-msg**: Enforces conventional commits via commitlint
 
 ## Code Style
 
@@ -63,6 +67,17 @@ Configuration in `biome.json`:
 - **Formatter:** Double quotes, semicolons, 2-space indent, line width 100, trailing commas ES5
 - **Linter:** Recommended + a11y + React hooks + security + style rules
 - **Key rules:** `noUnusedVariables: error`, `useImportType: error`, `noArrayIndexKey: warn`
+- **Additional rules:** `noExplicitAny: warn`, `noDoubleEquals: error`, `useExhaustiveDependencies: warn`
+
+**Type-Only Imports (CRITICAL):**
+```typescript
+// ✅ Correct - enforced by useImportType rule
+import type { Metadata } from "next";
+import type { LucideIcon } from "lucide-react";
+
+// ❌ Wrong - will cause lint error
+import { Metadata } from "next";
+```
 
 ## React Patterns
 
@@ -156,17 +171,41 @@ const CHECKLIST_ITEMS = [
 ```
 src/
   app/              # Next.js App Router
+    api/            # API routes (contact form)
     globals.css     # Tailwind v4 config
     layout.tsx      # Root layout
     page.tsx        # Home page
   components/
     ui/             # shadcn/ui components (Button, Card, etc.)
     sections/       # Page sections (Hero, Join, etc.)
+      hero/         # Complex sections split into multiple files
     layout/         # Header, Footer
+    emails/         # React Email templates
+  hooks/            # Custom hooks (useMediaQuery)
   lib/
     utils.ts        # cn(), hexToRgb()
+    rate-limit.ts   # API rate limiting
+    validations/    # Zod schemas
 public/
   images/           # Image assets
+```
+
+## API Route Patterns
+
+API routes use Zod validation + rate limiting + error handling:
+
+```typescript
+// Rate limiting (from lib/rate-limit.ts)
+import { checkRateLimit } from "@/lib/rate-limit";
+const identifier = request.headers.get("x-forwarded-for") || "anonymous";
+const { success } = await checkRateLimit(identifier);
+
+// Zod validation (from lib/validations/contact.ts)
+import { contactFormSchema } from "@/lib/validations/contact";
+const validatedData = contactFormSchema.parse(data);
+
+// Error responses
+return Response.json({ error: "Message" }, { status: 400 });
 ```
 
 ## Key Dependencies
