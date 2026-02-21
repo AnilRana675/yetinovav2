@@ -1,23 +1,8 @@
 import { GeistMono } from "geist/font/mono";
 import type { Metadata } from "next";
-import { Instrument_Sans, Manrope } from "next/font/google";
 import "material-symbols/outlined.css";
 import { Toaster } from "sonner";
 import "./globals.css";
-
-const manrope = Manrope({
-  subsets: ["latin"],
-  variable: "--font-manrope",
-  display: "swap",
-  preload: false,
-});
-
-const instrumentSans = Instrument_Sans({
-  subsets: ["latin"],
-  variable: "--font-instrument-sans",
-  display: "swap",
-  preload: false,
-});
 
 const SITE_URL = "https://yetinova.com";
 
@@ -72,11 +57,11 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`dark ${GeistMono.variable} ${manrope.variable} ${instrumentSans.variable}`}
+      className={`dark ${GeistMono.variable}`}
       style={{ "--accent-color": "#606FCC" } as React.CSSProperties}
     >
       <body
-        className={`antialiased bg-black text-neutral-text font-sans selection:bg-[var(--accent-color)] selection:text-black transition-colors duration-500`}
+        className={`antialiased bg-black text-neutral-text font-sans selection:bg-(--accent-color) selection:text-black transition-colors duration-500`}
       >
         {children}
         <Toaster richColors position="bottom-right" />

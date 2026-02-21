@@ -3,6 +3,7 @@
 import { ChevronDown, Loader2, Mail, MapPin, Phone, Send } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { toast } from "sonner";
+import { BlurGradient } from "@/components/ui/blurGradient";
 
 import type { InquiryType } from "@/lib/validations/contact";
 
@@ -121,10 +122,16 @@ export function Footer() {
   return (
     <footer
       id="contact"
-      className="bg-black py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8 xl:px-32 border-t border-white/5"
+      className="relative bg-black py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8 xl:px-32 border-t border-white/5 overflow-visible"
       style={{ "--accent-color": "#7cff67" } as React.CSSProperties}
     >
-      <div className="max-w-7xl mx-auto">
+      <BlurGradient
+        colorStops={["#5227FF", "#7cff67", "#606FCC"]}
+        speed="slow"
+        opacity={0.4}
+        className="inset-0"
+      />
+      <div className="max-w-7xl mx-auto relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 sm:gap-16 lg:gap-16 mb-12 sm:mb-20">
           <div>
             <h2 className="font-serif text-2xl sm:text-4xl md:text-5xl text-white mb-3 sm:mb-4">
@@ -137,8 +144,8 @@ export function Footer() {
 
             <div className="space-y-4 sm:space-y-6">
               <div className="flex items-center gap-3 sm:gap-4">
-                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-[var(--accent-color)]/10 border border-[var(--accent-color)]/20 flex items-center justify-center flex-shrink-0">
-                  <Mail className="w-4 h-4 sm:w-5 sm:h-5 text-[var(--accent-color)]" />
+                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-(--accent-color)/10 border border-(--accent-color)/20 flex items-center justify-center shrink-0">
+                  <Mail className="w-4 h-4 sm:w-5 sm:h-5 text-(--accent-color)" />
                 </div>
                 <div>
                   <p className="text-xs text-neutral-text-muted uppercase tracking-wider">Email</p>
@@ -147,8 +154,8 @@ export function Footer() {
               </div>
 
               <div className="flex items-center gap-3 sm:gap-4">
-                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-[var(--accent-color)]/10 border border-[var(--accent-color)]/20 flex items-center justify-center flex-shrink-0">
-                  <Phone className="w-4 h-4 sm:w-5 sm:h-5 text-[var(--accent-color)]" />
+                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-(--accent-color)/10 border border-(--accent-color)/20 flex items-center justify-center shrink-0">
+                  <Phone className="w-4 h-4 sm:w-5 sm:h-5 text-(--accent-color)" />
                 </div>
                 <div>
                   <p className="text-xs text-neutral-text-muted uppercase tracking-wider">Phone</p>
@@ -157,8 +164,8 @@ export function Footer() {
               </div>
 
               <div className="flex items-center gap-3 sm:gap-4">
-                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-[var(--accent-color)]/10 border border-[var(--accent-color)]/20 flex items-center justify-center flex-shrink-0">
-                  <MapPin className="w-4 h-4 sm:w-5 sm:h-5 text-[var(--accent-color)]" />
+                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-(--accent-color)/10 border border-(--accent-color)/20 flex items-center justify-center shrink-0">
+                  <MapPin className="w-4 h-4 sm:w-5 sm:h-5 text-(--accent-color)" />
                 </div>
                 <div>
                   <p className="text-xs text-neutral-text-muted uppercase tracking-wider">
@@ -202,7 +209,7 @@ export function Footer() {
                     required
                     minLength={2}
                     maxLength={100}
-                    className="w-full px-3 sm:px-4 py-2.5 sm:py-3 rounded-xl bg-black/50 border border-white/10 text-white placeholder-neutral-text-muted focus:border-[var(--accent-color)]/50 focus:outline-none transition-all text-sm sm:text-base disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="w-full px-3 sm:px-4 py-2.5 sm:py-3 rounded-xl bg-black/50 border border-white/10 text-white placeholder-neutral-text-muted focus:border-(--accent-color)/50 focus:outline-none transition-all text-sm sm:text-base disabled:opacity-50 disabled:cursor-not-allowed"
                     placeholder="Your name"
                   />
                 </div>
@@ -221,7 +228,7 @@ export function Footer() {
                     onChange={handleInputChange}
                     disabled={isSubmitting}
                     required
-                    className="w-full px-3 sm:px-4 py-2.5 sm:py-3 rounded-xl bg-black/50 border border-white/10 text-white placeholder-neutral-text-muted focus:border-[var(--accent-color)]/50 focus:outline-none transition-all text-sm sm:text-base disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="w-full px-3 sm:px-4 py-2.5 sm:py-3 rounded-xl bg-black/50 border border-white/10 text-white placeholder-neutral-text-muted focus:border-(--accent-color)/50 focus:outline-none transition-all text-sm sm:text-base disabled:opacity-50 disabled:cursor-not-allowed"
                     placeholder="your@email.com"
                   />
                 </div>
@@ -243,7 +250,7 @@ export function Footer() {
                   onClick={() => setIsDropdownOpen(!isDropdownOpen)}
                   className={`w-full flex items-center justify-between px-3 sm:px-4 py-2.5 sm:py-3 rounded-xl border transition-all text-sm sm:text-base disabled:opacity-50 disabled:cursor-not-allowed text-left ${
                     isDropdownOpen
-                      ? "bg-black/80 border-[var(--accent-color)]/50 text-white shadow-[0_0_15px_rgba(124,255,103,0.1)]"
+                      ? "bg-black/80 border-(--accent-color)/50 text-white shadow-[0_0_15px_rgba(124,255,103,0.1)]"
                       : "bg-black/50 border-white/10 text-white hover:border-white/20"
                   }`}
                 >
@@ -256,7 +263,7 @@ export function Footer() {
                   </span>
                   <ChevronDown
                     className={`w-4 h-4 sm:w-5 sm:h-5 text-neutral-text-muted transition-transform duration-300 ${
-                      isDropdownOpen ? "rotate-180 text-[var(--accent-color)]" : ""
+                      isDropdownOpen ? "rotate-180 text-(--accent-color)" : ""
                     }`}
                   />
                 </button>
@@ -271,7 +278,7 @@ export function Footer() {
                         onClick={() => handleSelectChange(option.value)}
                         className={`w-full text-left px-4 py-2.5 text-sm sm:text-base transition-colors ${
                           formState.inquiryType === option.value
-                            ? "bg-[var(--accent-color)]/10 text-[var(--accent-color)]"
+                            ? "bg-(--accent-color)/10 text-(--accent-color)"
                             : "text-neutral-300 hover:bg-white/5 hover:text-white"
                         }`}
                       >
@@ -307,7 +314,7 @@ export function Footer() {
                   required
                   minLength={10}
                   maxLength={2000}
-                  className="w-full min-h-[100px] px-3 sm:px-4 py-2.5 sm:py-3 rounded-xl bg-black/50 border border-white/10 text-white placeholder-neutral-text-muted focus:border-[var(--accent-color)]/50 focus:outline-none transition-all resize-none text-sm sm:text-base disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="w-full min-h-[100px] px-3 sm:px-4 py-2.5 sm:py-3 rounded-xl bg-black/50 border border-white/10 text-white placeholder-neutral-text-muted focus:border-(--accent-color)/50 focus:outline-none transition-all resize-none text-sm sm:text-base disabled:opacity-50 disabled:cursor-not-allowed"
                   placeholder="Tell us about your idea or inquiry..."
                 />
               </div>
@@ -315,7 +322,7 @@ export function Footer() {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-4 bg-[var(--accent-color)] hover:bg-[#25A84D] rounded-xl text-white font-medium transition-all duration-300 text-sm sm:text-base disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-4 bg-(--accent-color) hover:bg-[#25A84D] rounded-xl text-white font-medium transition-all duration-300 text-sm sm:text-base disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {isSubmitting ? (
                   <>
@@ -336,7 +343,7 @@ export function Footer() {
         <div className="pt-6 sm:pt-8 border-t border-white/10">
           <div className="flex flex-col md:flex-row items-start md:items-center gap-4 sm:gap-8 mb-6 sm:mb-8">
             <div className="flex items-center gap-2 sm:gap-3">
-              <div className="w-2 h-2 bg-[var(--accent-color)] rounded-full" />
+              <div className="w-2 h-2 bg-(--accent-color) rounded-full" />
               <span className="text-base sm:text-lg font-serif tracking-tight text-white">
                 YetiNova
               </span>

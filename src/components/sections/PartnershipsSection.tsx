@@ -3,7 +3,9 @@
 import { ArrowRight } from "lucide-react";
 import dynamic from "next/dynamic";
 import { Button } from "@/components/ui/Button";
+import { BlurGradient } from "@/components/ui/blurGradient";
 import { List, ListItem, ListItemContent } from "@/components/ui/list";
+import { useMediaQuery } from "@/hooks/useMediaQuery";
 
 const Aurora = dynamic(() => import("@/components/ui/aurora/Aurora"), {
   ssr: false,
@@ -41,13 +43,9 @@ const PARTNERSHIP_TYPES = [
   },
 ];
 
-export function PartnershipsSection() {
+function DesktopLayout() {
   return (
-    <section
-      id="partnerships"
-      className="relative bg-black py-16 sm:py-24 lg:py-32 px-4 sm:px-6 lg:px-8 xl:px-32 overflow-hidden"
-    >
-      {/* Aurora Background - Desktop */}
+    <>
       <div className="hidden md:block absolute -left-[100px] sm:-left-[150px] lg:-left-[200px] inset-y-0 h-full w-[150vh] opacity-60 pointer-events-none origin-center -rotate-90">
         <Aurora
           colorStops={["#7cff67", "#5227FF", "#ffffff"]}
@@ -59,18 +57,9 @@ export function PartnershipsSection() {
       <div className="hidden md:block absolute -right-[100px] sm:-right-[150px] lg:-right-[200px] inset-y-0 h-full w-[150vh] opacity-60 pointer-events-none origin-center rotate-90">
         <Aurora amplitude={0.8} blend={0.4} speed={0.3} />
       </div>
-
-      {/* Aurora Background - Mobile (fit within section) */}
-      <div className="md:hidden absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[200%] aspect-square opacity-30 pointer-events-none">
-        <Aurora
-          colorStops={["#7cff67", "#5227FF", "#ffffff"]}
-          amplitude={0.6}
-          blend={0.4}
-          speed={0.3}
-        />
-      </div>
       <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-black to-transparent pointer-events-none z-10" />
       <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-black to-transparent pointer-events-none z-10" />
+
       <div className="max-w-[1200px] mx-auto relative z-10">
         <div className="mb-10 sm:mb-16 animate-fade-in opacity-0 [--animation-delay:0ms]">
           <h2 className="font-serif font-normal text-white text-2xl sm:text-4xl md:text-5xl lg:text-6xl tracking-[0] leading-normal mb-4">
@@ -117,6 +106,77 @@ export function PartnershipsSection() {
           </Button>
         </div>
       </div>
+    </>
+  );
+}
+
+function MobileLayout() {
+  return (
+    <>
+      <BlurGradient
+        colorStops={["#5227FF", "#7cff67", "#606FCC"]}
+        speed="slow"
+        opacity={0.4}
+        className="inset-0"
+      />
+      <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-black to-transparent pointer-events-none z-10" />
+      <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-black to-transparent pointer-events-none z-10" />
+
+      <div className="max-w-[1200px] mx-auto relative z-10">
+        <div className="mb-10 animate-fade-in opacity-0 [--animation-delay:0ms]">
+          <h2 className="font-serif font-normal text-white text-2xl sm:text-4xl tracking-[0] leading-normal mb-4">
+            Don&apos;t Just Fund. Fuel.
+          </h2>
+          <p className="font-sans font-normal text-[#666060] text-lg tracking-[0] leading-normal">
+            Partner with us to deploy capital into high-growth ventures and national infrastructure.
+          </p>
+        </div>
+
+        <div className="space-y-4">
+          {PARTNERSHIP_TYPES.map((partnership, index) => (
+            <div
+              key={partnership.id}
+              className={`animate-fade-in opacity-0 [--animation-delay:${
+                200 + index * 150
+              }ms] p-4 rounded-lg border border-white/10 bg-white/5 hover:bg-white/10 transition-colors`}
+            >
+              <div className="flex items-start justify-between mb-2">
+                <h3 className="font-serif font-bold text-[#dcdcdc] text-base tracking-[0] leading-tight whitespace-pre-line">
+                  {partnership.category}
+                </h3>
+                <div className="font-serif font-black text-[#315434] text-base tracking-[0] leading-tight">
+                  {partnership.romanNumeral}
+                </div>
+              </div>
+              <p className="font-sans font-normal text-white text-sm tracking-[0] leading-[18px]">
+                {partnership.description}
+              </p>
+            </div>
+          ))}
+        </div>
+
+        <div className="mt-10 text-center animate-fade-in opacity-0 [--animation-delay:800ms]">
+          <Button asChild variant="brand" size="pill" className="group transition-all duration-300">
+            <a href="#contact">
+              Become a Partner
+              <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </a>
+          </Button>
+        </div>
+      </div>
+    </>
+  );
+}
+
+export function PartnershipsSection() {
+  const isMobile = useMediaQuery("(max-width: 768px)");
+
+  return (
+    <section
+      id="partnerships"
+      className="relative bg-black py-16 sm:py-24 lg:py-32 px-4 sm:px-6 lg:px-8 xl:px-32 overflow-hidden"
+    >
+      {isMobile ? <MobileLayout /> : <DesktopLayout />}
     </section>
   );
 }
