@@ -1,10 +1,20 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 
+const NAV_LINKS = [
+  { href: "#manifesto", label: "Manifesto" },
+  { href: "/projects", label: "Ventures" },
+  { href: "#ecosystem", label: "Ecosystem" },
+  { href: "/news", label: "News" },
+  { href: "/resources", label: "Resources" },
+];
+
 export function Header() {
+  const pathname = usePathname();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
@@ -81,16 +91,25 @@ export function Header() {
             </Link>
           </div>
 
-          <div className="hidden md:flex gap-6 lg:gap-10 text-sm font-light tracking-wide text-white/70">
-            <Link href="#manifesto" className="hover:text-white transition-colors duration-300">
-              Manifesto
-            </Link>
-            <Link href="/projects" className="hover:text-white transition-colors duration-300">
-              Ventures
-            </Link>
-            <Link href="#ecosystem" className="hover:text-white transition-colors duration-300">
-              Ecosystem
-            </Link>
+          <div className="hidden md:flex gap-6 lg:gap-10 text-sm font-light tracking-wide">
+            {NAV_LINKS.map((link) => {
+              const isActive = link.href.startsWith("#")
+                ? pathname === "/"
+                : pathname === link.href || pathname.startsWith(`${link.href}/`);
+
+              return (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className={cn(
+                    "transition-colors duration-300",
+                    isActive ? "text-white" : "text-white/70 hover:text-white"
+                  )}
+                >
+                  {link.label}
+                </Link>
+              );
+            })}
           </div>
 
           <div className="hidden md:block">
@@ -118,33 +137,31 @@ export function Header() {
 
       {isMobileMenuOpen && (
         <div
-          className="fixed inset-0 bg-black/98 backdrop-blur-xl z-40 flex flex-col items-center justify-center gap-6 md:hidden"
+          className="fixed inset-0 bg-black/98 backdrop-blur-xl z-40 flex flex-col items-center justify-center gap-4 md:hidden"
           style={{
             paddingTop: "env(safe-area-inset-top)",
             paddingBottom: "env(safe-area-inset-bottom)",
           }}
         >
-          <Link
-            href="#manifesto"
-            className="text-xl sm:text-2xl font-serif text-white py-3 px-6 hover:bg-white/5 rounded-xl transition-colors active:scale-95 min-w-[160px] sm:min-w-[200px] text-center"
-            onClick={() => setIsMobileMenuOpen(false)}
-          >
-            Manifesto
-          </Link>
-          <Link
-            href="#ventures"
-            className="text-xl sm:text-2xl font-serif text-white py-3 px-6 hover:bg-white/5 rounded-xl transition-colors active:scale-95 min-w-[160px] sm:min-w-[200px] text-center"
-            onClick={() => setIsMobileMenuOpen(false)}
-          >
-            Ventures
-          </Link>
-          <Link
-            href="#ecosystem"
-            className="text-xl sm:text-2xl font-serif text-white py-3 px-6 hover:bg-white/5 rounded-xl transition-colors active:scale-95 min-w-[160px] sm:min-w-[200px] text-center"
-            onClick={() => setIsMobileMenuOpen(false)}
-          >
-            Ecosystem
-          </Link>
+          {NAV_LINKS.map((link) => {
+            const isActive = link.href.startsWith("#")
+              ? pathname === "/"
+              : pathname === link.href || pathname.startsWith(`${link.href}/`);
+
+            return (
+              <Link
+                key={link.href}
+                href={link.href}
+                className={cn(
+                  "text-xl sm:text-2xl font-serif py-3 px-6 hover:bg-white/5 rounded-xl transition-colors active:scale-95 min-w-[160px] sm:min-w-[200px] text-center",
+                  isActive ? "text-white" : "text-white/70"
+                )}
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                {link.label}
+              </Link>
+            );
+          })}
           <Link
             href="#contact"
             className="text-sm uppercase tracking-widest text-white border border-white/20 px-8 py-4 rounded-full hover:bg-white hover:text-black transition-all duration-300 mt-4 active:scale-95"

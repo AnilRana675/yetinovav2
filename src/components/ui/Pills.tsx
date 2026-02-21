@@ -55,6 +55,17 @@ export function CurrentlyBacking() {
           href="/projects/agroconnect"
         />
       </div>
+
+      <span className="text-xs sm:text-sm font-sans font-medium tracking-wider uppercase text-neutral text-center mt-2">
+        Yetinova is backed by:
+      </span>
+      <ProjectPill
+        initials="WMI"
+        bgColor="rgba(96,111,204,0.3)"
+        projectName="WMI"
+        category="Accelerator"
+        href="/backing/wmi"
+      />
     </div>
   );
 }

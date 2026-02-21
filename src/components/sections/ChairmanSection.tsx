@@ -2,27 +2,32 @@
 
 import { Lightbulb, Network } from "lucide-react";
 import Image from "next/image";
+import { useState } from "react";
 
 export function ChairmanSection() {
+  const [imageError, setImageError] = useState(false);
+
   return (
     <section id="about" style={{ "--accent-color": "#6B9EAA" } as React.CSSProperties}>
       <div className="max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-center">
         {/* Left Column - Image */}
-        <div className="relative aspect-3/4 w-full max-w-md mx-auto lg:max-w-none">
+        <div className="relative aspect-square w-full max-w-md mx-auto lg:max-w-none">
           {/* Placeholder for Chairman image - adapting to dark mode aesthetic */}
           <div className="absolute inset-0 bg-neutral-900 rounded-sm overflow-hidden">
-            <div className="w-full h-full bg-linear-to-br from-neutral-800 to-black flex items-center justify-center text-neutral-700 font-mono text-xs tracking-widest uppercase">
-              Chairman Portrait Placeholder
-            </div>
-            {
+            {imageError ? (
+              <div className="w-full h-full bg-linear-to-br from-neutral-800 to-black flex items-center justify-center text-neutral-700 font-mono text-xs tracking-widest uppercase">
+                Chairman Portrait Placeholder
+              </div>
+            ) : (
               <Image
                 src="/images/chairman.avif"
                 alt="Basudev P. Gautam"
                 fill
                 sizes="(max-width: 1024px) 448px, 50vw"
                 className="object-cover"
+                onError={() => setImageError(true)}
               />
-            }
+            )}
           </div>
         </div>
 
