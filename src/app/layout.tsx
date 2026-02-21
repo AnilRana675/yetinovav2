@@ -2,6 +2,7 @@ import { GeistMono } from "geist/font/mono";
 import type { Metadata } from "next";
 import { Instrument_Sans, Manrope } from "next/font/google";
 import "material-symbols/outlined.css";
+import { Toaster } from "sonner";
 import "./globals.css";
 
 const manrope = Manrope({
@@ -78,6 +79,7 @@ export default function RootLayout({
         className={`antialiased bg-black text-neutral-text font-sans selection:bg-[var(--accent-color)] selection:text-black transition-colors duration-500`}
       >
         {children}
+        <Toaster richColors position="bottom-right" />
       </body>
     </html>
   );

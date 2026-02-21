@@ -18,15 +18,15 @@ interface FormState {
   email: string;
   inquiryType: string;
   message: string;
-  honeypot: string;
+  websiteUrl: string;
 }
 
 const INITIAL_FORM_STATE: FormState = {
   name: "",
   email: "",
-  inquiryType: "general", // Default to prevent validation errors; users can change via dropdown
+  inquiryType: "",
   message: "",
-  honeypot: "",
+  websiteUrl: "",
 };
 
 export function Footer() {
@@ -60,6 +60,13 @@ export function Footer() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
+    if (!formState.inquiryType) {
+      toast.error("Validation error", {
+        description: "Please select an inquiry type.",
+      });
+      return;
+    }
+
     if (isSubmitting) return;
 
     setIsSubmitting(true);
@@ -73,7 +80,7 @@ export function Footer() {
           email: formState.email,
           inquiryType: formState.inquiryType,
           message: formState.message,
-          honeypot: formState.honeypot,
+          websiteUrl: formState.websiteUrl,
         }),
       });
 
@@ -166,10 +173,11 @@ export function Footer() {
           <div className="p-4 sm:p-6 lg:p-8 rounded-2xl sm:rounded-3xl border border-white/10 bg-surface-dark/30">
             <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
               <input
+                id="contact-websiteUrl"
                 type="text"
-                name="honeypot"
-                value={formState.honeypot}
-                onChange={(e) => setFormState((prev) => ({ ...prev, honeypot: e.target.value }))}
+                name="websiteUrl"
+                value={formState.websiteUrl || ""}
+                onChange={handleInputChange}
                 className="absolute -left-[9999px]"
                 tabIndex={-1}
                 autoComplete="off"
@@ -188,7 +196,7 @@ export function Footer() {
                     id="contact-name"
                     name="name"
                     type="text"
-                    value={formState.name}
+                    value={formState.name || ""}
                     onChange={handleInputChange}
                     disabled={isSubmitting}
                     required
@@ -209,7 +217,7 @@ export function Footer() {
                     id="contact-email"
                     name="email"
                     type="email"
-                    value={formState.email}
+                    value={formState.email || ""}
                     onChange={handleInputChange}
                     disabled={isSubmitting}
                     required
@@ -274,7 +282,12 @@ export function Footer() {
                 )}
 
                 {/* Hidden input for form submission if needed by traditional form handlers */}
-                <input type="hidden" name="inquiryType" value={formState.inquiryType} required />
+                <input
+                  type="hidden"
+                  name="inquiryType"
+                  value={formState.inquiryType || ""}
+                  required
+                />
               </div>
 
               <div>
@@ -288,7 +301,7 @@ export function Footer() {
                   id="contact-message"
                   name="message"
                   rows={4}
-                  value={formState.message}
+                  value={formState.message || ""}
                   onChange={handleInputChange}
                   disabled={isSubmitting}
                   required
