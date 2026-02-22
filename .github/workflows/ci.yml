@@ -93,6 +93,14 @@ jobs:
                 per_page: 100
               });
 
+              core.info(
+                `Deployments found: ${JSON.stringify(
+                  deployments.map((d) => ({ id: d.id, environment: d.environment, sha: d.sha, created_at: d.created_at })),
+                  null,
+                  2
+                )}`
+              );
+
               if (deployments.length > 0) {
                 const deploymentId = deployments[0].id;
                 const { data: statuses } = await github.rest.repos.listDeploymentStatuses({
@@ -102,8 +110,26 @@ jobs:
                   per_page: 100
                 });
 
+                if (statuses.length > 0) {
+                  core.info(
+                    `Deployment statuses: ${JSON.stringify(
+                      statuses.map((s) => ({ id: s.id, state: s.state, environment_url: s.environment_url, target_url: s.target_url, description: s.description })),
+                      null,
+                      2
+                    )}`
+                  );
+                }
+
+                // Vercel usually sets environment_url; target_url is a fallback used by some
+                // older integrations. The description field occasionally contains the preview
+                // URL when both URL fields are empty (observed with some Vercel bot versions).
+                // The regex ensures only *.vercel.app HTTPS URLs are accepted from description.
+                const VERCEL_URL_RE = /^https:\/\/[^/]+\.vercel\.app(\/.*)?$/;
                 const success = statuses.find((status) => status.state === "success");
-                const url = success?.environment_url || success?.target_url;
+                const url =
+                  success?.environment_url ||
+                  success?.target_url ||
+                  (VERCEL_URL_RE.test(success?.description ?? "") ? success.description : null);
 
                 if (url) {
                   core.info(`Found Vercel preview: ${url}`);
