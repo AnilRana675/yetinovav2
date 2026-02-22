@@ -1,6 +1,6 @@
 # Agent Guidelines for YetiNova V2
 
-Next.js 16+ with React 19, TypeScript, Tailwind CSS v4, shadcn/ui. Uses Biome for linting/formatting.
+Next.js 16+ with React 19, TypeScript, Tailwind CSS v4, shadcn/ui. Biome for lint/format, Vitest for tests.
 
 ## Build Commands
 
@@ -21,17 +21,17 @@ npx vitest run src/path/to/test.ts  # Single test file
 
 ## Git Hooks
 
-- **pre-commit:** Runs lint-staged (biome check + tsc --noEmit on staged files)
-- **commit-msg:** Runs commitlint (enforces conventional commits)
-- **pre-push:** Runs `npm run lint`
+- **pre-commit:** lint-staged (biome check + tsc --noEmit on staged files)
+- **commit-msg:** commitlint (conventional commits)
+- **pre-push:** `npm run lint`
 
 ## Code Style
 
-**TypeScript:** Strict mode - must pass `tsc --noEmit`. Use explicit types, prefer `interface` for objects, `type` for unions. Avoid `any` - use `unknown` with type guards.
+**TypeScript:** Strict mode. Prefer `interface` for objects, `type` for unions. Avoid `any`; use `unknown` with type guards.
 
-**Naming:** Components/Files: PascalCase, Utilities: camelCase, Constants: UPPER_SNAKE_CASE, CSS Classes: kebab-case
+**Formatting (Biome):** double quotes, semicolons, 2-space indent, line width 100.
 
-**Biome Config:** double quotes, semicolons, 2-space indent, line width 100. Key rules: `noUnusedVariables: error`, `useImportType: error`, `noDoubleEquals: error`
+**Naming:** Components/Files PascalCase, utilities camelCase, constants UPPER_SNAKE_CASE, CSS classes kebab-case.
 
 **Import Order:**
 ```typescript
@@ -50,47 +50,26 @@ import { Metadata } from "next";        // Wrong - lint error
 
 ## React Patterns
 
-**Client Components:** `"use client"` required for hooks, event handlers, browser APIs, WebGL
-
-**forwardRef:**
-```typescript
-const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant, size, ...props }, ref) => (
-    <button className={cn(buttonVariants({ variant, size, className }))} ref={ref} {...props} />
-  )
-);
-Button.displayName = "Button";
-```
-
-**Props Interface:**
-```typescript
-export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: "default" | "brand";
-  size?: "default" | "xl";
-}
-```
+- Add `"use client"` for hooks, handlers, browser APIs, WebGL.
+- `forwardRef` components must set `displayName`.
+- Use `cn()` for class merging.
 
 ## Component Patterns
 
 **CVA:**
 ```typescript
 const buttonVariants = cva("base-classes", {
-  variants: {
-    variant: { default: "bg-primary", brand: "bg-[#606FCC]" },
-    size: { default: "h-10 px-4", xl: "h-12 px-6" },
-  },
-  defaultVariants: { variant: "default", size: "default" },
+  variants: { variant: { default: "bg-primary" }, size: { default: "h-10" } },
+  defaultVariants: { variant: "default", size: "default" }
 });
 ```
 
-**Constants:** `const CHECKLIST_ITEMS = ["Item one", "Item two"];`
-
 ## Error Handling
 
-- **WebGL/Canvas:** Handle `webglcontextlost`/`webglcontextrestored` events, wrap init in try/catch
-- **Utilities:** Return fallback values with `console.error`
-- **GSAP cleanup:** Silent try/catch (intentional - cleanup may fail)
-- **API Routes:** Use structured error responses with Zod validation
+- **WebGL/Canvas:** handle `webglcontextlost`/`webglcontextrestored`, wrap init in try/catch.
+- **Utilities:** return fallback values with `console.error`.
+- **GSAP cleanup:** silent try/catch (cleanup can fail).
+- **API Routes:** structured error responses with Zod validation.
 
 **API Error Response:**
 ```typescript
@@ -102,87 +81,86 @@ return NextResponse.json(
 
 ## API Routes
 
-```typescript
-import { checkRateLimit } from "@/lib/rate-limit";
-import { contactFormSchema } from "@/lib/validations/contact";
+### Contact Form (/api/contact)
 
-const identifier = request.headers.get("x-forwarded-for") || "anonymous";
-const { success } = await checkRateLimit(identifier);
-if (!success) return NextResponse.json({ error: { code: "rate_limited" } }, { status: 429 });
+- Rate limiting (5 req/min per IP)
+- Zod validation
+- Honeypot bot detection (`websiteUrl` field)
+- Admin email notification via Resend
+- Delayed auto-reply
+- Google Sheets sync (optional)
+- CORS origin validation
 
-const parsed = contactFormSchema.safeParse(body);
-if (!parsed.success) return NextResponse.json({ error: { code: "validation_error" } }, { status: 422 });
-```
+**Email Templates:**
+- `src/components/emails/AdminNotification.tsx`
+- `src/components/emails/UserAutoReply.tsx`
 
 ## Styling
 
-Tailwind CSS v4 in `src/app/globals.css`. Mobile-first: `sm:`, `md:`, `lg:`, `xl:`. Use `cn()` for conditional class merging.
+Tailwind CSS v4 in `src/app/globals.css`. Mobile-first: `sm:`, `md:`, `lg:`, `xl:`.
+
+**Custom CSS Variables:** `--accent-color`, `--font-serif`, `--font-mono`.
 
 ## Animation
 
-**GSAP + ScrollTrigger:**
-```typescript
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useGSAP } from "@gsap/react";
-
-gsap.registerPlugin(ScrollTrigger);
-useGSAP(() => {
-  gsap.to(element, { scrollTrigger: { trigger: element, start: "top 80%", once: true }, opacity: 1, duration: 0.8 });
-}, { scope: ref });
-```
-
-**Motion:**
-```typescript
-import { motion, useScroll, useTransform } from "motion/react";
-const { scrollYProgress } = useScroll();
-const opacity = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
-```
-
-**WebGL:** Requires `"use client"`, context loss handlers, cleanup with `cancelAnimationFrame`. Use `IntersectionObserver` for visibility-based rendering pause.
+- GSAP + ScrollTrigger via `useGSAP`.
+- Motion uses `useScroll` and `useTransform`.
+- WebGL requires `"use client"`, context loss handlers, cleanup with `cancelAnimationFrame`.
 
 ## Testing
 
-```typescript
-import { describe, expect, it, vi } from "vitest";
+- `src/lib/utils.test.ts`
+- `src/lib/rate-limit.test.ts`
+- `src/lib/validations/contact.test.ts`
 
-describe("functionName", () => {
-  it("handles error cases", () => {
-    const consoleSpy = vi.spyOn(console, "error").mockImplementation(() => {});
-    const result = functionName(invalidInput);
-    expect(result).toEqual(fallbackValue);
-    consoleSpy.mockRestore();
-  });
-});
-```
+## Environment Variables
 
-## Section Accent Colors
+| Variable | Purpose |
+|----------|---------|
+| `RESEND_API_KEY` | Resend API key |
+| `RESEND_FROM_EMAIL` | Sender address (default: contact@yetinova.com) |
+| `ADMIN_EMAIL` | Admin notification recipient |
+| `GOOGLE_SCRIPT_URL` | Optional Google Sheets sync |
 
-| Section      | Hex       |
-|--------------|-----------|
-| Hero         | `#606FCC` |
-| Batches      | `#6589C9` |
-| Model        | `#6B9EAA` |
-| Partnerships | `#71B28B` |
-| Join         | `#77C76C` |
-| Governance   | `#7DDC4D` |
-| Footer       | `#7cff67` |
+## Pages
 
-Usage: `<section style={{ "--accent-color": "#6589C9" } as React.CSSProperties}>`
+| Route | Description |
+|-------|-------------|
+| `/` | Homepage with all sections |
+| `/projects` | Venture portfolio listing |
+| `/projects/astrayug` | AstraYug venture details |
+| `/projects/agroconnect` | AgroConnect venture details |
+
+## Venture Pages (Projects)
+
+Ventures live in `src/app/projects/page.tsx` as `VENTURES` and link to `/projects/[slug]`.
+
+**Current ventures:**
+- `w26-astrayug` (AstraYug) — `/projects/astrayug`
+- `w25-agroconnect` (AgroConnect) — `/projects/agroconnect`
+
+**Add a venture:**
+1. Add object to `VENTURES` (unique `slug`, stable `id`).
+2. Create `src/app/projects/<slug>/page.tsx` with `metadata`.
+3. Use `ProjectFooter` on venture pages.
 
 ## Project Structure
 
 ```
-src/app/         # Next.js App Router (api/, globals.css, layout.tsx, page.tsx)
-src/components/  # ui/, sections/, layout/
-src/hooks/       # Custom hooks
-src/lib/         # utils.ts, rate-limit.ts, validations/
+src/
+├── app/                    # App Router
+│   ├── api/contact/        # Contact endpoint
+│   ├── projects/           # Venture pages
+│   ├── globals.css         # Tailwind v4
+│   ├── layout.tsx          # Root layout
+│   └── page.tsx            # Homepage
+├── components/             # UI, sections, layout, emails
+├── hooks/                  # Custom hooks
+├── lib/                    # Utilities, rate limit, validations
+└── test/                   # Vitest setup
 ```
 
 ## Git Workflow
 
-**Conventional Commits:** `type(scope): subject`
-
-Types: `feat`, `fix`, `docs`, `style`, `refactor`, `perf`, `test`, `chore`
-
-**Pre-commit Flow:** `biome check --write` → `tsc --noEmit` on staged files
+Conventional commits: `type(scope): subject`.
+Types: `feat`, `fix`, `docs`, `style`, `refactor`, `perf`, `test`, `chore`.

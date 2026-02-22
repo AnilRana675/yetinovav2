@@ -6,6 +6,12 @@ on:
   pull_request:
     branches: [main]
 
+permissions:
+  contents: read
+  deployments: read
+  checks: write
+  pull-requests: write
+
 jobs:
   ci:
     runs-on: ubuntu-latest
@@ -65,11 +71,57 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Build
-        run: npm run build
+      - name: Wait for Vercel preview
+        id: vercel_preview
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+            const owner = context.repo.owner;
+            const repo = context.repo.repo;
+            const ref = context.sha;
+            const maxAttempts = 24;
+            const delayMs = 10000;
+            const environment = "Preview";
+
+            for (let attempt = 1; attempt <= maxAttempts; attempt += 1) {
+              const { data: deployments } = await github.rest.repos.listDeployments({
+                owner,
+                repo,
+                environment,
+                ref,
+                per_page: 100
+              });
+
+              if (deployments.length > 0) {
+                const deploymentId = deployments[0].id;
+                const { data: statuses } = await github.rest.repos.listDeploymentStatuses({
+                  owner,
+                  repo,
+                  deployment_id: deploymentId,
+                  per_page: 100
+                });
+
+                const success = statuses.find((status) => status.state === "success");
+                const url = success?.environment_url || success?.target_url;
+
+                if (url) {
+                  core.info(`Found Vercel preview: ${url}`);
+                  core.setOutput("url", url);
+                  return;
+                }
+              }
+
+              core.info(`Waiting for Vercel preview deployment... (${attempt}/${maxAttempts})`);
+              await wait(delayMs);
+            }
+
+            core.setFailed("Timed out waiting for Vercel preview deployment URL.");
 
       - name: Run Lighthouse CI
         uses: treosh/lighthouse-ci-action@v11
         with:
+          urls: ${{ steps.vercel_preview.outputs.url }}
+          runs: 3
           configPath: ./lighthouserc.json
           uploadArtifacts: true
