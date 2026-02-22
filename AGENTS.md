@@ -55,9 +55,9 @@ import { Metadata } from "next";        // Wrong - lint error
 **forwardRef:**
 ```typescript
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant, size, ...props }, ref) => {
-    return <button className={cn(buttonVariants({ variant, size, className }))} ref={ref} {...props} />;
-  }
+  ({ className, variant, size, ...props }, ref) => (
+    <button className={cn(buttonVariants({ variant, size, className }))} ref={ref} {...props} />
+  )
 );
 Button.displayName = "Button";
 ```
@@ -100,10 +100,6 @@ return NextResponse.json(
 );
 ```
 
-## Styling
-
-Tailwind CSS v4 in `src/app/globals.css`. Mobile-first: `sm:`, `md:`, `lg:`, `xl:`. Use `cn()` for conditional class merging.
-
 ## API Routes
 
 ```typescript
@@ -118,6 +114,10 @@ const parsed = contactFormSchema.safeParse(body);
 if (!parsed.success) return NextResponse.json({ error: { code: "validation_error" } }, { status: 422 });
 ```
 
+## Styling
+
+Tailwind CSS v4 in `src/app/globals.css`. Mobile-first: `sm:`, `md:`, `lg:`, `xl:`. Use `cn()` for conditional class merging.
+
 ## Animation
 
 **GSAP + ScrollTrigger:**
@@ -128,10 +128,7 @@ import { useGSAP } from "@gsap/react";
 
 gsap.registerPlugin(ScrollTrigger);
 useGSAP(() => {
-  gsap.to(element, {
-    scrollTrigger: { trigger: element, start: "top 80%", once: true },
-    opacity: 1, duration: 0.8,
-  });
+  gsap.to(element, { scrollTrigger: { trigger: element, start: "top 80%", once: true }, opacity: 1, duration: 0.8 });
 }, { scope: ref });
 ```
 
