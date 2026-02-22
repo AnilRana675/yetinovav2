@@ -1,7 +1,8 @@
 "use client";
 
+import { motion } from "motion/react";
+import Image from "next/image";
 import { useEffect, useState } from "react";
-
 import { AuroraBackground } from "./AuroraBackground";
 import { CurrentlyBackingWrapper } from "./CurrentlyBackingWrapper";
 import { HeroAnimations } from "./HeroAnimations";
@@ -42,6 +43,24 @@ export function HeroSection() {
           >
             {SUBTITLE_1}
           </p>
+          <motion.a
+            href="https://worldmerchantinvest.com/"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1.25, ease: "easeOut", delay: 1.0 }}
+            className="group inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/10 bg-white/5 backdrop-blur-sm transition-all duration-300 hover:bg-white/10 hover:border-white/20"
+          >
+            <Image
+              src="/images/wmiLogo.png"
+              alt="WMI"
+              width={20}
+              height={20}
+              className="w-5 h-5 rounded-full object-contain"
+            />
+            <span className="text-xs sm:text-sm font-sans font-medium text-neutral-text/70 group-hover:text-neutral-text/90">
+              In partnership with WMI
+            </span>
+          </motion.a>
           <p
             className="text-neutral-text/60 text-sm sm:text-base md:text-lg lg:text-2xl font-light leading-relaxed max-w-3xl mx-auto text-center hero-ghost-text"
             data-animate="subtitle-2"
