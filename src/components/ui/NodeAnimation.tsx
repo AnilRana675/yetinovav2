@@ -8,7 +8,14 @@ interface Node {
   vx: number;
   vy: number;
   radius: number;
+  glowColor: string;
+  coreColor: string;
 }
+
+const BLUE_GLOW = "107, 158, 170";
+const BLUE_CORE = "40, 80, 95";
+const GREEN_GLOW = "85, 184, 96";
+const GREEN_CORE = "4, 62, 102";
 
 interface NodeAnimationProps {
   glowColor?: string;
@@ -16,8 +23,8 @@ interface NodeAnimationProps {
 }
 
 export function NodeAnimation({
-  glowColor = "85, 184, 96",
-  coreColor = "4, 62, 102",
+  glowColor: _glowColor = "85, 184, 96",
+  coreColor: _coreColor = "4, 62, 102",
 }: NodeAnimationProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const animationRef = useRef<number | undefined>(undefined);
@@ -51,6 +58,7 @@ export function NodeAnimation({
 
       for (let i = 0; i < nodeCount; i++) {
         const baseRadius = isMobile ? 2.2 : 2.8;
+        const useBlue = Math.random() > 0.5;
 
         nodesRef.current.push({
           x: Math.random() * canvas.width,
@@ -58,6 +66,8 @@ export function NodeAnimation({
           vx: (Math.random() - 0.5) * 0.5,
           vy: (Math.random() - 0.5) * 0.5,
           radius: Math.random() * baseRadius + 1.5,
+          glowColor: useBlue ? BLUE_GLOW : GREEN_GLOW,
+          coreColor: useBlue ? BLUE_CORE : GREEN_CORE,
         });
       }
     };
@@ -67,18 +77,13 @@ export function NodeAnimation({
 
       const gradient = ctx.createRadialGradient(node.x, node.y, 0, node.x, node.y, node.radius * 4);
 
-      gradient.addColorStop(0, `rgba(${glowColor}, 0.9)`);
-      gradient.addColorStop(0.4, `rgba(${glowColor}, 0.4)`);
-      gradient.addColorStop(1, `rgba(${glowColor}, 0)`);
+      gradient.addColorStop(0, `rgba(${node.glowColor}, 0.9)`);
+      gradient.addColorStop(0.4, `rgba(${node.glowColor}, 0.4)`);
+      gradient.addColorStop(1, `rgba(${node.glowColor}, 0)`);
 
       ctx.beginPath();
       ctx.arc(node.x, node.y, node.radius * 4, 0, Math.PI * 2);
       ctx.fillStyle = gradient;
-      ctx.fill();
-
-      ctx.beginPath();
-      ctx.arc(node.x, node.y, node.radius, 0, Math.PI * 2);
-      ctx.fillStyle = `rgb(${coreColor})`;
       ctx.fill();
     };
 
@@ -86,6 +91,15 @@ export function NodeAnimation({
       if (!ctx) return;
 
       const opacity = 1 - distance / maxDistance;
+
+      const dist1 = Math.sqrt(
+        (node1.x - mouseRef.current.x) ** 2 + (node1.y - mouseRef.current.y) ** 2
+      );
+      const dist2 = Math.sqrt(
+        (node2.x - mouseRef.current.x) ** 2 + (node2.y - mouseRef.current.y) ** 2
+      );
+      const coreColor = dist1 < dist2 ? node1.coreColor : node2.coreColor;
+
       ctx.beginPath();
       ctx.moveTo(node1.x, node1.y);
       ctx.lineTo(node2.x, node2.y);
@@ -153,7 +167,7 @@ export function NodeAnimation({
         cancelAnimationFrame(animationRef.current);
       }
     };
-  }, [glowColor, coreColor]);
+  }, []);
 
   return (
     <canvas

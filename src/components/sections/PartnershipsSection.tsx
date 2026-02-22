@@ -133,26 +133,43 @@ function MobileLayout() {
         </div>
 
         <div className="space-y-4">
-          {PARTNERSHIP_TYPES.map((partnership, index) => (
-            <div
-              key={partnership.id}
-              className={`animate-fade-in opacity-0 [--animation-delay:${
-                200 + index * 150
-              }ms] p-4 rounded-lg border border-white/10 bg-white/5 hover:bg-white/10 transition-colors`}
-            >
-              <div className="flex items-start justify-between mb-2">
-                <h3 className="font-serif font-bold text-[#dcdcdc] text-base tracking-[0] leading-tight whitespace-pre-line">
-                  {partnership.category}
-                </h3>
-                <div className="font-serif font-black text-[#315434] text-base tracking-[0] leading-tight">
-                  {partnership.romanNumeral}
+          {PARTNERSHIP_TYPES.map((partnership, index) => {
+            const isEven = index % 2 === 1;
+            return (
+              <div
+                key={partnership.id}
+                className={`animate-fade-in opacity-0 [--animation-delay:${
+                  200 + index * 150
+                }ms] p-4 rounded-lg border border-white/10 transition-colors ${
+                  isEven ? "bg-white" : "bg-white/5 hover:bg-white/10"
+                }`}
+              >
+                <div className="flex items-start justify-between mb-2">
+                  <h3
+                    className={`font-serif font-bold text-base tracking-[0] leading-tight whitespace-pre-line ${
+                      isEven ? "text-black" : "text-[#dcdcdc]"
+                    }`}
+                  >
+                    {partnership.category}
+                  </h3>
+                  <div
+                    className={`font-serif font-black text-base tracking-[0] leading-tight ${
+                      isEven ? "text-[#3759a4]" : "text-[#315434]"
+                    }`}
+                  >
+                    {partnership.romanNumeral}
+                  </div>
                 </div>
+                <p
+                  className={`font-sans font-normal text-sm tracking-[0] leading-[18px] ${
+                    isEven ? "text-gray-700" : "text-white"
+                  }`}
+                >
+                  {partnership.description}
+                </p>
               </div>
-              <p className="font-sans font-normal text-white text-sm tracking-[0] leading-[18px]">
-                {partnership.description}
-              </p>
-            </div>
-          ))}
+            );
+          })}
         </div>
 
         <div className="mt-10 text-center animate-fade-in opacity-0 [--animation-delay:800ms]">
