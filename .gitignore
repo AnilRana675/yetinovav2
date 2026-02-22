@@ -36,6 +36,9 @@ yarn-error.log*
 # vercel
 .vercel
 
+# lighthouse ci
+.lighthouseci/
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts
@@ -51,3 +54,4 @@ nodeComp.txt
 colorFix.txt
 projectContent.txt
 task.txt
+.vercel
