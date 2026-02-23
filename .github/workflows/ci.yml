@@ -8,7 +8,7 @@ on:
 
 permissions:
   contents: read
-  statuses: read
+  deployments: read
   checks: write
   pull-requests: write
 
@@ -80,43 +80,43 @@ jobs:
             const owner = context.repo.owner;
             const repo = context.repo.repo;
             const ref = context.sha;
-            const maxAttempts = 30;
-            const delayMs = 20000;
-            const expectedContext = (process.env.VERCEL_STATUS_CONTEXT || "").toLowerCase().trim();
+            const maxAttempts = 24;
+            const delayMs = 10000;
+            const environment = "Preview";
 
             for (let attempt = 1; attempt <= maxAttempts; attempt += 1) {
-              const { data: statuses } = await github.rest.repos.listCommitStatusesForRef({
+              const { data: deployments } = await github.rest.repos.listDeployments({
                 owner,
                 repo,
+                environment,
                 ref,
                 per_page: 100
               });
 
-              const match = statuses.find((status) => {
-                if (status.state !== "success" || !status.target_url) {
-                  return false;
-                }
-                const contextName = (status.context || "").toLowerCase();
-                const url = status.target_url.toLowerCase();
-                if (expectedContext) {
-                  return contextName === expectedContext;
-                }
-                return contextName.includes("vercel") || url.includes("vercel.app");
-              });
+              if (deployments.length > 0) {
+                const deploymentId = deployments[0].id;
+                const { data: statuses } = await github.rest.repos.listDeploymentStatuses({
+                  owner,
+                  repo,
+                  deployment_id: deploymentId,
+                  per_page: 100
+                });
 
-              if (match) {
-                core.info(`Found Vercel deployment: ${match.target_url}`);
-                core.setOutput("url", match.target_url);
-                return;
+                const success = statuses.find((status) => status.state === "success");
+                const url = success?.environment_url || success?.target_url;
+
+                if (url) {
+                  core.info(`Found Vercel preview: ${url}`);
+                  core.setOutput("url", url);
+                  return;
+                }
               }
 
-              core.info(`Waiting for Vercel preview... (${attempt}/${maxAttempts})`);
+              core.info(`Waiting for Vercel preview deployment... (${attempt}/${maxAttempts})`);
               await wait(delayMs);
             }
 
             core.setFailed("Timed out waiting for Vercel preview deployment URL.");
-        env:
-          VERCEL_STATUS_CONTEXT: ${{ vars.VERCEL_STATUS_CONTEXT }}
 
       - name: Run Lighthouse CI
         uses: treosh/lighthouse-ci-action@v11
